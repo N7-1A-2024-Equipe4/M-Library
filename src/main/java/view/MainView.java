@@ -14,6 +14,12 @@ import java.awt.*;
  * @see MainController
  */
 public class MainView {
+    public enum Views {
+        HOME,
+        LISTS,
+        PROFILE
+    }
+
     private static MainView instance = null;
 
     private final MainController controller;
@@ -27,12 +33,12 @@ public class MainView {
         contentLayout = (CardLayout) content.getLayout();
 
         // add different views to content panel layout
-        content.add(new HomeView().panel, "home");
-        content.add(new ListsView().panel, "lists");
-        content.add(new ProfileView().panel, "profile");
+        content.add(new HomeView().panel, Views.HOME.name());
+        content.add(new ListsView().panel, Views.LISTS.name());
+        content.add(new ProfileView().panel, Views.PROFILE.name());
 
         // show home view by default
-        showHome();
+        setCurrentView(Views.HOME);
     }
 
     public static MainView getInstance() {
@@ -46,15 +52,7 @@ public class MainView {
         return panel;
     }
 
-    public void showHome() {
-        contentLayout.show(content, "home");
-    }
-
-    public void showLists() {
-        contentLayout.show(content, "lists");
-    }
-
-    public void showProfile() {
-        contentLayout.show(content, "profile");
+    public void setCurrentView(Views newView) {
+        contentLayout.show(content, newView.name());
     }
 }
