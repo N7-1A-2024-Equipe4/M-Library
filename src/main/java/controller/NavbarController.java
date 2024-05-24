@@ -8,14 +8,14 @@ public class NavbarController {
     }
 
     public void homeAction() {
-        MainView.getInstance().showHome();
+        MainView.getInstance().setCurrentView(MainView.View.HOME);
     }
 
     public void listsAction() {
-        MainView.getInstance().showLists();
+        MainView.getInstance().setCurrentView(MainView.View.LISTS);
     }
 
     public void profileAction() {
-        MainView.getInstance().showProfile();
+        MainView.getInstance().setCurrentView(MainView.View.PROFILE);
     }
 }
