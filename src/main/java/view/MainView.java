@@ -52,7 +52,7 @@ public class MainView {
         return panel;
     }
 
-    public void setCurrentView(View newView) {
-        contentLayout.show(content, newView.name());
+    public void setCurrentView(View view) {
+        contentLayout.show(content, view.name());
     }
 }
