@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.NavbarView">
+  <grid id="27dc6" binding="panel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="f3629" class="javax.swing.JButton" binding="homeButton" default-binding="true">
+        <constraints/>
+        <properties>
+          <text value="Accueil"/>
+        </properties>
+      </component>
+      <component id="ffd6e" class="javax.swing.JButton" binding="listsButton" default-binding="true">
+        <constraints/>
+        <properties>
+          <text value="Listes"/>
+        </properties>
+      </component>
+      <component id="9c193" class="javax.swing.JButton" binding="profileButton">
+        <constraints/>
+        <properties>
+          <text value="Profil"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
