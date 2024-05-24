@@ -4,6 +4,7 @@ import controller.MainController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * Main view of the application.<br>
@@ -11,50 +12,44 @@ import java.awt.*;
  * Singleton class.
  *
  * @see NavbarView
- * @see MainController
+ * @see controller.MainController
  */
-public class MainView {
-    private static MainView instance = null;
-
+public class MainView extends View {
+    private static MainView instance;
     private final MainController controller;
-    public JPanel panel;
+    private JPanel panel;
     private NavbarView navbarView;
     private JPanel content;
     private final CardLayout contentLayout;
 
-    private MainView() {
-        controller = new MainController();
+    public MainView() {
+        controller = MainController.initInstance(this);
+        /* FIXME should it rather be this ?
+            controller = MainController.getInstance();
+            controller.init(this);
+         */
         contentLayout = (CardLayout) content.getLayout();
 
         // add different views to content panel layout
-        content.add(new HomeView().panel, "home");
-        content.add(new ListsView().panel, "lists");
-        content.add(new ProfileView().panel, "profile");
+        Arrays.stream(ViewEnum.values()).forEach(
+                viewEnum -> content.add(controller.getView(viewEnum).getPanel(), viewEnum.name())
+        );
 
-        // show home view by default
-        showHome();
+        // set initial view
+        setContent(ViewEnum.LOGIN);
     }
 
-    public static MainView getInstance() {
-        if (instance == null) {
-            instance = new MainView();
-        }
-        return instance;
-    }
-
+    @Override
     public JPanel getPanel() {
         return panel;
     }
 
-    public void showHome() {
-        contentLayout.show(content, "home");
+    public void setContent(ViewEnum viewEnum) {
+        contentLayout.show(content, viewEnum.name());
     }
 
-    public void showLists() {
-        contentLayout.show(content, "lists");
-    }
-
-    public void showProfile() {
-        contentLayout.show(content, "profile");
+    @Override
+    public void update() {
+        navbarView.update();
     }
 }
