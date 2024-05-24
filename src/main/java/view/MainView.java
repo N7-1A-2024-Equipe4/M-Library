@@ -23,7 +23,7 @@ public class MainView {
     private final CardLayout contentLayout;
 
     private MainView() {
-        controller = new MainController(this);
+        controller = new MainController();
         contentLayout = (CardLayout) content.getLayout();
 
         // add different views to content panel layout

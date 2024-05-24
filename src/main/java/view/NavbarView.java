@@ -12,18 +12,9 @@ public class NavbarView {
     private JButton profileButton;
 
     public NavbarView() {
-        controller = new NavbarController(this);
-    }
-
-    public JButton getHomeButton() {
-        return homeButton;
-    }
-
-    public JButton getListsButton() {
-        return listsButton;
-    }
-
-    public JButton getProfileButton() {
-        return profileButton;
+        controller = new NavbarController();
+        homeButton.addActionListener(actionEvent -> controller.homeAction());
+        listsButton.addActionListener(actionEvent -> controller.listsAction());
+        profileButton.addActionListener(actionEvent -> controller.profileAction());
     }
 }

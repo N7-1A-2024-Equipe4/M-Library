@@ -9,6 +9,6 @@ public class MovieView {
     private JPanel panel;
 
     public MovieView() {
-        controller = new MovieController(this);
+        controller = new MovieController();
     }
 }

@@ -12,6 +12,6 @@ public class HomeView {
     private JButton button3;
 
     public HomeView() {
-        controller = new HomeController(this);
+        controller = new HomeController();
     }
 }

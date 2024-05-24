@@ -9,6 +9,6 @@ public class ProfileView {
     JPanel panel;
 
     public ProfileView() {
-        controller = new ProfileController(this);
+        controller = new ProfileController();
     }
 }
