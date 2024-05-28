@@ -23,6 +23,10 @@ public class Movie {
         return id;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public String getTitle() {
         return title;
     }
