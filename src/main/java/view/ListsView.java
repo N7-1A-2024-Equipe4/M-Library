@@ -4,7 +4,7 @@ import controller.ListsController;
 
 import javax.swing.*;
 
-public class ListsView extends View {
+public class ListsView implements View {
     private final ListsController controller;
     private JPanel panel;
 

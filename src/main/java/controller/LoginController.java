@@ -1,6 +1,5 @@
 package controller;
 
-import dao.UserDAO;
 import session.Session;
 import view.LoginView;
 import view.ViewEnum;
@@ -13,7 +12,10 @@ public class LoginController {
     }
 
     public void loginAction(String username) {
-        Session.getInstance().login(UserDAO.getUser(username));
+        if (!Session.login(username)) {
+            view.loginFailed();
+            return;
+        }
         MainController mainController = MainController.getInstance();
         mainController.updateNavbar();
         mainController.show(ViewEnum.PROFILE);

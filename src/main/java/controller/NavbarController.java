@@ -13,7 +13,7 @@ public class NavbarController {
     }
 
     public void homeAction() {
-        if (Session.getInstance().isSignedOut()) {
+        if (Session.isSignedOut()) {
             MainController.getInstance().show(ViewEnum.LOGIN);
             return;
         }
@@ -22,7 +22,7 @@ public class NavbarController {
 
 
     public void listsAction() {
-        if (Session.getInstance().isSignedOut()) {
+        if (Session.isSignedOut()) {
             MainController.getInstance().show(ViewEnum.LOGIN);
             return;
         }
@@ -30,7 +30,7 @@ public class NavbarController {
     }
 
     public void profileAction() {
-        if (Session.getInstance().isSignedOut()) {
+        if (Session.isSignedOut()) {
             MainController.getInstance().show(ViewEnum.LOGIN);
             return;
         }
@@ -38,16 +38,9 @@ public class NavbarController {
     }
 
     public void logoutAction() {
-        Session.getInstance().logout();
+        Session.logout();
 
         view.update();
         MainController.getInstance().show(ViewEnum.LOGIN);
-    }
-
-    public String getUsername() {
-        if (Session.getInstance().isSignedOut()) {
-            return "Not logged in";
-        }
-        return Session.getInstance().getUser().getUsername();
     }
 }

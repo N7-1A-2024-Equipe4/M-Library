@@ -8,7 +8,7 @@ public class Application {
         JFrame frame = new JFrame("M-Library");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(true);
-        frame.setSize(1280, 720);
+        frame.setSize(800, 600);
 
         // init database
         // TODO

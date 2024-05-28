@@ -1,10 +1,11 @@
 package view;
 
 import controller.NavbarController;
+import session.Session;
 
 import javax.swing.*;
 
-public class NavbarView extends View {
+public class NavbarView implements View {
     private final NavbarController controller;
     private JPanel panel;
     private JButton homeButton;
@@ -28,7 +29,6 @@ public class NavbarView extends View {
 
     @Override
     public void update() {
-        // FIXME should a view update fetch from model directly? or should it be passed the data? or should it fetch from controller?
-        usernameLabel.setText(controller.getUsername());
+        usernameLabel.setText(Session.getUsername());
     }
 }

@@ -14,7 +14,7 @@ import java.util.Arrays;
  * @see NavbarView
  * @see controller.MainController
  */
-public class MainView extends View {
+public class MainView implements View {
     private static MainView instance;
     private final MainController controller;
     private JPanel panel;

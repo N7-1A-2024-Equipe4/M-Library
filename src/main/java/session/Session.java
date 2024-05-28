@@ -1,35 +1,31 @@
 package session;
 
-import model.User;
+import dao.UserDAO;
 
 public class Session {
-    private static Session instance;
-
-    private User user;
+    private static String name;
 
     private Session() {
     }
 
-    public static Session getInstance() {
-        if (instance == null) {
-            instance = new Session();
+    public static String getUsername() {
+        if (isSignedOut()) {
+            return "Not logged in";
         }
-        return instance;
+        return name;
     }
 
-    public User getUser() {
-        return user;
+    public static boolean login(String username) {
+        name = UserDAO.getUserByUsername(username) != null ? username : null;
+        return !isSignedOut();
     }
 
-    public void login(User user) {
-        this.user = user;
+    public static void logout() {
+        name = null;
     }
 
-    public void logout() {
-        this.user = null;
+    public static boolean isSignedOut() {
+        return name == null;
     }
 
-    public boolean isSignedOut() {
-        return user == null;
-    }
 }

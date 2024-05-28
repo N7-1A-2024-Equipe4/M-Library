@@ -4,7 +4,7 @@ import controller.MovieController;
 
 import javax.swing.*;
 
-public class MovieView extends View {
+public class MovieView implements View {
     private final MovieController controller;
     private JPanel panel;
 

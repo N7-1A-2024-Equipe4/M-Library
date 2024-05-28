@@ -5,7 +5,7 @@ import model.MovieList;
 
 import javax.swing.*;
 
-public class HomeView extends View {
+public class HomeView implements View {
     private final HomeController controller;
     private JPanel panel;
     private JButton button1;

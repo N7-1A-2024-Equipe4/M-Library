@@ -37,7 +37,7 @@
                       <text value="placeholder username"/>
                     </properties>
                   </component>
-                  <component id="86078" class="javax.swing.JButton" binding="usernameButton">
+                  <component id="86078" class="javax.swing.JButton" binding="changeUsernameButton">
                     <constraints border-constraint="East"/>
                     <properties>
                       <enabled value="true"/>
@@ -59,7 +59,7 @@
                       <text value="placeholder password"/>
                     </properties>
                   </component>
-                  <component id="1a48b" class="javax.swing.JButton" binding="passwordButton">
+                  <component id="1a48b" class="javax.swing.JButton" binding="changePasswordButton">
                     <constraints border-constraint="East"/>
                     <properties>
                       <text value="Button"/>

@@ -1,22 +1,24 @@
 package view;
 
 import controller.ProfileController;
+import dao.UserDAO;
 import model.User;
+import session.Session;
 
 import javax.swing.*;
 
-public class ProfileView extends View {
+public class ProfileView implements View {
     private final ProfileController controller;
     private JPanel panel;
     private JLabel usernameLabel;
-    private JButton usernameButton;
+    private JButton changeUsernameButton;
     private JLabel passwordLabel;
-    private JButton passwordButton;
+    private JButton changePasswordButton;
 
     public ProfileView() {
         controller = new ProfileController(this);
-        usernameButton.addActionListener(actionEvent -> controller.usernameAction());
-        passwordButton.addActionListener(actionEvent -> controller.passwordAction());
+        changeUsernameButton.addActionListener(actionEvent -> controller.usernameChangeAction("newUsername"));
+        changePasswordButton.addActionListener(actionEvent -> controller.passwordAction("newPassword"));
     }
 
     @Override
@@ -26,8 +28,12 @@ public class ProfileView extends View {
 
     @Override
     public void update() {
-        User user = controller.getUser();
+        User user = UserDAO.getUserByUsername(Session.getUsername());
         usernameLabel.setText(user.getUsername());
         passwordLabel.setText(user.getPassword());
+    }
+
+    public void usernameChangeSuccess(String username) {
+        JOptionPane.showMessageDialog(panel, "Username changed successfully to " + username, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 }
