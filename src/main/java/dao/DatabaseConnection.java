@@ -1,11 +1,6 @@
-package model;
+package dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class DatabaseConnection {
 
@@ -13,12 +8,24 @@ public class DatabaseConnection {
     private static final String USER = "root";
     private static final String PASSWORD = "ZgVBNQcDVBedxSknPJLpBjfmpfdgSCoq";
 
-    public Connection getConnection() throws SQLException {
+    private static DatabaseConnection instance;
+
+    private DatabaseConnection() {
+    }
+
+    public static DatabaseConnection getInstance() {
+        if (instance == null) {
+            instance = new DatabaseConnection();
+        }
+        return instance;
+    }
+
+    private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
     public ResultSet executeQuery(String query) throws SQLException {
-        Connection connection = getConnection();
+        Connection connection = this.getConnection();
         Statement statement = connection.createStatement();
         return statement.executeQuery(query);
     }
@@ -26,5 +33,4 @@ public class DatabaseConnection {
     public void close() throws SQLException {
         this.getConnection().close();
     }
-
 }

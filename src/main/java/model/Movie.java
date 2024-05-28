@@ -1,16 +1,25 @@
 package model;
 
-import java.awt.Image;
+import java.awt.*;
 
 public class Movie {
-    private String id;
+    private int id;
     private String title;
     private MovieGenre genre;
     private int duration;
     private Image poster;
     private String synopsis;
 
-    public Movie(String title, String genre, int year) {
+    public Movie(String title, MovieGenre genre, int duration, Image poster, String synopsis) {
+        this.title = title;
+        this.genre = genre;
+        this.duration = duration;
+        this.poster = poster;
+        this.synopsis = synopsis;
+    }
+
+    public Movie(int id, String title, MovieGenre genre, int duration, Image poster, String synopsis) {
+        this.id = id;
         this.title = title;
         this.genre = genre;
         this.duration = duration;
@@ -22,16 +31,8 @@ public class Movie {
         return id;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public void setTitle(String title) {
