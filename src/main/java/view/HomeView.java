@@ -1,17 +1,33 @@
 package view;
 
 import controller.HomeController;
+import model.MovieList;
 
 import javax.swing.*;
 
-public class HomeView {
+public class HomeView implements View {
     private final HomeController controller;
-    JPanel panel;
+    private JPanel panel;
     private JButton button1;
     private JButton a1Button;
     private JButton button3;
 
     public HomeView() {
-        controller = new HomeController();
+        this.controller = new HomeController(this);
+    }
+
+    @Override
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    @Override
+    public void refresh() {
+
+    }
+
+    protected void update(MovieList model) {
+        // Update the view with the model data
+
     }
 }

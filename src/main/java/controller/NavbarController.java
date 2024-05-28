@@ -1,21 +1,34 @@
 package controller;
 
-import view.MainView;
+import session.Session;
+import view.NavbarView;
+import view.ViewEnum;
 
 public class NavbarController {
 
-    public NavbarController() {
+    private final NavbarView view;
+
+    public NavbarController(NavbarView view) {
+        this.view = view;
     }
 
     public void homeAction() {
-        MainView.getInstance().setCurrentView(MainView.View.HOME);
+        MainController.getInstance().show(ViewEnum.HOME);
     }
 
+
     public void listsAction() {
-        MainView.getInstance().setCurrentView(MainView.View.LISTS);
+        MainController.getInstance().show(ViewEnum.LISTS);
     }
 
     public void profileAction() {
-        MainView.getInstance().setCurrentView(MainView.View.PROFILE);
+        MainController.getInstance().show(ViewEnum.PROFILE);
+    }
+
+    public void logoutAction() {
+        Session.logout();
+
+        view.refresh();
+        MainController.getInstance().show(ViewEnum.LOGIN);
     }
 }
