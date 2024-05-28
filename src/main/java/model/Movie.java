@@ -1,25 +1,65 @@
-package model;
+package com.list.project;
+
+import java.awt.Image;
 
 public class Movie {
+    final private int id;
     private String title;
-    private String genre;
-    private int year;
+    private MovieGenre genre;
+    private int duration;
+    private Image poster;
+    private String synopsis;
 
-    public Movie(String title, String genre, int year) {
+    public Movie(int id, String title, MovieGenre genre, int duration, Image poster, String synopsis) {
+        this.id = id;
         this.title = title;
         this.genre = genre;
-        this.year = year;
+        this.duration = duration;
+        this.poster = poster;
+        this.synopsis = synopsis;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getGenre() {
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public MovieGenre getGenre() {
         return genre;
     }
 
-    public int getYear() {
-        return year;
+    public void setGenre(MovieGenre genre) {
+        this.genre = genre;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public Image getPoster() {
+        return poster;
+    }
+
+    public void setPoster(Image poster) {
+        this.poster = poster;
+    }
+
+    public String getSynopsis() {
+        return synopsis;
+    }
+
+    public void setSynopsis(String synopsis) {
+        this.synopsis = synopsis;
     }
 }
