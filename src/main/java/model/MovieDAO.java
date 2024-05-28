@@ -1,4 +1,4 @@
-package com.list.project;
+package model;
 
 import java.awt.Image;
 import java.sql.ResultSet;
