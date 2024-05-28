@@ -3,15 +3,14 @@ package model;
 import java.awt.Image;
 
 public class Movie {
-    final private int id;
+    private String id;
     private String title;
     private MovieGenre genre;
     private int duration;
     private Image poster;
     private String synopsis;
 
-    public Movie(int id, String title, MovieGenre genre, int duration, Image poster, String synopsis) {
-        this.id = id;
+    public Movie(String title, String genre, int year) {
         this.title = title;
         this.genre = genre;
         this.duration = duration;
@@ -29,6 +28,10 @@ public class Movie {
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setTitle(String title) {

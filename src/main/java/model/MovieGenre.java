@@ -1,4 +1,4 @@
-package model;
+package com.list.project;
 
 public enum MovieGenre {
 
