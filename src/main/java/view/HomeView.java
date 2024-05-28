@@ -30,4 +30,9 @@ public class HomeView implements View {
         // Update the view with the model data
 
     }
+
+    public void addMovieError(String errorAddingMovie) {
+        // Display error message
+        JOptionPane.showMessageDialog(panel, errorAddingMovie, "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }

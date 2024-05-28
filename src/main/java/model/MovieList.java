@@ -29,8 +29,8 @@ public class MovieList {
         movies.remove(movie);
     }
 
-    public void remove(String id) {
-        movies.removeIf(movie -> movie.getId().equals(id));
+    public void remove(int id) {
+        movies.removeIf(movie -> movie.getId() == id);
     }
 
     public void removeIf(Predicate<Movie> predicate) {
