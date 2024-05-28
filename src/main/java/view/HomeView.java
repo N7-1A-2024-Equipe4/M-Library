@@ -22,7 +22,7 @@ public class HomeView implements View {
     }
 
     @Override
-    public void update() {
+    public void refresh() {
 
     }
 

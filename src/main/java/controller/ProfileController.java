@@ -16,13 +16,13 @@ public class ProfileController {
         UserDAO.updateUserByUsername(Session.getUsername(), new User(username, null));
         if (Session.login(username)) {
             MainController.getInstance().updateNavbar();
-            view.update();
+            view.refresh();
             view.usernameChangeSuccess(username);
         }
     }
 
     public void passwordAction(String password) {
         UserDAO.updateUserByUsername(Session.getUsername(), new User(null, password));
-        view.update();
+        view.refresh();
     }
 }

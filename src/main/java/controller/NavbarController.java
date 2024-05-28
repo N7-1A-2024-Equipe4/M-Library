@@ -13,34 +13,22 @@ public class NavbarController {
     }
 
     public void homeAction() {
-        if (Session.isSignedOut()) {
-            MainController.getInstance().show(ViewEnum.LOGIN);
-            return;
-        }
         MainController.getInstance().show(ViewEnum.HOME);
     }
 
 
     public void listsAction() {
-        if (Session.isSignedOut()) {
-            MainController.getInstance().show(ViewEnum.LOGIN);
-            return;
-        }
         MainController.getInstance().show(ViewEnum.LISTS);
     }
 
     public void profileAction() {
-        if (Session.isSignedOut()) {
-            MainController.getInstance().show(ViewEnum.LOGIN);
-            return;
-        }
         MainController.getInstance().show(ViewEnum.PROFILE);
     }
 
     public void logoutAction() {
         Session.logout();
 
-        view.update();
+        view.refresh();
         MainController.getInstance().show(ViewEnum.LOGIN);
     }
 }

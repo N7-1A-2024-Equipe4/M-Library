@@ -1,5 +1,6 @@
 package controller;
 
+import session.Session;
 import view.*;
 
 import java.util.Map;
@@ -37,7 +38,11 @@ public class MainController {
     }
 
     public void show(ViewEnum viewEnum) {
-        this.views.get(viewEnum).update();
+        if (Session.isSignedOut()) {
+            this.mainView.setContent(ViewEnum.LOGIN);
+            return;
+        }
+        this.views.get(viewEnum).refresh();
         this.mainView.setContent(viewEnum);
     }
 
@@ -46,6 +51,6 @@ public class MainController {
     }
 
     public void updateNavbar() {
-        mainView.update();
+        mainView.refresh();
     }
 }

@@ -28,7 +28,7 @@ public class NavbarView implements View {
     }
 
     @Override
-    public void update() {
+    public void refresh() {
         usernameLabel.setText(Session.getUsername());
     }
 }

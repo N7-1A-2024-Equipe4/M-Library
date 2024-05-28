@@ -18,7 +18,7 @@ public class MovieView implements View {
     }
 
     @Override
-    public void update() {
+    public void refresh() {
 
     }
 }

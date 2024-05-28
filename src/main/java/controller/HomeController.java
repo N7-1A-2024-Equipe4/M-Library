@@ -14,7 +14,7 @@ public class HomeController {
 
     public void addMovieAction(Movie movie) {
         MovieDAO.create(new Movie("movie", "genre", 2000));
-        view.update();
+        view.refresh();
     }
 
     public void removeMovieAction(String id) {

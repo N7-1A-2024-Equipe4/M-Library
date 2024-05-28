@@ -21,7 +21,7 @@ public class LoginView implements View {
     }
 
     @Override
-    public void update() {
+    public void refresh() {
 
     }
 

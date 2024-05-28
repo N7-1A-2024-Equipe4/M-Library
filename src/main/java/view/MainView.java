@@ -49,7 +49,7 @@ public class MainView implements View {
     }
 
     @Override
-    public void update() {
-        navbarView.update();
+    public void refresh() {
+        navbarView.refresh();
     }
 }

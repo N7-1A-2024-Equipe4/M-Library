@@ -27,7 +27,7 @@ public class ProfileView implements View {
     }
 
     @Override
-    public void update() {
+    public void refresh() {
         User user = UserDAO.getUserByUsername(Session.getUsername());
         usernameLabel.setText(user.getUsername());
         passwordLabel.setText(user.getPassword());
