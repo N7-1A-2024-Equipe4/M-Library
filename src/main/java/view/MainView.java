@@ -4,6 +4,7 @@ import controller.MainController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * Main view of the application.<br>
@@ -11,48 +12,44 @@ import java.awt.*;
  * Singleton class.
  *
  * @see NavbarView
- * @see MainController
+ * @see controller.MainController
  */
-public class MainView {
-    public enum View {
-        HOME,
-        LISTS,
-        PROFILE
-    }
-
-    private static MainView instance = null;
-
+public class MainView implements View {
+    private static MainView instance;
     private final MainController controller;
-    public JPanel panel;
+    private JPanel panel;
     private NavbarView navbarView;
     private JPanel content;
     private final CardLayout contentLayout;
 
-    private MainView() {
-        controller = new MainController();
+    public MainView() {
+        controller = MainController.initInstance(this);
+        /* FIXME should it rather be this ?
+            controller = MainController.getInstance();
+            controller.init(this);
+         */
         contentLayout = (CardLayout) content.getLayout();
 
         // add different views to content panel layout
-        content.add(new HomeView().panel, View.HOME.name());
-        content.add(new ListsView().panel, View.LISTS.name());
-        content.add(new ProfileView().panel, View.PROFILE.name());
+        Arrays.stream(ViewEnum.values()).forEach(
+                viewEnum -> content.add(controller.getView(viewEnum).getPanel(), viewEnum.name())
+        );
 
-        // show home view by default
-        setCurrentView(View.HOME);
+        // set initial view
+        setContent(ViewEnum.LOGIN);
     }
 
-    public static MainView getInstance() {
-        if (instance == null) {
-            instance = new MainView();
-        }
-        return instance;
-    }
-
+    @Override
     public JPanel getPanel() {
         return panel;
     }
 
-    public void setCurrentView(View view) {
-        contentLayout.show(content, view.name());
+    public void setContent(ViewEnum viewEnum) {
+        contentLayout.show(content, viewEnum.name());
+    }
+
+    @Override
+    public void refresh() {
+        navbarView.refresh();
     }
 }
