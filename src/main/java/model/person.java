@@ -10,11 +10,11 @@ public class Person {
     private String lastName;
     private Date dateOfBirth;
     private Date dateOfDeath;
-    private Boolean isActor = false;
+    private Boolean Actor = false;
     private List<Movie> actedMovies;
-    private Boolean isDirector = false;
+    private Boolean Director = false;
     private List<Movie> directedMovies;
-    private Boolean isScreenwriter = false;
+    private Boolean Screenwriter = false;
     private List<Movie> writtenMovies;
 
     public Person(int id, String firstName, String lastName, Date dateOfBirth, Date dateOfDeath, Boolean isActor, Boolean isDirector, Boolean isScreenwriter) {
@@ -23,9 +23,9 @@ public class Person {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;
-        this.isActor = isActor;
-        this.isDirector = isDirector;
-        this.isScreenwriter = isScreenwriter;
+        this.Actor = isActor;
+        this.Director = isDirector;
+        this.Screenwriter = isScreenwriter;
     }
 
     public Person(String firstName, String lastName, Date dateOfBirth, Date dateOfDeath, Boolean isActor, Boolean isDirector, Boolean isScreenwriter) {
@@ -33,9 +33,9 @@ public class Person {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.dateOfDeath = dateOfDeath;
-        this.isActor = isActor;
-        this.isDirector = isDirector;
-        this.isScreenwriter = isScreenwriter;
+        this.Actor = isActor;
+        this.Director = isDirector;
+        this.Screenwriter = isScreenwriter;
     }
 
     public Person(int id, String firstName, String lastName, Date dateOfBirth, Date dateOfDeath) {
@@ -98,6 +98,10 @@ public class Person {
         return dateOfBirth;
     }
 
+    public java.sql.Date getSqlDateOfBirth() {
+        return new java.sql.Date(dateOfBirth.getTime());
+    }
+
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
@@ -106,16 +110,20 @@ public class Person {
         return dateOfDeath;
     }
 
+    public java.sql.Date getSqlDateOfDeath() {
+        return new java.sql.Date(dateOfDeath.getTime());
+    }
+
     public void setDateOfDeath(Date dateOfDeath) {
         this.dateOfDeath = dateOfDeath;
     }
 
-    public Boolean getIsActor() {
-        return isActor;
+    public Boolean isActor() {
+        return Actor;
     }
 
-    public void setIsActor(Boolean isActor) {
-        this.isActor = isActor;
+    public void setActor(Boolean isActor) {
+        this.Actor = isActor;
     }
 
     public List<Movie> getActedMovies() {
@@ -126,12 +134,12 @@ public class Person {
         this.actedMovies = actedMovies;
     }
 
-    public Boolean getIsDirector() {
-        return isDirector;
+    public Boolean isDirector() {
+        return Director;
     }
 
-    public void setIsDirector(Boolean isDirector) {
-        this.isDirector = isDirector;
+    public void setDirector(Boolean isDirector) {
+        this.Director = isDirector;
     }
 
     public List<Movie> getDirectedMovies() {
@@ -142,12 +150,12 @@ public class Person {
         this.directedMovies = directedMovies;
     }
 
-    public Boolean getIsScreenwriter() {
-        return isScreenwriter;
+    public Boolean isScreenwriter() {
+        return Screenwriter;
     }
 
-    public void setIsScreenwriter(Boolean isScreenwriter) {
-        this.isScreenwriter = isScreenwriter;
+    public void setScreenwriter(Boolean isScreenwriter) {
+        this.Screenwriter = isScreenwriter;
     }
 
     public List<Movie> getWrittenMovies() {
