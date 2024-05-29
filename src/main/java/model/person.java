@@ -17,7 +17,6 @@ public class Person {
     private Boolean isScreenwriter = false;
     private List<Movie> writtenMovies;
 
-    
     public Person(int id, String firstName, String lastName, Date dateOfBirth, Date dateOfDeath, Boolean isActor, Boolean isDirector, Boolean isScreenwriter) {
         this.id = id;
         this.firstName = firstName;
