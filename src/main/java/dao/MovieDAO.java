@@ -3,7 +3,7 @@ package dao;
 import model.Movie;
 import model.MovieGenre;
 
-import java.awt.*;
+import java.awt.Image;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -82,6 +82,9 @@ public class MovieDAO extends DAO<Movie> {
 
         return movies;
     }
+
+//    public Movie getCompleteById(int id) throws SQLException {
+        
 
     // Update
 
