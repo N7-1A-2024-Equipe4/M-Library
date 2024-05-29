@@ -22,11 +22,10 @@ public class LoginView implements View {
 
     @Override
     public void refresh() {
-
+        usernameTextField.setBorder(BorderFactory.createLineBorder(java.awt.Color.BLACK));
     }
 
     public void loginFailed() {
-        usernameTextField.setText("");
         usernameTextField.setBorder(BorderFactory.createLineBorder(java.awt.Color.RED));
         JOptionPane.showMessageDialog(panel, "Login failed", "Error", JOptionPane.ERROR_MESSAGE);
     }
