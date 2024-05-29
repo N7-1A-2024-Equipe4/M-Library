@@ -1,6 +1,9 @@
+
 package model;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Movie {
     private int id;
@@ -9,6 +12,9 @@ public class Movie {
     private int duration;
     private Image poster;
     private String synopsis;
+    private List<Person> actors;
+    private List<Person> directors;
+    private List<Person> screenwriters;
 
     public Movie(String title, MovieGenre genre, int duration, Image poster, String synopsis) {
         this.title = title;
@@ -16,7 +22,10 @@ public class Movie {
         this.duration = duration;
         this.poster = poster;
         this.synopsis = synopsis;
-    }
+        this.actors = new ArrayList<>();
+        this.directors = new ArrayList<>();
+        this.screenwriters = new ArrayList<>();
+}
 
     public Movie(int id, String title, MovieGenre genre, int duration, Image poster, String synopsis) {
         this.id = id;
@@ -25,6 +34,19 @@ public class Movie {
         this.duration = duration;
         this.poster = poster;
         this.synopsis = synopsis;
+        this.actors = new ArrayList<>();
+        this.directors = new ArrayList<>();
+        this.screenwriters = new ArrayList<>();
+    }
+
+    public Movie(String title, MovieGenre genre, int duration, String synopsis) {
+        this.title = title;
+        this.genre = genre;
+        this.duration = duration;
+        this.synopsis = synopsis;
+        this.actors = new ArrayList<>();
+        this.directors = new ArrayList<>();
+        this.screenwriters = new ArrayList<>();
     }
 
     public int getId() {
@@ -69,5 +91,29 @@ public class Movie {
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+    }
+
+    public List<Person> getActors() {
+        return actors;
+    }
+
+    public void addActor(Person actor) {
+        actors.add(actor);
+    }
+
+    public List<Person> getDirectors() {
+        return directors;
+    }
+
+    public void addDirector(Person director) {
+        directors.add(director);
+    }
+
+    public List<Person> getScreenwriters() {
+        return screenwriters;
+    }
+
+    public void addScreenwriter(Person screenwriter) {
+        screenwriters.add(screenwriter);
     }
 }
