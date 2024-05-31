@@ -29,8 +29,8 @@ CREATE TABLE list
     list_id INT AUTO_INCREMENT PRIMARY KEY,
     list_name VARCHAR(255) NOT NULL,
     icon LONGBLOB,
-    creation_date DATE NOT NULL,
-    user_id INT,
+    creation_date DATE,
+    user_id INT NOT NULL,
     description TEXT(1000),
     FOREIGN KEY (user_id) REFERENCES user (user_id)
 );
@@ -40,7 +40,7 @@ CREATE TABLE person
     person_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
-    date_of_birth DATE NOT NULL,
+    date_of_birth DATE,
     date_of_death DATE,
     is_actor BOOL,
     is_director BOOL,
@@ -54,7 +54,7 @@ CREATE TABLE movie
     genre       ENUM('Action', 'Comedy', 'Drama', 'Horror', 'Romance', 'Sci-Fi', 'Documentary', 'Fantasy', 'Thriller', 'War'),
     duration    INT,
     image       LONGBLOB, -- Since this database will be used for a small application, we choose to store the image directly in the database
-    synopsis    TEXT(1000) NOT NULL,
+    synopsis    TEXT(1000),
     person_id INT,
     FOREIGN KEY (person_id) REFERENCES person (person_id)
 );
@@ -63,15 +63,14 @@ CREATE TABLE review
 (
     review_id INT AUTO_INCREMENT PRIMARY KEY,
     review    TEXT(1000) NOT NULL,
-    user_id   INT,
-    movie_id  INT,
+    user_id   INT NOT NULL,
+    movie_id  INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user (user_id),
     FOREIGN KEY (movie_id) REFERENCES movie (movie_id)
 );
 
 CREATE TABLE actor_in_movie
 (
-    actor_in_movie_id INT AUTO_INCREMENT PRIMARY KEY,
     person_id INT,
     movie_id INT,
     FOREIGN KEY (person_id) REFERENCES person (person_id),
@@ -80,7 +79,6 @@ CREATE TABLE actor_in_movie
 
 CREATE TABLE director_of_movie
 (
-    director_in_movie_id INT AUTO_INCREMENT PRIMARY KEY,
     person_id INT,
     movie_id INT,
     FOREIGN KEY (person_id) REFERENCES person (person_id),

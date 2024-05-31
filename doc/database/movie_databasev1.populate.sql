@@ -39,6 +39,18 @@ VALUES
 (14, 'Jonathan', 'Demme', '1944-02-22', '2017-04-26'),
 (15, 'Mel', 'Gibson', '1956-01-03', NULL),
 (16, 'Cillian', 'Murphy', '1976-05-25', NULL);
+(17, 'Joseph', 'Gordon-Levitt', '1981-02-17', NULL);
+(18, 'Tom', 'Hardy', '1977-09-15', NULL);
+(19, 'Al', 'Pacino', '1940-04-25', NULL),
+(20, 'Marlon', 'Brando', '1924-04-03', '2004-07-01');
+(21, 'James', 'Caan', '1940-03-26', '2022-07-06');
+(22, 'Diane', 'Keaton', '1946-01-05', NULL);
+(23, 'Ema', 'Thurman', '1970-04-25', NULL;
+(24, 'James', 'Caan', '1954-02-18', NULL);
+(25, 'Samuel L.', 'Jackson', '1948-12-21', NULL);
+(26, 'Heath', 'Ledger', '1979-04-04', '2008-01-22');
+(27, 'Tom', 'Hanks', '1956-07-09', NULL);
+(28, 'Robin', 'Wright', '1966-04-08', NULL);
 
 -- Insert sample movies
 INSERT INTO movie (title, genre, duration, image, synopsis, person_id)
@@ -108,7 +120,27 @@ VALUES ('Inception', 'Sci-Fi', 148, NULL,
 INSERT INTO actor_in_movie (actor_in_movie_id, movie_id, person_id)
 VALUES
 (1, 1, 1),
-(2, 1, 16);
+(2, 1, 16),
+(3, 1, 17),
+(4, 1, 18),
+
+(9, 2, 19),
+(10, 2, 20),
+(11, 2, 21),
+(12, 2, 22),
+
+(13, 3, 23),
+(14, 3, 24),
+(15, 3, 25),
+
+(16, 4, 26),
+
+(17, 5, 27),
+(18, 5, 28);
+
+
+
+
 
 -- Insert sample directors
 INSERT INTO director_of_movie (director_in_movie_id, movie_id, person_id)
