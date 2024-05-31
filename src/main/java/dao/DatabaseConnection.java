@@ -24,12 +24,6 @@ public class DatabaseConnection {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    public ResultSet executeQuery(String query) throws SQLException {
-        Connection connection = this.getConnection();
-        Statement statement = connection.createStatement();
-        return statement.executeQuery(query);
-    }
-
     public PreparedStatement prepareStatement(String query) throws SQLException {
         return this.getConnection().prepareStatement(query);
     }

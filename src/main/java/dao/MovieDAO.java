@@ -38,12 +38,15 @@ public class MovieDAO extends DAO<Movie> {
     @Override
     public Movie getById(int id) throws SQLException {
         Movie movie = null;
-        String query = "SELECT * FROM movie WHERE movie_id = " + id;
+        String query = "SELECT * FROM movie WHERE movie_id = ?"; 
 
-        ResultSet resultSet = databaseConnection.executeQuery(query);
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            ResultSet resultSet = stmt.executeQuery();
 
-        if (resultSet.next()) {
-            movie = getMovieFromResultSet(resultSet);
+            if (resultSet.next()) {
+                movie = getMovieFromResultSet(resultSet);
+            }
         }
 
         return movie;
@@ -55,11 +58,13 @@ public class MovieDAO extends DAO<Movie> {
         Movie movie = null;
         List<Movie> movies = new ArrayList<>();
 
-        ResultSet resultSet = databaseConnection.executeQuery(query);
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            ResultSet resultSet = stmt.executeQuery();
 
-        while (resultSet.next()) {
-            movie = getMovieFromResultSet(resultSet);
-            movies.add(movie);
+            while (resultSet.next()) {
+                movie = getMovieFromResultSet(resultSet);
+                movies.add(movie);
+            }
         }
 
         return movies;

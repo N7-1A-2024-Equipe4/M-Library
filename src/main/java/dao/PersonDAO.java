@@ -41,12 +41,15 @@ public class PersonDAO extends DAO<Person> {
     @Override
     public Person getById(int id) throws SQLException {
         Person person = null;
-        String query = "SELECT * FROM person WHERE person_id = " + id;
+        String query = "SELECT * FROM person WHERE person_id = ?";
 
-        ResultSet resultSet = databaseConnection.executeQuery(query);
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            ResultSet resultSet = stmt.executeQuery();
 
-        if (resultSet.next()) {
-            person = getPersonFromResultSet(resultSet);
+            if (resultSet.next()) {
+                person = getPersonFromResultSet(resultSet);
+            }
         }
 
         return person;
