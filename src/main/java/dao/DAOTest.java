@@ -5,12 +5,31 @@ import java.util.List;
 
 import model.*;
 
-public class MovieDAOTest {
+
+// This is not a permanent class, when real test are implemented, this class will be deleted
+public class DAOTest {
     public static void main(String[] args) {
+
+        // Create a new PersonDAO object
+        PersonDAO personDAO = new PersonDAO(DatabaseConnection.getInstance());
 
         // Create a new MovieDAO object
         MovieDAO movieDAO = new MovieDAO(DatabaseConnection.getInstance());
 
+        // Test the PersonDAO
+        personTest(personDAO);
+
+        // Test the MovieDAO
+        movieTest(movieDAO);
+
+    }
+
+    public static void personTest(PersonDAO personDAO) {
+        // Create a new Person object
+        // Person person = new Person("99", "Robert", "Downey Jr.", new Date(1965, 4, 4), 
+    }
+
+    public static void movieTest(MovieDAO movieDAO) {
         // Create a new Movie object
         Movie movie = new Movie("BBgame", MovieGenre.ACTION, 181, "The Avengers take a final stand against Thanos in the epic conclusion of the Infinity Saga.");
 
@@ -18,16 +37,14 @@ public class MovieDAOTest {
         addMovie(movieDAO, movie);
 
         // Test the read methods
-
+        
         //getAllMovies(movieDAO);
-
-        //getMovieById(movieDAO, 1);
-
+        
+        getMovieById(movieDAO, 1);
 
         // Test the update method
 
         // Test the delete method
-
     }
 
     public static void addMovie(MovieDAO movieDAO, Movie movie) {

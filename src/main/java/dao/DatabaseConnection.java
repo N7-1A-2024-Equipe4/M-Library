@@ -30,6 +30,10 @@ public class DatabaseConnection {
         return statement.executeQuery(query);
     }
 
+    public PreparedStatement prepareStatement(String query) throws SQLException {
+        return this.getConnection().prepareStatement(query);
+    }
+
     public void close() throws SQLException {
         this.getConnection().close();
     }

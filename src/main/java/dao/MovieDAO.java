@@ -22,7 +22,7 @@ public class MovieDAO extends DAO<Movie> {
     public void add(Movie movie) throws SQLException {
         String query = "INSERT INTO movie (title, genre, duration, image, synopsis) VALUES (?, ?, ?, ?, ?)";
         
-        try (PreparedStatement stmt = databaseConnection.getConnection().prepareStatement(query)) {
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
             stmt.setString(1, movie.getTitle());
             stmt.setString(2, movie.getGenre().toString());
             stmt.setInt(3, movie.getDuration());
@@ -43,15 +43,8 @@ public class MovieDAO extends DAO<Movie> {
         ResultSet resultSet = databaseConnection.executeQuery(query);
 
         if (resultSet.next()) {
-            String title = resultSet.getString("title");
-            MovieGenre genre = MovieGenre.fromDisplayName(resultSet.getString("genre"));
-            int duration = resultSet.getInt("duration");
-            Image poster = (Image) resultSet.getObject("image");
-            String synopsis = resultSet.getString("synopsis");
-
-            movie = new Movie(id, title, genre, duration, poster, synopsis);
+            movie = getMovieFromResultSet(resultSet);
         }
-
 
         return movie;
     }
@@ -59,32 +52,18 @@ public class MovieDAO extends DAO<Movie> {
     @Override
     public List<Movie> getAll() throws SQLException {
         String query = "SELECT * FROM movie";
-        int id;
-        String title;
-        MovieGenre genre;
-        int duration;
-        Image poster;
-        String synopsis;
+        Movie movie = null;
         List<Movie> movies = new ArrayList<>();
 
         ResultSet resultSet = databaseConnection.executeQuery(query);
 
         while (resultSet.next()) {
-            id = resultSet.getInt("movie_id");
-            title = resultSet.getString("title");
-            genre = MovieGenre.fromDisplayName(resultSet.getString("genre"));
-            duration = resultSet.getInt("duration");
-            poster = (Image) resultSet.getObject("image");
-            synopsis = resultSet.getString("synopsis");
-
-            movies.add(new Movie(id, title, genre, duration, poster, synopsis));
+            movie = getMovieFromResultSet(resultSet);
+            movies.add(movie);
         }
 
         return movies;
-    }
-
-//    public Movie getCompleteById(int id) throws SQLException {
-        
+    }        
 
     // Update
 
@@ -100,5 +79,19 @@ public class MovieDAO extends DAO<Movie> {
     public void delete(int id) throws SQLException {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    }
+
+    // Other
+
+    private Movie getMovieFromResultSet(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("movie_id");
+        String title = resultSet.getString("title");
+        MovieGenre genre = MovieGenre.fromDisplayName(resultSet.getString("genre"));
+        int duration = resultSet.getInt("duration");
+        Image poster = (Image) resultSet.getObject("image");
+        String synopsis = resultSet.getString("synopsis");
+
+        return new Movie(id, title, genre, duration, poster, synopsis);
+
     }
 }
