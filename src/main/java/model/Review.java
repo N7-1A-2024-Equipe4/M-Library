@@ -5,21 +5,21 @@ public class Review {
     private int id;
     private String review;
     private int rating;
-    private User owner;
+    private User author;
     private Movie movie;
 
     public Review(int id, String text, int rating, User user, Movie movie) {
         this.id = id;
         this.review = text;
         this.rating = rating;
-        this.owner = user;
+        this.author = user;
         this.movie = movie;
     }
 
     public Review(String text, int rating, User user, Movie movie) {
         this.review = text;
         this.rating = rating;
-        this.owner = user;
+        this.author = user;
         this.movie = movie;
     }
 
@@ -43,12 +43,12 @@ public class Review {
         this.rating = rating;
     }
 
-    public User getOwner() {
-        return owner;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setOwner(User user) {
-        this.owner = user;
+    public void setAuthor(User user) {
+        this.author = user;
     }
 
     public Movie getMovie() {
