@@ -1,8 +1,7 @@
 -- Insert sample users
-INSERT INTO user (username)
-VALUES
-('john_doe'),
-('jane_smith');
+INSERT INTO user (username, password, first_name, last_name, created_at)
+VALUES ('john_doe', 'password', 'John', 'Doe', '2024-01-01'),
+       ('jane_smith', 'password', 'Jane', 'Smith', '2024-02-01');
 
 -- Insert sample lists
 INSERT INTO list (list_name, icon, creation_date, user_id, description)

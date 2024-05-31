@@ -11,8 +11,8 @@ public class LoginController {
         this.view = view;
     }
 
-    public void loginAction(String username) {
-        if (!Session.login(username)) {
+    public void loginAction(String username, String password) {
+        if (!Session.login(username, password)) {
             view.loginFailed();
             return;
         }

@@ -8,11 +8,16 @@ public class LoginView implements View {
     private final LoginController controller;
     private JPanel panel;
     private JTextField usernameTextField;
+    private JTextField passwordTextField;
     private JButton loginButton;
 
     public LoginView() {
         controller = new LoginController(this);
-        loginButton.addActionListener(actionEvent -> controller.loginAction(usernameTextField.getText()));
+        loginButton.addActionListener(actionEvent -> controller
+                .loginAction(
+                        usernameTextField.getText(),
+                        passwordTextField.getText()
+                ));
     }
 
     @Override
