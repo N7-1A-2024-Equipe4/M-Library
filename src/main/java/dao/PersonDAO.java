@@ -22,11 +22,11 @@ public class PersonDAO extends DAO<Person> {
             stmt.setInt(1, person.getId());
             stmt.setString(2, person.getFirstName());
             stmt.setString(3, person.getLastName());
-            stmt.setDate(4, person.getSqlDateOfBirth());
-            stmt.setDate(5, person.getSqlDateOfDeath());
-            stmt.setBoolean(6, person.isActor());
-            stmt.setBoolean(7, person.isDirector());
-            stmt.setBoolean(8, person.isScreenwriter());
+            stmt.setDate(4, new Date(person.getDateOfBirth().getTime()));
+            stmt.setDate(5, new Date(person.getDateOfDeath().getTime()));
+            stmt.setBoolean(6, person.getIsActor());
+            stmt.setBoolean(7, person.getIsDirector());
+            stmt.setBoolean(8, person.getIsScreenwriter());
 
             stmt.executeUpdate();
         }
@@ -79,6 +79,6 @@ public class PersonDAO extends DAO<Person> {
 
         return new Person(id, firstName, lastName, dateOfBirth, dateOfDeath, isActor, isDirector, isScreenwriter);
     }
-    
+
 
 }
