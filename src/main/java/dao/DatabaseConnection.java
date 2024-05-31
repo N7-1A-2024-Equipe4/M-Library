@@ -20,7 +20,7 @@ public class DatabaseConnection {
         return instance;
     }
 
-    public Connection getConnection() throws SQLException {
+    private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
