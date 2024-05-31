@@ -11,10 +11,10 @@ public class DAOTest {
     public static void main(String[] args) {
 
         // Create a new PersonDAO object
-        PersonDAO personDAO = new PersonDAO(DatabaseConnection.getInstance());
+        PersonDAO personDAO = new PersonDAO();
 
         // Create a new MovieDAO object
-        MovieDAO movieDAO = new MovieDAO(DatabaseConnection.getInstance());
+        MovieDAO movieDAO = new MovieDAO();
 
         // Test the PersonDAO
         personTest(personDAO);

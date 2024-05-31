@@ -7,8 +7,8 @@ import java.util.List;
 
 public class ReviewDAO extends DAO<Review> {
 
-    public ReviewDAO(DatabaseConnection databaseConnection) {
-        super(databaseConnection);
+    public ReviewDAO() {
+        super();
         //TODO Auto-generated constructor stub
     }
 

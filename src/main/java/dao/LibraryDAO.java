@@ -7,8 +7,8 @@ import java.util.List;
 
 public class LibraryDAO extends DAO<Library> {
 
-    public LibraryDAO(DatabaseConnection databaseConnection) {
-        super(databaseConnection);
+    public LibraryDAO() {
+        super();
     }
 
     @Override

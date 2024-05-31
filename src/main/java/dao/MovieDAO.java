@@ -12,8 +12,8 @@ import java.util.List;
 
 public class MovieDAO extends DAO<Movie> {
 
-    public MovieDAO(DatabaseConnection databaseConnection) {
-        super(databaseConnection);
+    public MovieDAO() {
+        super();
     }
 
     // Create

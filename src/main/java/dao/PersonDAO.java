@@ -10,8 +10,8 @@ import java.util.List;
 
 public class PersonDAO extends DAO<Person> {
 
-    public PersonDAO(DatabaseConnection databaseConnection) {
-        super(databaseConnection);
+    public PersonDAO() {
+        super();
     }
 
     @Override

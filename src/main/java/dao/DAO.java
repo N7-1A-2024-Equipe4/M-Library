@@ -17,8 +17,8 @@ public abstract class DAO<T> {
      *
      * @param databaseConnection the database connection to be used by the DAO
      */
-    public DAO(DatabaseConnection databaseConnection) {
-        this.databaseConnection = databaseConnection;
+    public DAO() {
+        this.databaseConnection = DatabaseConnection.getInstance();
     }
 
     // Create
