@@ -8,7 +8,9 @@ public enum MovieGenre {
     HORROR("Horror"),
     ROMANCE("Romance"),
     SCI_FI("Sci-Fi"),
-    DOCUMENTARY("Documentary");
+    DOCUMENTARY("Documentary"),
+    THRILLER("Thriller"),
+    FANTASY("Fantasy");
 
     private final String displayName;
 

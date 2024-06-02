@@ -3,6 +3,7 @@ package view;
 import controller.LoginController;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class LoginView implements View {
     private final LoginController controller;
@@ -27,7 +28,8 @@ public class LoginView implements View {
 
     public void loginFailed() {
         usernameTextField.setText("");
-        usernameTextField.setBorder(BorderFactory.createLineBorder(java.awt.Color.RED));
+        usernameTextField.setBorder(BorderFactory.createLineBorder(Color.RED));
         JOptionPane.showMessageDialog(panel, "Login failed", "Error", JOptionPane.ERROR_MESSAGE);
     }
+
 }

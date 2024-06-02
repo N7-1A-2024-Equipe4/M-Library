@@ -4,6 +4,7 @@ import controller.NavbarController;
 import session.Session;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class NavbarView implements View {
     private final NavbarController controller;
@@ -31,4 +32,5 @@ public class NavbarView implements View {
     public void refresh() {
         usernameLabel.setText(Session.getUsername());
     }
+
 }

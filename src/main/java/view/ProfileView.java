@@ -6,6 +6,7 @@ import model.User;
 import session.Session;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ProfileView implements View {
     private final ProfileController controller;
@@ -36,4 +37,5 @@ public class ProfileView implements View {
     public void usernameChangeSuccess(String username) {
         JOptionPane.showMessageDialog(panel, "Username changed successfully to " + username, "Success", JOptionPane.INFORMATION_MESSAGE);
     }
+
 }
