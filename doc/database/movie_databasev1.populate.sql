@@ -11,10 +11,9 @@ DELETE FROM library;
 DELETE FROM user;
 
 -- Insert sample users
-INSERT INTO user (user_id, username)
-VALUES
-(1, 'john_doe'),
-(2, 'jane_smith');
+INSERT INTO user (user_id, username, password, first_name, last_name, created_at)
+VALUES (1, 'john_doe', 'password', 'John', 'Doe', '2024-01-01'),
+       (2, 'jane_smith', 'password', 'Jane', 'Smith', '2024-02-01');
 
 -- Insert sample lists
 INSERT INTO library (library_id, library_name, icon, creation_date, user_id, description)
