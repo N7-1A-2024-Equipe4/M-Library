@@ -24,10 +24,10 @@ CREATE TABLE user
     username VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE list
+CREATE TABLE library
 (
-    list_id INT AUTO_INCREMENT PRIMARY KEY,
-    list_name VARCHAR(255) NOT NULL,
+    library_id INT AUTO_INCREMENT PRIMARY KEY,
+    library_name VARCHAR(255) NOT NULL,
     icon LONGBLOB,
     creation_date DATE,
     user_id INT NOT NULL,
@@ -85,11 +85,11 @@ CREATE TABLE director_of_movie
     FOREIGN KEY (movie_id) REFERENCES movie (movie_id)
 );
 
-CREATE TABLE movie_in_list
+CREATE TABLE movie_in_library
 (
     movie_id INT,
-    list_id INT,
+    library_id INT,
     note VARCHAR(255),
     FOREIGN KEY (movie_id) REFERENCES movie (movie_id),
-    FOREIGN KEY (list_id) REFERENCES list (list_id)
+    FOREIGN KEY (library_id) REFERENCES library (library_id)
 );

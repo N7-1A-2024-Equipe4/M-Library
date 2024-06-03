@@ -1,12 +1,12 @@
 SET SQL_SAFE_UPDATES = 0;
 
 DELETE FROM director_of_movie;
-DELETE FROM movie_in_list;
+DELETE FROM movie_in_library;
 DELETE FROM actor_in_movie;
 DELETE FROM review;
 DELETE FROM movie;
 DELETE FROM person;
-DELETE FROM list;
+DELETE FROM library;
 DELETE FROM user;
 
 -- Insert sample users
@@ -16,7 +16,7 @@ VALUES
 (2, 'jane_smith');
 
 -- Insert sample lists
-INSERT INTO list (list_id, list_name, icon, creation_date, user_id, description)
+INSERT INTO library (library_id, library_name, icon, creation_date, user_id, description)
 VALUES
 (1, 'Favorites', 'heart.png', '2024-01-01', 1, 'My favorite movies'),
 (2, 'Watch Later', 'clock.png', '2024-02-01', 2, 'Movies to watch later');
@@ -170,7 +170,7 @@ VALUES
 (3, 5);
 
 -- Insert sample saved lists
-INSERT INTO movie_in_list (movie_id, list_id, note)
+INSERT INTO movie_in_library (movie_id, library_id, note)
 VALUES
 (1, 1, 'Good movie'),
 (2, 1, 'Wow !');
