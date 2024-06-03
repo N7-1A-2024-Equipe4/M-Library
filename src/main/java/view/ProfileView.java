@@ -17,7 +17,7 @@ public class ProfileView implements View {
     public ProfileView() {
         controller = new ProfileController(this);
         changeUsernameButton.addActionListener(actionEvent -> controller.usernameChangeAction("newUsername"));
-        changePasswordButton.addActionListener(actionEvent -> controller.passwordAction("newPassword"));
+        changePasswordButton.addActionListener(actionEvent -> controller.passwordChangeAction("newPassword"));
     }
 
     @Override

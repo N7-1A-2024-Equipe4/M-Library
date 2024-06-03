@@ -41,7 +41,7 @@ public class ProfileController {
         }
     }
 
-    public void passwordAction(String password) {
+    public void passwordChangeAction(String password) {
         // copy session user
         User newUser = new User(Session.getUser());
         // set new password
