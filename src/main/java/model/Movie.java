@@ -1,6 +1,7 @@
 
 package model;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +11,13 @@ public class Movie {
     private String title;
     private MovieGenre genre;
     private int duration;
-    private Image poster;
+    private ImageIcon poster;
     private String synopsis;
     private List<Person> actors;
     private List<Person> directors;
     private List<Person> screenwriters;
 
-    public Movie(String title, MovieGenre genre, int duration, Image poster, String synopsis) {
+    public Movie(String title, MovieGenre genre, int duration, ImageIcon poster, String synopsis) {
         this.title = title;
         this.genre = genre;
         this.duration = duration;
@@ -27,7 +28,7 @@ public class Movie {
         this.screenwriters = new ArrayList<>();
 }
 
-    public Movie(int id, String title, MovieGenre genre, int duration, Image poster, String synopsis) {
+    public Movie(int id, String title, MovieGenre genre, int duration, ImageIcon poster, String synopsis) {
         this.id = id;
         this.title = title;
         this.genre = genre;
@@ -77,11 +78,11 @@ public class Movie {
         this.duration = duration;
     }
 
-    public Image getPoster() {
+    public ImageIcon getPoster() {
         return poster;
     }
 
-    public void setPoster(Image poster) {
+    public void setPoster(ImageIcon poster) {
         this.poster = poster;
     }
 

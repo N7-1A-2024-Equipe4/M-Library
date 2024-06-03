@@ -3,6 +3,7 @@ package view;
 import controller.ListsController;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ListsView implements View {
     private final ListsController controller;
@@ -21,4 +22,5 @@ public class ListsView implements View {
     public void refresh() {
 
     }
+
 }

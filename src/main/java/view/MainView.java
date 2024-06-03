@@ -12,7 +12,7 @@ import java.util.Arrays;
  * Singleton class.
  *
  * @see NavbarView
- * @see controller.MainController
+ * @see MainController
  */
 public class MainView implements View {
     private static MainView instance;
@@ -52,4 +52,5 @@ public class MainView implements View {
     public void refresh() {
         navbarView.refresh();
     }
+
 }

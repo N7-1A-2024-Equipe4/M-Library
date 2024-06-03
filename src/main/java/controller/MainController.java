@@ -2,6 +2,7 @@ package controller;
 
 import session.Session;
 import view.*;
+import view.home.HomeView;
 
 import java.util.Map;
 

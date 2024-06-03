@@ -2,8 +2,13 @@ package dao;
 
 import model.Movie;
 import model.MovieGenre;
+import utils.ImageUtil;
 
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,9 +20,8 @@ public class MovieDAO extends DAO<Movie> {
     public MovieDAO() {
         super();
     }
-
+  
     // Create
-
     @Override
     public void add(Movie movie) throws SQLException {
         String query = "INSERT INTO movie (title, genre, duration, image, synopsis) VALUES (?, ?, ?, ?, ?)";
@@ -34,7 +38,6 @@ public class MovieDAO extends DAO<Movie> {
     }
 
     // Read
-
     @Override
     public Movie getById(int id) throws SQLException {
         Movie movie = null;
@@ -67,6 +70,7 @@ public class MovieDAO extends DAO<Movie> {
             }
         }
 
+
         return movies;
     }        
 
@@ -79,7 +83,6 @@ public class MovieDAO extends DAO<Movie> {
     }
 
     // Delete
-
     @Override
     public void delete(int id) throws SQLException {
         // TODO Auto-generated method stub
@@ -93,7 +96,19 @@ public class MovieDAO extends DAO<Movie> {
         String title = resultSet.getString("title");
         MovieGenre genre = MovieGenre.fromDisplayName(resultSet.getString("genre"));
         int duration = resultSet.getInt("duration");
-        Image poster = (Image) resultSet.getObject("image");
+      
+        InputStream is =  resultSet.getBinaryStream("image");
+        ImageIcon poster = null;
+        if (is != null) {
+            try {
+                poster = ImageUtil.getImageFromBinaryStream(is);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            poster = null;
+        }
+
         String synopsis = resultSet.getString("synopsis");
 
         return new Movie(id, title, genre, duration, poster, synopsis);

@@ -5,6 +5,7 @@ import model.User;
 import session.Session;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ProfileView implements View {
     private final ProfileController controller;

@@ -3,6 +3,7 @@ package view;
 import controller.MovieController;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MovieView implements View {
     private final MovieController controller;
@@ -21,4 +22,5 @@ public class MovieView implements View {
     public void refresh() {
 
     }
+
 }
