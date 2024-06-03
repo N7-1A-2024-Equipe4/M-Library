@@ -21,7 +21,7 @@ public class HomeController {
 
     public void addMovieAction(String title, MovieGenre genre, int duration, ImageIcon poster, String synopsis) {
         try {
-            movieDAO.addMovie(new Movie(title, genre, duration, poster, synopsis));
+            movieDAO.add(new Movie(title, genre, duration, poster, synopsis));
             view.refresh();
         } catch (Exception e) {
             view.addMovieError("Error adding movie");

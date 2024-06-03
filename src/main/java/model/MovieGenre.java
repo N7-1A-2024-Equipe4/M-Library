@@ -9,8 +9,9 @@ public enum MovieGenre {
     ROMANCE("Romance"),
     SCI_FI("Sci-Fi"),
     DOCUMENTARY("Documentary"),
+    FANTASY("Fantasy"),
     THRILLER("Thriller"),
-    FANTASY("Fantasy");
+    WAR("War");
 
     private final String displayName;
 
@@ -21,7 +22,7 @@ public enum MovieGenre {
     public String getDisplayName() {
         return displayName;
     }
-    
+
     public static MovieGenre fromDisplayName(String displayName) {
         for (MovieGenre genre : MovieGenre.values()) {
             if (genre.getDisplayName().equals(displayName)) {
