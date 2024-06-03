@@ -1,6 +1,7 @@
 SET SQL_SAFE_UPDATES = 0;
 
 DELETE FROM director_of_movie;
+DELETE FROM screenwriter_of_movie;
 DELETE FROM movie_in_library;
 DELETE FROM actor_in_movie;
 DELETE FROM review;
@@ -74,48 +75,48 @@ VALUES
 (48, 'Michael', 'Clarke Duncan', '1957-12-10', '2012-09-03');
 
 -- Insert sample movies
-INSERT INTO movie (movie_id, title, genre, duration, image, synopsis, person_id)
+INSERT INTO movie (movie_id, title, genre, duration, image, synopsis, rating)
 VALUES (1, 'Inception', 'Sci-Fi', 148, NULL,
-        'A thief who steals corporate secrets through the use of dream-sharing technology.', 3),
+        'A thief who steals corporate secrets through the use of dream-sharing technology.', 0),
        (2, 'The Godfather', 'Drama', 175, NULL,
-        'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.',
-        4),
+        'The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.'
+        , 0),
        (3, 'Pulp Fiction', 'Comedy', 154, NULL,
-        'The lives of two mob hitmen, a boxer, a gangster, and his wife intertwine in four tales of violence and redemption.',
-        5),
+        'The lives of two mob hitmen, a boxer, a gangster, and his wife intertwine in four tales of violence and redemption.'
+        , 0),
        (4, 'The Dark Knight', 'Action', 152, NULL,
-        'When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.',
-        3),
+        'When the menace known as the Joker emerges from his mysterious past, he wreaks havoc and chaos on the people of Gotham.'
+        , 0),
        (5, 'Forrest Gump', 'Drama', 142, NULL,
-        'The presidencies of Kennedy and Johnson, the events of Vietnam, Watergate, and other history unfold through the perspective of an Alabama man with an IQ of 75.',
-        6),
+        'The presidencies of Kennedy and Johnson, the events of Vietnam, Watergate, and other history unfold through the perspective of an Alabama man with an IQ of 75.'
+        , 0),
        (6, 'The Shawshank Redemption', 'Drama', 142, NULL,
-        'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.',
-        7),
+        'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.'
+        , 0),
        (7, 'The Lord of the Rings: The Fellowship of the Ring', 'Fantasy', 178, NULL,
-        'A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.',
-        8),
+        'A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.'
+        , 0),
        (8, 'Fight Club', 'Drama', 139, NULL,
-        'An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.',
-        9),
+        'An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.'
+        , 0),
        (9, 'Interstellar', 'Sci-Fi', 169, NULL,
-        'A team of explorers travel through a wormhole in space in an attempt to ensure humanity''s survival.',
-        3),
+        'A team of explorers travel through a wormhole in space in an attempt to ensure humanity''s survival.'
+        , 0),
        (10, 'Gladiator', 'Action', 155, NULL,
-        'A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.',
-        10),
+        'A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family and sent him into slavery.'
+        , 0),
        (11, 'Titanic', 'Drama', 195, NULL,
-        'A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.',
-        11),
+        'A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious, ill-fated R.M.S. Titanic.'
+        , 0),
        (12, 'The Silence of the Lambs', 'Thriller', 118, NULL,
-        'A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.',
-        14),
+        'A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.'
+        , 0),
        (13, 'Braveheart', 'Action', 178, NULL,
-        'Scottish warrior William Wallace leads his countrymen in a rebellion to free his homeland from the tyranny of King Edward I of England.',
-        15),
+        'Scottish warrior William Wallace leads his countrymen in a rebellion to free his homeland from the tyranny of King Edward I of England.'
+        , 0),
        (14, 'The Green Mile', 'Drama', 189, NULL,
-        'The lives of guards on Death Row are affected by one of their charges: a black man accused of child murder and rape, yet who has a mysterious gift.',
-        7);
+        'The lives of guards on Death Row are affected by one of their charges: a black man accused of child murder and rape, yet who has a mysterious gift.'
+        , 0);
 
 -- Insert sample reviews
 INSERT INTO review (review_id, movie_id, user_id, review)

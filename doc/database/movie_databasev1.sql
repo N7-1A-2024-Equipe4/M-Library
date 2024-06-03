@@ -55,8 +55,8 @@ CREATE TABLE movie
     duration    INT,
     image       LONGBLOB, -- Since this database will be used for a small application, we choose to store the image directly in the database
     synopsis    TEXT(1000),
-    person_id INT,
-    FOREIGN KEY (person_id) REFERENCES person (person_id)
+    rating INT,
+    CHECK (rating BETWEEN 0 AND 10)
 );
 
 CREATE TABLE review
@@ -78,6 +78,14 @@ CREATE TABLE actor_in_movie
 );
 
 CREATE TABLE director_of_movie
+(
+    person_id INT,
+    movie_id INT,
+    FOREIGN KEY (person_id) REFERENCES person (person_id),
+    FOREIGN KEY (movie_id) REFERENCES movie (movie_id)
+);
+
+CREATE TABLE screenwriter_of_movie
 (
     person_id INT,
     movie_id INT,
