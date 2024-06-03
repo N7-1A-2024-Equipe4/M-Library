@@ -42,7 +42,7 @@ public class HomeView implements View {
     @Override
     public void refresh() {
         try {
-            List<Movie> movies = movieDAO.getAllMovies();
+            List<Movie> movies = movieDAO.getAll();
             moviesGrid.setMovies(movies);
         } catch (SQLException exception) {
             // ...
