@@ -7,16 +7,15 @@ DATABASE mlibrary;
 USE
 mlibrary;
 
-DROP TABLE IF EXISTS movie;
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS library;
-DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS person;
-DROP TABLE IF EXISTS actor;
-DROP TABLE IF EXISTS screenwriter;
-DROP TABLE IF EXISTS director;
+DROP TABLE IF EXISTS movie;
+DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS actor_in_movie;
-DROP TABLE IF EXISTS movie_in_list;
+DROP TABLE IF EXISTS director_in_movie;
+DROP TABLE IF EXISTS screenwriter_in_movie;
+DROP TABLE IF EXISTS movie_in_library;
 
 CREATE TABLE user
 (
