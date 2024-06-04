@@ -7,12 +7,19 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="46430" class="javax.swing.JLabel">
+      <grid id="76ca1" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
         <constraints border-constraint="North"/>
-        <properties>
-          <text value="Mes listes de films :D"/>
-        </properties>
-      </component>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="cb8e1" class="javax.swing.JLabel">
+            <constraints/>
+            <properties>
+              <text value="My libraries"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>
