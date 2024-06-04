@@ -47,12 +47,9 @@ public class LibraryDAO extends DAO<Library> {
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 libraries.add(getLibraryFromResultSet(resultSet));
-                //library = getLibraryFromResultSet(resultSet);
             }
-
         }
         return libraries;
-    
     }
         
     @Override
@@ -74,9 +71,9 @@ public class LibraryDAO extends DAO<Library> {
         int userId = resultSet.getInt("user_id");
         String description = resultSet.getString("description");
 
-        InputStream is =  resultSet.getBinaryStream("icon");
+        //InputStream is =  resultSet.getBinaryStream("icon");
         ImageIcon icon = null;
-        if (is != null) {
+        /*if (is != null) {
             try {
                 icon = ImageUtil.getImageFromBinaryStream(is);
             } catch (IOException e) {
@@ -84,8 +81,7 @@ public class LibraryDAO extends DAO<Library> {
             }
         } else {
             icon = null;
-        }
-        System.out.println(libraryId + "");
+        }*/
         return new Library(libraryId, name, new User(userId), description, icon);
     }
 

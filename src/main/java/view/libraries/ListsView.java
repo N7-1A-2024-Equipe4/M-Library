@@ -7,6 +7,7 @@ import model.*;
 import view.View;
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import session.Session;
@@ -42,19 +43,8 @@ public class ListsView implements View {
     public void refresh() {
         try {
             List<Library> libraries = this.libraryService.getByUserId(Session.getUser().getId());
-            /*List<Library> libraries = new ArrayList<Library>();//this.libraryDAO.getAll();
-            List<ElementOfLibrary> el = new ArrayList<ElementOfLibrary>();
-            el.add(new ElementOfLibrary(
-                    new Movie("ede", MovieGenre.HORROR, 3, null, "rvdver")));
-            libraries.add(new Library("test", el, new User()));
-            libraries.add(new Library("test2", el, new User()));
-            libraries.add(new Library("test3", el, new User()));
-            libraries.add(new Library("rferfergerg", el, new User()));
-            libraries.add(new Library("r", el, new User()));
-            libraries.add(new Library("efergergergege", el, new User()));*/
-
             this.listsGrid.setLists(libraries);
-        } catch (/*SQL*/Exception exception) {
+        } catch (SQLException exception) {
             //
         }
     }
