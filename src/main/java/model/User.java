@@ -27,4 +27,8 @@ public class User {
         this.createdAt = new Date();
     }
 
+    public User(int id) {
+        this.id = id;
+    }
+
 }

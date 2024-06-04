@@ -4,17 +4,30 @@ import lombok.Getter;
 
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 public class Library {
 
+    private int id;
     @Getter
     private String name;
     private List<ElementOfLibrary> elements;
     private User owner;
+    private String description;
+    private ImageIcon icon;
 
     public Library(String name, List<ElementOfLibrary> elements, User owner) {
         this.name = name;
         this.elements = elements;
         this.owner = owner;
+    }
+
+    public Library(int id, String name, User owner, String description, ImageIcon icon) {
+        this.id = id;
+        this.name = name;
+        this.owner = owner;
+        this.description = description;
+        this.icon = icon;
     }
 
     public void addElement(ElementOfLibrary element) {
