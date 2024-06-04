@@ -2,6 +2,7 @@ package view.libraries;
 
 import controller.ListsController;
 import dao.LibraryDAO;
+import dao.LibraryService;
 import model.*;
 import view.View;
 import javax.swing.*;
@@ -13,11 +14,11 @@ import session.Session;
 public class ListsView implements View {
     private final ListsController controller;
     private JPanel panel;
-    private final LibraryDAO libraryDAO;
+    private final LibraryService libraryService;
     private ListsGrid listsGrid;
 
     public ListsView() {
-        this.libraryDAO = new LibraryDAO();
+        this.libraryService = new LibraryService();
         this.controller = new ListsController(this);
         setupUI();
     }
@@ -40,7 +41,7 @@ public class ListsView implements View {
     @Override
     public void refresh() {
         try {
-            List<Library> libraries = this.libraryDAO.getByUserId(Session.getUser().getId());
+            List<Library> libraries = this.libraryService.getByUserId(Session.getUser().getId());
             /*List<Library> libraries = new ArrayList<Library>();//this.libraryDAO.getAll();
             List<ElementOfLibrary> el = new ArrayList<ElementOfLibrary>();
             el.add(new ElementOfLibrary(
@@ -51,6 +52,7 @@ public class ListsView implements View {
             libraries.add(new Library("rferfergerg", el, new User()));
             libraries.add(new Library("r", el, new User()));
             libraries.add(new Library("efergergergege", el, new User()));*/
+
             this.listsGrid.setLists(libraries);
         } catch (/*SQL*/Exception exception) {
             //

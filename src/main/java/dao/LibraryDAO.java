@@ -39,21 +39,19 @@ public class LibraryDAO extends DAO<Library> {
         throw new UnsupportedOperationException("Unimplemented method 'getById'");
     }
 
-    public Library getByUserId(int userId) throws SQLException {
+    public List<Library> getByUserId(int userId) throws SQLException {
         String query = "SELECT * FROM library WHERE user_id = ?";
-        Library library = null;
-
+        List<Library> libraries = new ArrayList<>();
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
             stmt.setInt(1, userId);
             ResultSet resultSet = stmt.executeQuery();
-
             while (resultSet.next()) {
-                library = getLibraryFromResultSet(resultSet);
+                libraries.add(getLibraryFromResultSet(resultSet));
+                //library = getLibraryFromResultSet(resultSet);
             }
 
         }
-
-        return library;
+        return libraries;
     
     }
         
@@ -87,7 +85,7 @@ public class LibraryDAO extends DAO<Library> {
         } else {
             icon = null;
         }
-
+        System.out.println(libraryId + "");
         return new Library(libraryId, name, new User(userId), description, icon);
     }
 

@@ -1,10 +1,10 @@
-package model;
+package dao;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import dao.LibraryDAO;
-import dao.MovieDAO;
+import model.Library;
+import model.Movie;
 
 public class LibraryService {
 
@@ -15,11 +15,11 @@ public class LibraryService {
         // TODO Auto-generated constructor stub
     }
 
-    public Library getByUserId(int id) throws SQLException {
-        Library library = libraryDAO.getByUserId(id);
-        List<Movie> movies = movieDAO.getByLibraryId(library.getId());
+    public List<Library> getByUserId(int id) throws SQLException {
+        List<Library> libraries = libraryDAO.getByUserId(id);
+        //List<Movie> movies = movieDAO.getByLibraryId(library.getId());
         //library.setMovies(movies);
-        return library;
+        return libraries;
     }
 
 }

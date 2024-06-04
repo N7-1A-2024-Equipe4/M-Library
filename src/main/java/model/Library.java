@@ -15,6 +15,7 @@ public class Library {
     private User owner;
     private String description;
     private ImageIcon icon;
+    private int id;
 
     public Library(String name, List<ElementOfLibrary> elements, User owner) {
         this.name = name;
