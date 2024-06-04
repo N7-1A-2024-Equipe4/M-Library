@@ -16,10 +16,7 @@ public class LibraryService {
     }
 
     public List<Library> getByUserId(int id) throws SQLException {
-        List<Library> libraries = libraryDAO.getByUserId(id);
-        //List<Movie> movies = movieDAO.getByLibraryId(library.getId());
-        //library.setMovies(movies);
-        return libraries;
+        return libraryDAO.getByUserId(id);
     }
 
 }
