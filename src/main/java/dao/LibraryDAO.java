@@ -51,7 +51,7 @@ public class LibraryDAO extends DAO<Library> {
         }
         return libraries;
     }
-        
+
     @Override
     public void update(int id, Library entity) throws SQLException {
         // TODO Auto-generated method stub
@@ -82,9 +82,10 @@ public class LibraryDAO extends DAO<Library> {
         } else {
             icon = null;
         }
+
         return new Library(libraryId, name, new User(userId), description, icon);
     }
 
-    
+
 
 }
