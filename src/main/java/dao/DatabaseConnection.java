@@ -1,12 +1,15 @@
 package dao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    private static final String URL = "jdbc:mysql://roundhouse.proxy.rlwy.net:15970/mlibrary";
-    private static final String USER = "root";
-    private static final String PASSWORD = "ZgVBNQcDVBedxSknPJLpBjfmpfdgSCoq";
+    private static final String URL = "jdbc:mysql://alcoolis.me:3306/mlibrary";
+    private static final String USER = "mlibrary";
+    private static final String PASSWORD = "0}S2jB,-WG(?4K727>2@";
 
     private static DatabaseConnection instance;
 
