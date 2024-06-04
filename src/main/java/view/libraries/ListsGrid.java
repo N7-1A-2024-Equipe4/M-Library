@@ -1,12 +1,10 @@
-package view;
+package view.libraries;
 
 import model.Library;
-import model.Movie;
-import view.home.MovieThumbnail;
-import java.util.List;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class ListsGrid extends JPanel {
 
@@ -14,14 +12,11 @@ public class ListsGrid extends JPanel {
         setLayout(new GridLayout(0,5,5,5));
     }
 
-    private void setLists(List<Library> libraries){
+    public void setLists(List<Library> libraries){
         removeAll();
-
         for (Library lib : libraries) {
-            //MovieThumbnail thumbnail = new MovieThumbnail(movie);
-            //this.add(thumbnail);
+            ListsThumbnail thumbnail = new ListsThumbnail(lib);
+            this.add(thumbnail);
         }
     }
-
-
 }
