@@ -1,9 +1,12 @@
 package model;
 
+import lombok.Getter;
+
 import java.util.List;
 
 public class Library {
 
+    @Getter
     private String name;
     private List<ElementOfLibrary> elements;
     private User owner;
