@@ -1,5 +1,6 @@
 package view.libraries;
 
+import model.Movie;
 import lombok.Getter;
 import utils.ImageUtil;
 

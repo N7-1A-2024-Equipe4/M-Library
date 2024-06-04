@@ -1,12 +1,14 @@
 package view.libraries;
 
 import controller.ListsController;
+import dao.LibraryDAO;
 import dao.LibraryService;
 import model.*;
 import view.View;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import session.Session;
 import java.awt.event.MouseAdapter;
@@ -15,11 +17,13 @@ import java.awt.event.MouseEvent;
 public class ListsView implements View {
     private final ListsController controller;
     private JPanel panel;
+    private final LibraryDAO libraryDAO;
     private final LibraryService libraryService;
     private ListsGrid listsGrid;
 
     public ListsView() {
         this.libraryService = new LibraryService();
+        this.libraryDAO = new LibraryDAO();
         this.controller = new ListsController(this);
         setupUI();
     }
