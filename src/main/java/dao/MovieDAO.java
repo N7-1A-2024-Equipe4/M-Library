@@ -70,9 +70,31 @@ public class MovieDAO extends DAO<Movie> {
             }
         }
 
-
         return movies;
     }        
+
+    public List<Movie> getByLibraryId(int libraryId) throws SQLException {
+        String query = """
+                       SELECT *
+                       FROM movie.*
+                       LEFT JOIN movie_in_library ON movie.movie_id = movie_in_library.movie_id
+                       WHERE library_id = ?;
+                       """;
+        Movie movie = null;
+        List<Movie> movies = new ArrayList<>();
+
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setInt(1, libraryId);
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                movie = getMovieFromResultSet(resultSet);
+                movies.add(movie);
+            }
+        }
+
+        return movies;
+    }
 
     // Update
 
@@ -114,4 +136,5 @@ public class MovieDAO extends DAO<Movie> {
         return new Movie(id, title, genre, duration, poster, synopsis);
 
     }
+
 }
