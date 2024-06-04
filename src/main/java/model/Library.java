@@ -45,6 +45,10 @@ public class Library {
         // TODO: implement this method
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setMovies(List<Movie> movies) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setMovies'");
