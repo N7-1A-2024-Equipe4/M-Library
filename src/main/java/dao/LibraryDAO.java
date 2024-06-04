@@ -47,11 +47,14 @@ public class LibraryDAO extends DAO<Library> {
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
                 libraries.add(getLibraryFromResultSet(resultSet));
+                //library = getLibraryFromResultSet(resultSet);
             }
+
         }
         return libraries;
+    
     }
-
+        
     @Override
     public void update(int id, Library entity) throws SQLException {
         // TODO Auto-generated method stub
@@ -82,7 +85,7 @@ public class LibraryDAO extends DAO<Library> {
         } else {
             icon = null;
         }
-
+        System.out.println(libraryId + "");
         return new Library(libraryId, name, new User(userId), description, icon);
     }
 

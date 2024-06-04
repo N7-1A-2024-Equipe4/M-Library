@@ -17,13 +17,12 @@ import java.awt.event.MouseEvent;
 public class ListsView implements View {
     private final ListsController controller;
     private JPanel panel;
-    private final LibraryDAO libraryDAO;
     private final LibraryService libraryService;
     private ListsGrid listsGrid;
 
     public ListsView() {
         this.libraryService = new LibraryService();
-        this.libraryDAO = new LibraryDAO();
+        this.libraryService = new LibraryService();
         this.controller = new ListsController(this);
         setupUI();
     }

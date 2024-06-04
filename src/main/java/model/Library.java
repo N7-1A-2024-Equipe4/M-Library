@@ -8,7 +8,6 @@ import javax.swing.ImageIcon;
 
 public class Library {
 
-    private int id;
     @Getter
     private String name;
     private List<ElementOfLibrary> elements;
