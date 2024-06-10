@@ -13,9 +13,8 @@ public class NavbarController {
     }
 
     public void homeAction() {
-        MainController.getInstance().show(ViewEnum.HOME);
+        MainController.getInstance().show(ViewEnum.MOVIE);
     }
-
 
     public void listsAction() {
         MainController.getInstance().show(ViewEnum.LISTS);
