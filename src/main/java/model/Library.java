@@ -14,7 +14,7 @@ public class Library {
     private User owner;
     private String description;
     @Getter
-    private ImageIcon icon;
+    private ImageIcon poster;
     @Getter
     private int id;
 
@@ -29,7 +29,7 @@ public class Library {
         this.name = name;
         this.owner = owner;
         this.description = description;
-        this.icon = icon;
+        this.poster = icon;
     }
 
     public void addElement(ElementOfLibrary element) {
@@ -42,10 +42,6 @@ public class Library {
 
     public void removeElement(int movie_id) {
         // TODO: implement this method
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setMovies(List<Movie> movies) {
