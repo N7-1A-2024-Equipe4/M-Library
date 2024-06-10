@@ -1,14 +1,12 @@
 package view.libraries;
 
 import controller.ListsController;
-import dao.LibraryDAO;
 import dao.LibraryService;
 import model.*;
 import view.View;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import session.Session;
 import java.awt.event.MouseAdapter;
