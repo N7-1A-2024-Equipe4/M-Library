@@ -71,9 +71,9 @@ public class LibraryDAO extends DAO<Library> {
         int userId = resultSet.getInt("user_id");
         String description = resultSet.getString("description");
 
-        //InputStream is =  resultSet.getBinaryStream("icon");
+        InputStream is =  resultSet.getBinaryStream("icon");
         ImageIcon icon = null;
-        /*if (is != null) {
+        if (is != null) {
             try {
                 icon = ImageUtil.getImageFromBinaryStream(is);
             } catch (IOException e) {
@@ -81,7 +81,7 @@ public class LibraryDAO extends DAO<Library> {
             }
         } else {
             icon = null;
-        }*/
+        }
         return new Library(libraryId, name, new User(userId), description, icon);
     }
 

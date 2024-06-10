@@ -27,8 +27,10 @@ public class ListsView implements View {
     private void setupUI(){
         panel = new JPanel(new BorderLayout());
         this.listsGrid = new ListsGrid();
+        JLabel pageTitle = new JLabel("My libraries");
+        pageTitle.setFont(new Font("Arial", Font.BOLD, 24));
         JScrollPane scrollPane = new JScrollPane(listsGrid, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        panel.add(new JLabel("My libraries"), BorderLayout.NORTH);
+        panel.add(pageTitle, BorderLayout.NORTH);
         panel.add(scrollPane, BorderLayout.CENTER);
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10,0,0,0));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));

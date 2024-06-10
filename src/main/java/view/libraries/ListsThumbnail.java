@@ -8,8 +8,8 @@ import java.awt.*;
 import model.Library;
 
 public class ListsThumbnail extends JPanel{
-    private final int WIDTH = 50;
-    private final int HEIGHT = 50;
+    private final int WIDTH = 200;
+    private final int HEIGHT = 300;
 
     private String libraryName;
     private JLabel titleLabel;
@@ -17,7 +17,7 @@ public class ListsThumbnail extends JPanel{
 
     public ListsThumbnail(Library library) {
         this.libraryName = library.getName();
-        setLayout(new BorderLayout());
+        setLayout(new FlowLayout());
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
         titleLabel = new JLabel(libraryName, SwingConstants.CENTER);
@@ -25,11 +25,9 @@ public class ListsThumbnail extends JPanel{
 
         posterLabel = new JLabel();
         posterLabel.setHorizontalAlignment(SwingConstants.CENTER);
-
-        /*if (movie.getPoster() != null) {
-            posterLabel.setIcon(new ImageIcon(ImageUtil.getScaledImage(movie.getPoster().getImage(), WIDTH, HEIGHT)));
-        }*/
-
+        if (library.getPoster() != null) {
+            posterLabel.setIcon(new ImageIcon(ImageUtil.getScaledImage(library.getPoster().getImage(), WIDTH, HEIGHT)));
+        }
         add(titleLabel, BorderLayout.NORTH);
         add(posterLabel, BorderLayout.CENTER);
     }
