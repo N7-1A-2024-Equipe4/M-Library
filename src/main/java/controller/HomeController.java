@@ -23,17 +23,4 @@ public class HomeController {
     public void showDetails(Integer movieID) {
         MainController.getInstance().show(ViewEnum.MOVIE, movieID);
     }
-
-    public void addMovieAction(String title, MovieGenre genre, int duration, ImageIcon poster, String synopsis, int rating) {
-        try {
-            movieDAO.add(new Movie(title, genre, duration, poster, synopsis, rating));
-            view.refresh(null);
-        } catch (Exception e) {
-            view.addMovieError("Error adding movie");
-        }
-    }
-
-    public void removeMovieAction(int id) {
-
-    }
 }

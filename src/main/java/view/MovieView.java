@@ -1,21 +1,25 @@
 package view;
 
 import controller.MovieController;
-import dao.MovieDAO;
 import model.Movie;
+import model.Person;
 import org.apache.commons.lang3.StringUtils;
+import service.MovieService;
 import utils.ImageUtil;
 import utils.TimeUtils;
 
 import javax.swing.*;
+import java.awt.*;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MovieView implements View {
     private final MovieController controller;
 
     private final int WIDTH = 200;
     private final int HEIGHT = 250;
-
 
     private JPanel panel;
     private JLabel movieImage;
@@ -24,12 +28,15 @@ public class MovieView implements View {
     private JLabel movieDuration;
     private JLabel movieRating;
     private JLabel movieSynopsis;
+    private JLabel movieDirectors;
+    private JPanel movieCastingPanel;
 
-    private final MovieDAO movieDAO;
+    private final MovieService movieService;
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public MovieView() {
         controller = new MovieController();
-        this.movieDAO = new MovieDAO();
+        this.movieService = new MovieService();
     }
 
     @Override
@@ -39,10 +46,8 @@ public class MovieView implements View {
 
     @Override
     public void refresh(Integer movieID) {
-        System.out.println(movieID);
-
         try {
-            Movie fetchedMovie = movieDAO.getById(movieID);
+            Movie fetchedMovie = movieService.getMovieById(movieID);
             if (fetchedMovie.getPoster() != null) {
                 movieImage.setIcon(new ImageIcon(ImageUtil.getScaledImage(fetchedMovie.getPoster().getImage(), WIDTH, HEIGHT)));
             }
@@ -52,9 +57,54 @@ public class MovieView implements View {
             movieDuration.setText(TimeUtils.formatDuration(fetchedMovie.getDuration()));
             movieSynopsis.setText(fetchedMovie.getSynopsis());
             movieRating.setText(Float.toString(fetchedMovie.getRating()));
+            movieDirectors.setText(formatDirectors(fetchedMovie.getDirectors()));
+            populateCastingPanel(fetchedMovie.getActors());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String formatDirectors(List<Person> directors) {
+        if (directors == null || directors.isEmpty()) {
+            return "Unknown";
+        }
+        return directors.stream()
+                .map(director -> director.getFirstName() + " " + director.getLastName())
+                .collect(Collectors.joining(", "));
+    }
+
+    private String formatActorDetails(Person actor) {
+        StringBuilder details = new StringBuilder();
+        details.append(actor.getFirstName()).append(" ").append(actor.getLastName());
+        if (actor.getDateOfBirth() != null) {
+            details.append(" (").append(dateFormat.format(actor.getDateOfBirth()));
+            if (actor.getDateOfDeath() != null) {
+                details.append(" - ").append(dateFormat.format(actor.getDateOfDeath()));
+            }
+            details.append(")");
+        }
+        return details.toString();
+    }
+
+    private void populateCastingPanel(List<Person> actors) {
+        movieCastingPanel.removeAll();
+        movieCastingPanel.setLayout(new BoxLayout(movieCastingPanel, BoxLayout.Y_AXIS));
+
+        Font synopsisFont = movieSynopsis.getFont();
+        if (actors == null || actors.isEmpty()) {
+            JLabel noActorsLabel = new JLabel("No actors available");
+            noActorsLabel.setFont(synopsisFont);
+            movieCastingPanel.add(noActorsLabel);
+        } else {
+            for (Person actor : actors) {
+                JLabel actorLabel = new JLabel(formatActorDetails(actor));
+                actorLabel.setFont(synopsisFont);
+                movieCastingPanel.add(actorLabel);
+                movieCastingPanel.add(Box.createVerticalStrut(3));
+            }
+        }
+        movieCastingPanel.revalidate();
+        movieCastingPanel.repaint();
     }
 
 }
