@@ -5,5 +5,6 @@ public enum ViewEnum {
     HOME,
     LISTS,
     PROFILE,
-    MOVIE;
+    MOVIE,
+    LIST;
 }

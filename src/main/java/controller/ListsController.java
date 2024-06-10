@@ -1,6 +1,7 @@
 package controller;
 
 import dao.LibraryDAO;
+import view.ViewEnum;
 import view.libraries.ListsView;
 
 public class ListsController {
@@ -11,5 +12,9 @@ public class ListsController {
     public ListsController(ListsView view) {
         this.view = view;
         this.libraryDAO = new LibraryDAO();
+    }
+
+    public void showDetails(String libraryName) {
+        MainController.getInstance().show(ViewEnum.LIST);
     }
 }
