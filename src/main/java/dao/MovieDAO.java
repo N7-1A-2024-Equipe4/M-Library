@@ -24,7 +24,7 @@ public class MovieDAO extends DAO<Movie> {
     // Create
     @Override
     public void add(Movie movie) throws SQLException {
-        String query = "INSERT INTO movie (title, genre, duration, image, synopsis) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO movie (title, genre, duration, image, synopsis, rating) VALUES (?, ?, ?, ?, ?, ?)";
         
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
             stmt.setString(1, movie.getTitle());
@@ -32,6 +32,7 @@ public class MovieDAO extends DAO<Movie> {
             stmt.setInt(3, movie.getDuration());
             stmt.setNull(4, java.sql.Types.BINARY);
             stmt.setString(5, movie.getSynopsis());
+            stmt.setFloat(6, movie.getRating());
 
             stmt.executeUpdate();
         }
@@ -110,8 +111,9 @@ public class MovieDAO extends DAO<Movie> {
         }
 
         String synopsis = resultSet.getString("synopsis");
+        float rating = resultSet.getInt("rating");
 
-        return new Movie(id, title, genre, duration, poster, synopsis);
+        return new Movie(id, title, genre, duration, poster, synopsis, rating);
 
     }
 }

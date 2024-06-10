@@ -27,7 +27,7 @@ public class LoginView implements View {
     }
 
     @Override
-    public void refresh() {
+    public void refresh(Integer moveID) {
         usernameTextField.setBorder(BorderFactory.createLineBorder(java.awt.Color.BLACK));
     }
 

@@ -13,38 +13,42 @@ public class Movie {
     private int duration;
     private ImageIcon poster;
     private String synopsis;
+    private float rating;
     private List<Person> actors;
     private List<Person> directors;
     private List<Person> screenwriters;
 
-    public Movie(String title, MovieGenre genre, int duration, ImageIcon poster, String synopsis) {
+    public Movie(String title, MovieGenre genre, int duration, ImageIcon poster, String synopsis, float rating) {
         this.title = title;
         this.genre = genre;
         this.duration = duration;
         this.poster = poster;
         this.synopsis = synopsis;
+        this.rating = rating;
         this.actors = new ArrayList<>();
         this.directors = new ArrayList<>();
         this.screenwriters = new ArrayList<>();
 }
 
-    public Movie(int id, String title, MovieGenre genre, int duration, ImageIcon poster, String synopsis) {
+    public Movie(int id, String title, MovieGenre genre, int duration, ImageIcon poster, String synopsis, float rating) {
         this.id = id;
         this.title = title;
         this.genre = genre;
         this.duration = duration;
         this.poster = poster;
         this.synopsis = synopsis;
+        this.rating = rating;
         this.actors = new ArrayList<>();
         this.directors = new ArrayList<>();
         this.screenwriters = new ArrayList<>();
     }
 
-    public Movie(String title, MovieGenre genre, int duration, String synopsis) {
+    public Movie(String title, MovieGenre genre, int duration, String synopsis, float rating) {
         this.title = title;
         this.genre = genre;
         this.duration = duration;
         this.synopsis = synopsis;
+        this.rating = rating;
         this.actors = new ArrayList<>();
         this.directors = new ArrayList<>();
         this.screenwriters = new ArrayList<>();
@@ -92,6 +96,14 @@ public class Movie {
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public List<Person> getActors() {

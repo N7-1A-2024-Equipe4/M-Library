@@ -31,7 +31,7 @@ public class DAOTest {
 
     public static void movieTest(MovieDAO movieDAO) {
         // Create a new Movie object
-        Movie movie = new Movie("BBgame", MovieGenre.ACTION, 181, "The Avengers take a final stand against Thanos in the epic conclusion of the Infinity Saga.");
+        Movie movie = new Movie("BBgame", MovieGenre.ACTION, 181, "The Avengers take a final stand against Thanos in the epic conclusion of the Infinity Saga.", 3);
 
         // Test the add method
         addMovie(movieDAO, movie);

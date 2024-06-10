@@ -5,5 +5,5 @@ import javax.swing.*;
 public interface View {
     JPanel getPanel();
 
-    void refresh();
+    void refresh(Integer modelID);
 }

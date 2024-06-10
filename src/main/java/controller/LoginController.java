@@ -18,6 +18,6 @@ public class LoginController {
         }
         MainController mainController = MainController.getInstance();
         mainController.updateNavbar();
-        mainController.show(ViewEnum.PROFILE);
+        mainController.show(ViewEnum.PROFILE, null);
     }
 }

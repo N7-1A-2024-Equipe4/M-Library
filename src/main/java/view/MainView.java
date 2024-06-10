@@ -49,8 +49,8 @@ public class MainView implements View {
     }
 
     @Override
-    public void refresh() {
-        navbarView.refresh();
+    public void refresh(Integer moveID) {
+        navbarView.refresh(null);
     }
 
 }
