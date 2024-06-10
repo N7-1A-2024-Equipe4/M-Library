@@ -14,7 +14,7 @@ public class Library {
     private User owner;
     private String description;
     @Getter
-    private ImageIcon poster;
+    private ImageIcon icon;
     @Getter
     private int id;
 
@@ -29,7 +29,7 @@ public class Library {
         this.name = name;
         this.owner = owner;
         this.description = description;
-        this.poster = icon;
+        this.icon = icon;
     }
 
     public void addElement(ElementOfLibrary element) {

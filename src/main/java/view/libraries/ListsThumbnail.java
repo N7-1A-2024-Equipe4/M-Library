@@ -1,6 +1,6 @@
 package view.libraries;
 
-import model.Movie;
+import lombok.Getter;
 import utils.ImageUtil;
 
 import javax.swing.*;
@@ -11,6 +11,7 @@ public class ListsThumbnail extends JPanel{
     private final int WIDTH = 200;
     private final int HEIGHT = 300;
 
+    @Getter
     private String libraryName;
     private JLabel titleLabel;
     private JLabel posterLabel;
@@ -25,10 +26,11 @@ public class ListsThumbnail extends JPanel{
 
         posterLabel = new JLabel();
         posterLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        if (library.getPoster() != null) {
-            posterLabel.setIcon(new ImageIcon(ImageUtil.getScaledImage(library.getPoster().getImage(), WIDTH, HEIGHT)));
+        if (library.getIcon() != null) {
+            posterLabel.setIcon(new ImageIcon(ImageUtil.getScaledImage(library.getIcon().getImage(), WIDTH, HEIGHT)));
         }
         add(titleLabel, BorderLayout.NORTH);
         add(posterLabel, BorderLayout.CENTER);
     }
+
 }
