@@ -1,12 +1,34 @@
 package model;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import javax.swing.ImageIcon;
+
 
 public class Library {
 
+    private int id;
     private String name;
-    private List<ElementOfLibrary> elements;
+    private ImageIcon poster;
+    private Date creationDate;
     private User owner;
+    private String description;
+    private List<ElementOfLibrary> elements;
+
+    public Library(String name, ImageIcon poster, Date creationDate, User owner, String description) {
+        this.name = name;
+        this.poster = poster;
+        this.creationDate = creationDate;
+        this.owner = owner;
+        this.description = description;
+    }
 
     public Library(String name, List<ElementOfLibrary> elements, User owner) {
         this.name = name;
@@ -24,6 +46,77 @@ public class Library {
 
     public void removeElement(int movie_id) {
         // TODO: implement this method
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ImageIcon getPoster() {
+        return poster;
+    }
+
+    public byte[] getPosterBytes() {
+        BufferedImage image = new BufferedImage(poster.getIconWidth(), poster.getIconHeight(), BufferedImage.TYPE_INT_RGB);
+        poster.paintIcon(null, image.getGraphics(), 0, 0);   
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(image, "png", baos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return baos.toByteArray();
+    }
+        
+
+    public void setPoster(ImageIcon poster) {
+        this.poster = poster;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<ElementOfLibrary> getElements() {
+        return elements;
+    }
+
+    public void setElements(List<ElementOfLibrary> elements) {
+        this.elements = elements;
     }
 
 }
