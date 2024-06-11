@@ -62,4 +62,7 @@ public class Session {
         return user.getPassword();
     }
 
+    public static boolean isLoggedIn() {
+        return !isSignedOut();
+    }
 }

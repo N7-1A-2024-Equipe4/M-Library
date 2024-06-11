@@ -1,67 +1,48 @@
 package controller;
 
-import dao.UserDAO;
 import model.User;
+import service.UserService;
 import session.Session;
 import view.ProfileView;
-
-import java.sql.SQLException;
 
 public class ProfileController {
     private final ProfileView view;
 
-    private final UserDAO userDao;
+    private final UserService userService;
 
     public ProfileController(ProfileView view) {
         this.view = view;
-        this.userDao = new UserDAO();
+        this.userService = new UserService();
     }
 
-    public void usernameChangeAction(String username) {
+    public void saveChangesAction(String firstName, String lastName, String username, String password) {
         // copy session user
-        User newUser = new User(Session.getUser());
-        // set new username
-        newUser.setUsername(username);
-        // update in database
-        try {
-            userDao.update(newUser.getId(), newUser);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            view.usernameChangeFailed();
+        User updatedUser = new User(Session.getUser());
+        // update fields if not blank
+        if (!firstName.isBlank()) {
+            updatedUser.setFirstName(firstName);
+        }
+        if (!lastName.isBlank()) {
+            updatedUser.setLastName(lastName);
+        }
+        if (!username.isBlank()) {
+            updatedUser.setUsername(username);
+        }
+        if (!password.isBlank()) {
+            updatedUser.setPassword(password);
+        }
+        // update user
+        if (!userService.updateUser(updatedUser.getId(), updatedUser)) {
+            view.userChangeFail();
             return;
         }
-        // log back in
+        // logout and login to refresh the user in the session
         Session.logout();
-        if (Session.login(newUser.getUsername(), newUser.getPassword())) {
-            MainController.getInstance().updateNavbar();
+        if (Session.login(updatedUser.getUsername(), updatedUser.getPassword())) {
             view.refresh(null);
-            view.usernameChangeSuccess(username);
+            view.userChangeSuccess();
         } else {
-            view.weirdFail();
-        }
-    }
-
-    public void passwordChangeAction(String password) {
-        // copy session user
-        User newUser = new User(Session.getUser());
-        // set new password
-        newUser.setPassword(password);
-        // update in database
-        try {
-            userDao.update(newUser.getId(), newUser);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            view.passwordChangeFailed();
-            return;
-        }
-        // log back in
-        Session.logout();
-        if (Session.login(newUser.getUsername(), newUser.getPassword())) {
-            MainController.getInstance().updateNavbar();
-            view.refresh(null);
-            view.passwordChangeSuccess();
-        } else {
-            view.weirdFail();
+            view.userChangeFail();
         }
     }
 }
