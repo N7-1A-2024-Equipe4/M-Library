@@ -16,7 +16,7 @@ public class NavbarController {
         MainController.getInstance().show(ViewEnum.HOME, null);
     }
 
-    public void listsAction() {
+    public void librariesAction() {
         MainController.getInstance().show(ViewEnum.LISTS, null);
     }
 

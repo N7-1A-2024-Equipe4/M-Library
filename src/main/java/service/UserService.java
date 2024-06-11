@@ -18,7 +18,7 @@ public class UserService {
         if (user.getUsername().isBlank()) {
             return false;
         }
-        if (!isUserAuthorized(id)) {
+        if (!isAuthedUser(id)) {
             return false;
         }
         try {
@@ -30,7 +30,16 @@ public class UserService {
         }
     }
 
-    private static boolean isUserAuthorized(int id) {
+    public User getUser(Integer modelId) {
+        try {
+            return userDao.getById(modelId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static boolean isAuthedUser(int id) {
         return Session.getUser().getId() == id;
     }
 

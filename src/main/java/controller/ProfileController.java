@@ -15,67 +15,34 @@ public class ProfileController {
         this.userService = new UserService();
     }
 
-    public void firstNameChangeAction(String firstName) {
-        User newUser = new User(Session.getUser());
-        newUser.setFirstName(firstName);
-        if (!userService.updateUser(newUser.getId(), newUser)) {
-            view.firstNameChangeFailed();
-            return;
-        }
-        Session.getUser().setFirstName(firstName);
-        view.refresh(null);
-    }
-
-    public void lastNameChangeAction(String lastName) {
-        User newUser = new User(Session.getUser());
-        newUser.setLastName(lastName);
-        if (!userService.updateUser(newUser.getId(), newUser)) {
-            view.lastNameChangeFailed();
-            return;
-        }
-        Session.getUser().setLastName(lastName);
-        view.refresh(null);
-    }
-
-    public void usernameChangeAction(String username) {
+    public void saveChangesAction(String firstName, String lastName, String username, String password) {
         // copy session user
-        User newUser = new User(Session.getUser());
-        // set new username
-        newUser.setUsername(username);
-        // update in database
-        if (!userService.updateUser(newUser.getId(), newUser)) {
-            view.usernameChangeFailed();
+        User updatedUser = new User(Session.getUser());
+        // update fields if not blank
+        if (!firstName.isBlank()) {
+            updatedUser.setFirstName(firstName);
+        }
+        if (!lastName.isBlank()) {
+            updatedUser.setLastName(lastName);
+        }
+        if (!username.isBlank()) {
+            updatedUser.setUsername(username);
+        }
+        if (!password.isBlank()) {
+            updatedUser.setPassword(password);
+        }
+        // update user
+        if (!userService.updateUser(updatedUser.getId(), updatedUser)) {
+            view.userChangeFail();
             return;
         }
-        // log back in
+        // logout and login to refresh the user in the session
         Session.logout();
-        if (Session.login(newUser.getUsername(), newUser.getPassword())) {
-            MainController.getInstance().updateNavbar();
+        if (Session.login(updatedUser.getUsername(), updatedUser.getPassword())) {
             view.refresh(null);
-            view.usernameChangeSuccess(username);
+            view.userChangeSuccess();
         } else {
-            view.weirdFail();
-        }
-    }
-
-    public void passwordChangeAction(String password) {
-        // copy session user
-        User newUser = new User(Session.getUser());
-        // set new password
-        newUser.setPassword(password);
-        // update in database
-        if (!userService.updateUser(newUser.getId(), newUser)) {
-            view.passwordChangeFailed();
-            return;
-        }
-        // log back in
-        Session.logout();
-        if (Session.login(newUser.getUsername(), newUser.getPassword())) {
-            MainController.getInstance().updateNavbar();
-            view.refresh(null);
-            view.passwordChangeSuccess();
-        } else {
-            view.weirdFail();
+            view.userChangeFail();
         }
     }
 }
