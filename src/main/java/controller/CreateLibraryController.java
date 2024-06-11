@@ -2,14 +2,12 @@ package controller;
 
 import dao.LibraryService;
 import model.Library;
-import model.User;
 import session.Session;
 import view.CreateLibraryView;
 import view.ViewEnum;
 
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.Date;
 
 public class CreateLibraryController {
@@ -30,15 +28,10 @@ public class CreateLibraryController {
         Library library = new Library(libraryName, poster, new Date(), Session.getUser(), description); 
         libraryService.addLibrary(library);
 
-        MainController mainController = MainController.getInstance();
-        mainController.updateNavbar();
-        mainController.show(ViewEnum.LISTS);
-
+        MainController.getInstance().show(ViewEnum.LISTS);
     }
 
     public void cancelAction() {
-        MainController mainController = MainController.getInstance();
-        mainController.updateNavbar();
-        mainController.show(ViewEnum.LISTS);
+        MainController.getInstance().show(ViewEnum.LISTS);
     }
 }
