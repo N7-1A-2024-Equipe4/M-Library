@@ -1,9 +1,19 @@
 package dao;
 
 import model.Library;
+import model.User;
+import utils.image.ImageUtil;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javax.swing.ImageIcon;
 
 public class LibraryDAO extends DAO<Library> {
 
@@ -25,10 +35,30 @@ public class LibraryDAO extends DAO<Library> {
 
     @Override
     public Library getById(int id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+        String query = "SELECT * FROM library WHERE library_id = ?";
+        Library library = null;
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            ResultSet resultSet = stmt.executeQuery();
+            resultSet.next();
+            library = getLibraryFromResultSet(resultSet);
+        }
+        return library;
     }
 
+    public List<Library> getByUserId(int userId) throws SQLException {
+        String query = "SELECT * FROM library WHERE user_id = ?";
+        List<Library> libraries = new ArrayList<>();
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                libraries.add(getLibraryFromResultSet(resultSet));
+            }
+        }
+        return libraries;
+    }
+        
     @Override
     public void update(int id, Library entity) throws SQLException {
         // TODO Auto-generated method stub
@@ -40,6 +70,28 @@ public class LibraryDAO extends DAO<Library> {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
-    
+
+    private Library getLibraryFromResultSet(ResultSet resultSet) throws SQLException {
+        int libraryId = resultSet.getInt("library_id");
+        String name = resultSet.getString("library_name");
+        Date date = resultSet.getDate("creation_date");
+        int userId = resultSet.getInt("user_id");
+        String description = resultSet.getString("description");
+
+        InputStream is =  resultSet.getBinaryStream("icon");
+        ImageIcon icon;
+        if (is != null) {
+            try {
+                icon = ImageUtil.getImageFromBinaryStreamLibrary(is);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            icon = null;
+        }
+        return new Library(libraryId, name, new User(userId), description, icon, date);
+    }
+
+
 
 }

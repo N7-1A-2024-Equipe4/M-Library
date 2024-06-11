@@ -5,7 +5,8 @@ public enum ViewEnum {
     HOME(false),
     LISTS(true),
     PROFILE(true),
-    MOVIE(false);
+    MOVIE(false),
+    LIST(true);
 
     private boolean isProtected;
 

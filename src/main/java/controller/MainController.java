@@ -3,6 +3,7 @@ package controller;
 import session.Session;
 import view.*;
 import view.home.HomeView;
+import view.libraries.LibrariesView;
 
 import java.util.Map;
 
@@ -20,7 +21,8 @@ public class MainController {
                 ViewEnum.HOME, new HomeView(),
                 ViewEnum.MOVIE, new MovieView(),
                 ViewEnum.PROFILE, new ProfileView(),
-                ViewEnum.LISTS, new ListsView()
+                ViewEnum.LISTS, new LibrariesView(),
+                ViewEnum.LIST, new LibraryView()
         );
     }
 
