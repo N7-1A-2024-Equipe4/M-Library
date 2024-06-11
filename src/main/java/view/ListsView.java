@@ -19,7 +19,7 @@ public class ListsView implements View {
     }
 
     @Override
-    public void refresh() {
+    public void refresh(Integer movieID) {
 
     }
 

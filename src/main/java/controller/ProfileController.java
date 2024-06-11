@@ -34,7 +34,7 @@ public class ProfileController {
         Session.logout();
         if (Session.login(newUser.getUsername(), newUser.getPassword())) {
             MainController.getInstance().updateNavbar();
-            view.refresh();
+            view.refresh(null);
             view.usernameChangeSuccess(username);
         } else {
             view.weirdFail();
@@ -58,7 +58,7 @@ public class ProfileController {
         Session.logout();
         if (Session.login(newUser.getUsername(), newUser.getPassword())) {
             MainController.getInstance().updateNavbar();
-            view.refresh();
+            view.refresh(null);
             view.passwordChangeSuccess();
         } else {
             view.weirdFail();

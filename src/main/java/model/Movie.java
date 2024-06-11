@@ -1,8 +1,7 @@
-
 package model;
 
 import javax.swing.*;
-import java.awt.*;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,42 +12,32 @@ public class Movie {
     private int duration;
     private ImageIcon poster;
     private String synopsis;
+    private float rating;
     private List<Person> actors;
     private List<Person> directors;
     private List<Person> screenwriters;
 
-    public Movie(String title, MovieGenre genre, int duration, ImageIcon poster, String synopsis) {
-        this.title = title;
-        this.genre = genre;
-        this.duration = duration;
-        this.poster = poster;
-        this.synopsis = synopsis;
-        this.actors = new ArrayList<>();
-        this.directors = new ArrayList<>();
-        this.screenwriters = new ArrayList<>();
-}
-
-    public Movie(int id, String title, MovieGenre genre, int duration, ImageIcon poster, String synopsis) {
+    public Movie(int id, String title, MovieGenre genre, int duration, ImageIcon poster, String synopsis, float rating) {
         this.id = id;
         this.title = title;
         this.genre = genre;
         this.duration = duration;
         this.poster = poster;
         this.synopsis = synopsis;
+        this.rating = rating;
         this.actors = new ArrayList<>();
         this.directors = new ArrayList<>();
         this.screenwriters = new ArrayList<>();
     }
 
-    public Movie(String title, MovieGenre genre, int duration, String synopsis) {
-        this.title = title;
-        this.genre = genre;
-        this.duration = duration;
-        this.synopsis = synopsis;
-        this.actors = new ArrayList<>();
-        this.directors = new ArrayList<>();
-        this.screenwriters = new ArrayList<>();
+    public Movie(String title, MovieGenre genre, int duration, ImageIcon poster, String synopsis, float rating) {
+        this(-1, title, genre, duration, poster, synopsis, rating);
     }
+
+    public Movie(String title, MovieGenre genre, int duration, String synopsis, float rating) {
+        this(-1, title, genre, duration, null, synopsis, rating);
+    }
+
 
     public int getId() {
         return id;
@@ -94,24 +83,44 @@ public class Movie {
         this.synopsis = synopsis;
     }
 
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
     public List<Person> getActors() {
         return actors;
     }
 
-    public void addActor(Person actor) {
-        actors.add(actor);
+    public void setActors(List<Person> actors) {
+        this.actors = actors;
     }
 
     public List<Person> getDirectors() {
         return directors;
     }
 
-    public void addDirector(Person director) {
-        directors.add(director);
+    public void setDirectors(List<Person> directors) {
+        this.directors = directors;
     }
 
     public List<Person> getScreenwriters() {
         return screenwriters;
+    }
+
+    public void setScreenwriters(List<Person> screenwriters) {
+        this.screenwriters = screenwriters;
+    }
+
+    public void addActor(Person actor) {
+        actors.add(actor);
+    }
+
+    public void addDirector(Person director) {
+        directors.add(director);
     }
 
     public void addScreenwriter(Person screenwriter) {

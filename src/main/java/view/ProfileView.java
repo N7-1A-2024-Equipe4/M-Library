@@ -27,7 +27,7 @@ public class ProfileView implements View {
     }
 
     @Override
-    public void refresh() {
+    public void refresh(Integer movieID) {
         User user = Session.getUser();
         usernameLabel.setText(user.getUsername());
         passwordLabel.setText(user.getPassword());

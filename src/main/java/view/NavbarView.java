@@ -29,7 +29,7 @@ public class NavbarView implements View {
     }
 
     @Override
-    public void refresh() {
+    public void refresh(Integer movieID) {
         usernameLabel.setText(Session.getUsername());
     }
 

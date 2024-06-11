@@ -38,12 +38,12 @@ public class MainController {
         return instance = new MainController(view);
     }
 
-    public void show(ViewEnum viewEnum) {
+    public void show(ViewEnum viewEnum, Integer modelID) {
         if (Session.isSignedOut()) {
             this.mainView.setContent(ViewEnum.LOGIN);
             return;
         }
-        this.views.get(viewEnum).refresh();
+        this.views.get(viewEnum).refresh(modelID);
         this.mainView.setContent(viewEnum);
     }
 
@@ -52,6 +52,6 @@ public class MainController {
     }
 
     public void updateNavbar() {
-        mainView.refresh();
+        mainView.refresh(null);
     }
 }
