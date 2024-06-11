@@ -4,13 +4,13 @@ import javax.swing.ImageIcon;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ImageCache {
-    private final ConcurrentHashMap<String, ImageIcon> cache = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, ImageIcon> cache = new ConcurrentHashMap<>();
 
-    public ImageIcon getImage(String url) {
-        return cache.get(url);
+    public ImageIcon getImage(Integer id) {
+        return cache.get(id);
     }
 
-    public void addImage(String url, ImageIcon image) {
-        cache.put(url, image);
+    public void addImage(Integer id, ImageIcon image) {
+        cache.put(id, image);
     }
 }
