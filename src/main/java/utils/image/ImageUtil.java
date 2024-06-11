@@ -47,4 +47,18 @@ public class ImageUtil {
 
         return imageIcon;
     }
+
+    public static ImageIcon getImageFromBinaryStreamLibrary(InputStream is) throws IOException {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        byte[] buffer = new byte[8192];
+        int bytesRead;
+        while ((bytesRead = is.read(buffer)) != -1) {
+            os.write(buffer, 0, bytesRead);
+        }
+
+        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(os.toByteArray()));
+        ImageIcon imageIcon = new ImageIcon(bufferedImage);
+
+        return imageIcon;
+    }
 }
