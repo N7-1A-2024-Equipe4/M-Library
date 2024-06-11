@@ -50,7 +50,7 @@ public class CreateLibraryView implements View{
     }
 
     @Override
-    public void refresh() {
+    public void refresh(Integer modelID) {
         libraryNameTextField.setText("");
         poster = new ImageIcon();
         descriptionJTextArea.setText("");

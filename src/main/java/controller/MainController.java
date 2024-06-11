@@ -42,10 +42,10 @@ public class MainController {
     public void show(ViewEnum viewEnum, Integer modelID) {
         if (Session.isSignedOut() && viewEnum.isProtected()) {
             this.mainView.setContent(ViewEnum.LOGIN);
-            return;
+        } else {
+            this.views.get(viewEnum).refresh(modelID);
+            this.mainView.setContent(viewEnum);
         }
-        this.views.get(viewEnum).refresh(modelID);
-        this.mainView.setContent(viewEnum);
     }
 
     public View getView(ViewEnum viewEnum) {

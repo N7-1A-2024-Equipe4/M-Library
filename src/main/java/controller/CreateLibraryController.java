@@ -28,10 +28,10 @@ public class CreateLibraryController {
         Library library = new Library(libraryName, poster, new Date(), Session.getUser(), description); 
         libraryService.addLibrary(library);
 
-        MainController.getInstance().show(ViewEnum.LISTS);
+        MainController.getInstance().show(ViewEnum.LISTS, 1);
     }
 
     public void cancelAction() {
-        MainController.getInstance().show(ViewEnum.LISTS);
+        MainController.getInstance().show(ViewEnum.LISTS, 1);
     }
 }
