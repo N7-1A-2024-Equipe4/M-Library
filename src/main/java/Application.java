@@ -1,3 +1,4 @@
+import dao.DatabaseConnection;
 import view.MainView;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ public class Application {
         frame.setSize(800, 600);
 
         // init database
-        // TODO
+        DatabaseConnection.getInstance();
 
         // Create MainView
         MainView mainView = new MainView();
