@@ -15,8 +15,15 @@ public class LibraryService {
         // TODO Auto-generated constructor stub
     }
 
-    public List<Library> getByUserId(int id) throws SQLException {
-        return libraryDAO.getByUserId(id);
+    public void addLibrary(Library library) {
+        try {
+            libraryDAO.add(library);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
+    public List<Library> getByUserId ( int id) throws SQLException {
+        return libraryDAO.getByUserId(id);
+    }
 }

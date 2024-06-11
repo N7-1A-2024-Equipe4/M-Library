@@ -5,8 +5,8 @@ import model.Movie;
 import model.Person;
 import org.apache.commons.lang3.StringUtils;
 import service.MovieService;
-import utils.TimeUtils;
 import utils.image.ImageUtil;
+import utils.TimeUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,6 +51,7 @@ public class MovieView implements View {
             if (fetchedMovie.getPoster() != null) {
                 movieImage.setIcon(new ImageIcon(ImageUtil.getScaledImage(fetchedMovie.getPoster().getImage(), WIDTH, HEIGHT)));
             }
+
             movieTitle.setText(fetchedMovie.getTitle());
             movieGenre.setText(StringUtils.capitalize(fetchedMovie.getGenre().toString().toLowerCase()));
             movieDuration.setText(TimeUtils.formatDuration(fetchedMovie.getDuration()));

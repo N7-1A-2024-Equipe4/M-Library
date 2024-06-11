@@ -23,8 +23,18 @@ public class LibraryDAO extends DAO<Library> {
 
     @Override
     public void add(Library library) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        String query = "INSERT INTO library (library_name, icon, creation_date, user_id, description) VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setString(1, library.getName());
+            stmt.setBytes(2, library.getPosterBytes());
+            stmt.setDate(3, new java.sql.Date(library.getCreationDate().getTime()));
+            stmt.setInt(4, library.getOwner().getId());
+            stmt.setString(5, library.getDescription());
+
+            stmt.executeUpdate();
+        }
+
     }
 
     @Override
@@ -58,7 +68,7 @@ public class LibraryDAO extends DAO<Library> {
         }
         return libraries;
     }
-        
+
     @Override
     public void update(int id, Library entity) throws SQLException {
         // TODO Auto-generated method stub
