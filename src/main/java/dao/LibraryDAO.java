@@ -2,7 +2,7 @@ package dao;
 
 import model.Library;
 import model.User;
-import utils.ImageUtil;
+import utils.image.ImageUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -80,7 +80,7 @@ public class LibraryDAO extends DAO<Library> {
 
         InputStream is =  resultSet.getBinaryStream("icon");
         ImageIcon icon = null;
-        if (is != null) {
+        /*if (is != null) {
             try {
                 icon = ImageUtil.getImageFromBinaryStream(is);
             } catch (IOException e) {
@@ -88,7 +88,7 @@ public class LibraryDAO extends DAO<Library> {
             }
         } else {
             icon = null;
-        }
+        }*/
         return new Library(libraryId, name, new User(userId), description, icon, date);
     }
 

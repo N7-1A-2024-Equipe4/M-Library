@@ -1,11 +1,8 @@
 package view;
 
-import model.Movie;
-import service.LibraryService;
 import model.Library;
-import org.apache.commons.lang3.StringUtils;
-import utils.ImageUtil;
-import utils.TimeUtils;
+import service.LibraryService;
+import utils.image.ImageUtil;
 
 import javax.swing.*;
 import java.sql.SQLException;

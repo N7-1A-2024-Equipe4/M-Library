@@ -5,8 +5,8 @@ import model.Movie;
 import model.Person;
 import org.apache.commons.lang3.StringUtils;
 import service.MovieService;
-import utils.ImageUtil;
 import utils.TimeUtils;
+import utils.image.ImageUtil;
 
 import javax.swing.*;
 import java.awt.*;

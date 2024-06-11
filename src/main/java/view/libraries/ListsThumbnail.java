@@ -1,12 +1,11 @@
 package view.libraries;
 
 import lombok.Getter;
-import lombok.Getter;
-import utils.ImageUtil;
 
 import javax.swing.*;
 import java.awt.*;
 import model.Library;
+import utils.image.ImageUtil;
 
 public class ListsThumbnail extends JPanel{
     private final int WIDTH = 200;
