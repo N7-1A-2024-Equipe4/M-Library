@@ -1,13 +1,9 @@
 package controller;
 
 import dao.MovieDAO;
-import model.Movie;
-import model.MovieGenre;
 import view.ViewEnum;
 import view.home.HomeView;
 
-import javax.swing.*;
-import java.awt.*;
 
 public class HomeController {
 

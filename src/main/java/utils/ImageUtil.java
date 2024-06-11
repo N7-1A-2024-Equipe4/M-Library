@@ -8,6 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.Blob;
 
 public class ImageUtil {
@@ -25,16 +26,18 @@ public class ImageUtil {
         return resizedImg;
     }
 
-    public static ImageIcon getImageFromBinaryStream(InputStream is) throws IOException {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        byte[] buffer = new byte[8192];
-        int bytesRead;
-        while ((bytesRead = is.read(buffer)) != -1) {
-            os.write(buffer, 0, bytesRead);
+    public static ImageIcon getImageFromUrl(String imageUrl) throws IOException {
+        URL url = new URL(imageUrl);
+        try (InputStream is = url.openStream()) {
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            byte[] buffer = new byte[8192];
+            int bytesRead;
+            while ((bytesRead = is.read(buffer)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+
+            BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(os.toByteArray()));
+            return new ImageIcon(bufferedImage);
         }
-
-        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(os.toByteArray()));
-
-        return new ImageIcon(bufferedImage);
     }
 }
