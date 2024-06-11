@@ -1,20 +1,40 @@
 package controller;
 
-import dao.UserDAO;
 import model.User;
+import service.UserService;
 import session.Session;
 import view.ProfileView;
-
-import java.sql.SQLException;
 
 public class ProfileController {
     private final ProfileView view;
 
-    private final UserDAO userDao;
+    private final UserService userService;
 
     public ProfileController(ProfileView view) {
         this.view = view;
-        this.userDao = new UserDAO();
+        this.userService = new UserService();
+    }
+
+    public void firstNameChangeAction(String firstName) {
+        User newUser = new User(Session.getUser());
+        newUser.setFirstName(firstName);
+        if (!userService.updateUser(newUser.getId(), newUser)) {
+            view.firstNameChangeFailed();
+            return;
+        }
+        Session.getUser().setFirstName(firstName);
+        view.refresh(null);
+    }
+
+    public void lastNameChangeAction(String lastName) {
+        User newUser = new User(Session.getUser());
+        newUser.setLastName(lastName);
+        if (!userService.updateUser(newUser.getId(), newUser)) {
+            view.lastNameChangeFailed();
+            return;
+        }
+        Session.getUser().setLastName(lastName);
+        view.refresh(null);
     }
 
     public void usernameChangeAction(String username) {
@@ -23,10 +43,7 @@ public class ProfileController {
         // set new username
         newUser.setUsername(username);
         // update in database
-        try {
-            userDao.update(newUser.getId(), newUser);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (!userService.updateUser(newUser.getId(), newUser)) {
             view.usernameChangeFailed();
             return;
         }
@@ -47,10 +64,7 @@ public class ProfileController {
         // set new password
         newUser.setPassword(password);
         // update in database
-        try {
-            userDao.update(newUser.getId(), newUser);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (!userService.updateUser(newUser.getId(), newUser)) {
             view.passwordChangeFailed();
             return;
         }
