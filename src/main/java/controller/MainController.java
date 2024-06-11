@@ -20,7 +20,8 @@ public class MainController {
                 ViewEnum.HOME, new HomeView(),
                 ViewEnum.MOVIE, new MovieView(),
                 ViewEnum.PROFILE, new ProfileView(),
-                ViewEnum.LISTS, new ListsView()
+                ViewEnum.LISTS, new ListsView(),
+                ViewEnum.CREATELIBRARY, new CreateLibraryView()
         );
     }
 

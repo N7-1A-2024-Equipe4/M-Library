@@ -1,17 +1,19 @@
 package view;
 
 import controller.CreateLibraryController;
+import lombok.Setter;
 
 import javax.swing.*;
 
 
-public class CreateLibraryView {
+public class CreateLibraryView implements View{
 
     private final CreateLibraryController controller;
 
+    @Setter
     private ImageIcon poster;
 
-    private JPanel panel1;
+    private JPanel mainJPanel;
     private JButton importPosterJButton;
     private JTextArea descriptionJTextArea;
     private JButton createListJButton;
@@ -23,6 +25,7 @@ public class CreateLibraryView {
     private JLabel importPosterJLabel;
     private JPanel descriptionJPanel;
     private JLabel descriptionJLabel;
+    private JPanel wrapperJPanel;
 
     public CreateLibraryView() {
         controller = new CreateLibraryController(this);
@@ -33,18 +36,23 @@ public class CreateLibraryView {
         createListJButton.addActionListener(actionEvent -> controller
                 .createListAction(
                         libraryNameTextField.getText(),
-                        poster.getImage(),
+                        poster,
                         descriptionJTextArea.getText()
                 ));
 
         cancelJButton.addActionListener(actionEvent -> controller
                 .cancelAction());
-
     }
 
-    public void setPoster(ImageIcon poster) {
-        this.poster = poster;
+    @Override
+    public JPanel getPanel() {
+        return mainJPanel;
     }
 
-
+    @Override
+    public void refresh() {
+        libraryNameTextField.setText("");
+        poster = new ImageIcon();
+        descriptionJTextArea.setText("");
+    }
 }
