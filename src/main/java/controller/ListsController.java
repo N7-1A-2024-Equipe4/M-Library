@@ -14,7 +14,7 @@ public class ListsController {
         this.libraryDAO = new LibraryDAO();
     }
 
-    public void showDetails(String libraryName) {
-        MainController.getInstance().show(ViewEnum.LIST);
+    public void showDetails(int libraryId) {
+        MainController.getInstance().show(ViewEnum.LIST, libraryId);
     }
 }

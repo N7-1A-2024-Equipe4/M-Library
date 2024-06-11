@@ -1,7 +1,7 @@
 package view.libraries;
 
 import controller.ListsController;
-import dao.LibraryService;
+import service.LibraryService;
 import model.*;
 import view.View;
 import javax.swing.*;
@@ -19,7 +19,6 @@ public class ListsView implements View {
     private ListsGrid listsGrid;
 
     public ListsView() {
-        this.libraryService = new LibraryService();
         this.libraryService = new LibraryService();
         this.controller = new ListsController(this);
         setupUI();
@@ -44,7 +43,7 @@ public class ListsView implements View {
     }
 
     @Override
-    public void refresh() {
+    public void refresh(Integer modelID) {
         try {
             List<Library> libraries = this.libraryService.getByUserId(Session.getUser().getId());
             this.listsGrid.setLists(libraries);
@@ -57,7 +56,7 @@ public class ListsView implements View {
         @Override
         public void mouseClicked(MouseEvent e) {
             ListsThumbnail clickedList = (ListsThumbnail)((JPanel)e.getSource()).getComponentAt(e.getPoint());
-            controller.showDetails(clickedList.getLibraryName());
+            controller.showDetails(clickedList.getId());
         }
     }
 }

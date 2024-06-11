@@ -51,7 +51,6 @@ public class MovieView implements View {
             if (fetchedMovie.getPoster() != null) {
                 movieImage.setIcon(new ImageIcon(ImageUtil.getScaledImage(fetchedMovie.getPoster().getImage(), WIDTH, HEIGHT)));
             }
-
             movieTitle.setText(fetchedMovie.getTitle());
             movieGenre.setText(StringUtils.capitalize(fetchedMovie.getGenre().toString().toLowerCase()));
             movieDuration.setText(TimeUtils.formatDuration(fetchedMovie.getDuration()));

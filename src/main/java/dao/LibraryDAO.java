@@ -35,8 +35,15 @@ public class LibraryDAO extends DAO<Library> {
 
     @Override
     public Library getById(int id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+        String query = "SELECT * FROM library WHERE library_id = ?";
+        Library library = null;
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            ResultSet resultSet = stmt.executeQuery();
+            resultSet.next();
+            library = getLibraryFromResultSet(resultSet);
+        }
+        return library;
     }
 
     public List<Library> getByUserId(int userId) throws SQLException {
@@ -82,7 +89,7 @@ public class LibraryDAO extends DAO<Library> {
         } else {
             icon = null;
         }
-        return new Library(libraryId, name, new User(userId), description, icon);
+        return new Library(libraryId, name, new User(userId), description, icon, date);
     }
 
 

@@ -14,11 +14,14 @@ public class ListsThumbnail extends JPanel{
 
     @Getter
     private String libraryName;
+    @Getter
+    private int id;
     private JLabel titleLabel;
     private JLabel posterLabel;
 
     public ListsThumbnail(Library library) {
         this.libraryName = library.getName();
+        this.id = library.getId();
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
