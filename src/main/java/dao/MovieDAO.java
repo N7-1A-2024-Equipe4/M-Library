@@ -2,6 +2,7 @@ package dao;
 
 import model.Movie;
 import model.MovieGenre;
+import utils.image.ImageCache;
 import utils.image.ImageUtil;
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDAO extends DAO<Movie> {
+    private final ImageCache imageCache = ImageCache.getInstance();
 
     public MovieDAO() {
         super();
@@ -36,7 +38,7 @@ public class MovieDAO extends DAO<Movie> {
 
     @Override
     public Movie getById(int id) throws SQLException {
-        String query = "SELECT * FROM movie WHERE movie_id = ?";
+        String query = "SELECT  movie_id, title, genre, duration, synopsis, rating FROM movie WHERE movie_id = ?";
 
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
             stmt.setInt(1, id);
@@ -52,7 +54,7 @@ public class MovieDAO extends DAO<Movie> {
 
     @Override
     public List<Movie> getAll() throws SQLException {
-        String query = "SELECT * FROM movie";
+        String query = "SELECT movie_id, title, genre, duration, synopsis, rating FROM movie";
         List<Movie> movies = new ArrayList<>();
 
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
@@ -122,21 +124,38 @@ public class MovieDAO extends DAO<Movie> {
         String title = resultSet.getString("title");
         MovieGenre genre = MovieGenre.fromDisplayName(resultSet.getString("genre"));
         int duration = resultSet.getInt("duration");
-
-        InputStream is = resultSet.getBinaryStream("image");
-        ImageIcon poster = null;
-        if (is != null) {
-            try {
-                poster = ImageUtil.getImageFromBinaryStream(is, id);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
         String synopsis = resultSet.getString("synopsis");
         float rating = resultSet.getFloat("rating");
+
+        ImageIcon poster = getPosterFromCacheOrDatabase(id);
 
         return new Movie(id, title, genre, duration, poster, synopsis, rating);
     }
 
+    private ImageIcon getPosterFromCacheOrDatabase(int movieId) throws SQLException {
+        ImageIcon cachedImage = imageCache.getImage(movieId);
+        if (cachedImage != null) {
+            return cachedImage;
+        }
+
+        String query = "SELECT image FROM movie WHERE movie_id = ?";
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setInt(1, movieId);
+            ResultSet resultSet = stmt.executeQuery();
+
+            if (resultSet.next()) {
+                InputStream is = resultSet.getBinaryStream("image");
+                if (is != null) {
+                    try {
+                        ImageIcon poster = ImageUtil.getImageFromBinaryStream(is);
+                        imageCache.addImage(movieId, poster);
+                        return poster;
+                    } catch (IOException e) {
+                        throw new RuntimeException("Error reading image from database", e);
+                    }
+                }
+            }
+        }
+        return null;
+    }
 }

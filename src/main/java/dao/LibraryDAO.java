@@ -92,7 +92,7 @@ public class LibraryDAO extends DAO<Library> {
         ImageIcon icon;
         if (is != null) {
             try {
-                icon = ImageUtil.getImageFromBinaryStreamLibrary(is);
+                icon = ImageUtil.getImageFromBinaryStream(is);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

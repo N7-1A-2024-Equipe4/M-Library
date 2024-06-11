@@ -25,5 +25,4 @@ public class LibraryService {
     public List<Library> getByUserId(int id) throws SQLException {
         return libraryDAO.getByUserId(id);
     }
-
 }

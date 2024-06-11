@@ -3,7 +3,6 @@ package view.home;
 import controller.HomeController;
 import dao.MovieDAO;
 import model.Movie;
-import model.MovieList;
 import view.View;
 
 import javax.swing.*;
@@ -12,12 +11,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class HomeView implements View {
     private final HomeController controller;
 
     private JPanel panel;
     private MoviesGrid moviesGrid;
+    private JProgressBar progressBar;
 
     private final MovieDAO movieDAO;
 
@@ -34,7 +35,12 @@ public class HomeView implements View {
         moviesGrid.addMouseListener(new MoviesGridListener());
         JScrollPane scrollPane = new JScrollPane(moviesGrid, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
+        progressBar = new JProgressBar();
+        progressBar.setIndeterminate(true);
+        progressBar.setVisible(false);
+
         panel.add(scrollPane, BorderLayout.CENTER);
+        panel.add(progressBar, BorderLayout.SOUTH);
     }
 
     @Override
@@ -44,17 +50,26 @@ public class HomeView implements View {
 
     @Override
     public void refresh(Integer movieID) {
-        try {
-            List<Movie> movies = movieDAO.getAll();
-            moviesGrid.setMovies(movies);
-        } catch (SQLException exception) {
-            // ...
-        }
-    }
+        progressBar.setVisible(true);
 
-    protected void update(MovieList model) {
-        // Update the view with the model data
+        new SwingWorker<List<Movie>, Void>() {
+            @Override
+            protected List<Movie> doInBackground() throws SQLException {
+                return movieDAO.getAll();
+            }
 
+            @Override
+            protected void done() {
+                try {
+                    List<Movie> movies = get();
+                    moviesGrid.setMovies(movies);
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                } finally {
+                    progressBar.setVisible(false);
+                }
+            }
+        }.execute();
     }
 
     public void addMovieError(String errorAddingMovie) {
@@ -65,9 +80,11 @@ public class HomeView implements View {
     private class MoviesGridListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
-            MovieThumbnail clickedMovie = (MovieThumbnail)((JPanel)e.getSource()).getComponentAt(e.getPoint());
-            controller.showDetails(clickedMovie.getMovieId());
+            Component component = moviesGrid.getComponentAt(e.getPoint());
+            if (component instanceof MovieThumbnail) {
+                MovieThumbnail clickedMovie = (MovieThumbnail) component;
+                controller.showDetails(clickedMovie.getMovieId());
+            }
         }
     }
-
 }
