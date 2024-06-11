@@ -6,16 +6,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class ListsGrid extends JPanel {
+public class LibrariesGrid extends JPanel {
 
-    public ListsGrid() {
+    public LibrariesGrid() {
         setLayout(new GridLayout(0,5,5,5));
     }
 
     public void setLists(List<Library> libraries){
         removeAll();
         for (Library lib : libraries) {
-            ListsThumbnail thumbnail = new ListsThumbnail(lib);
+            LibrariesThumbnail thumbnail = new LibrariesThumbnail(lib);
             this.add(thumbnail);
         }
     }

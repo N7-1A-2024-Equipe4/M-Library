@@ -1,6 +1,6 @@
 package view.libraries;
 
-import controller.ListsController;
+import controller.LibrariesController;
 import service.LibraryService;
 import model.*;
 import view.View;
@@ -12,21 +12,21 @@ import session.Session;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class ListsView implements View {
-    private final ListsController controller;
+public class LibrariesView implements View {
+    private final LibrariesController controller;
     private JPanel panel;
     private final LibraryService libraryService;
-    private ListsGrid listsGrid;
+    private LibrariesGrid listsGrid;
 
-    public ListsView() {
+    public LibrariesView() {
         this.libraryService = new LibraryService();
-        this.controller = new ListsController(this);
+        this.controller = new LibrariesController(this);
         setupUI();
     }
 
     private void setupUI(){
         panel = new JPanel(new BorderLayout());
-        this.listsGrid = new ListsGrid();
+        this.listsGrid = new LibrariesGrid();
         listsGrid.addMouseListener(new ListsGridListener());
         JLabel pageTitle = new JLabel("My libraries");
         pageTitle.setFont(new Font("Arial", Font.BOLD, 24));
@@ -55,7 +55,7 @@ public class ListsView implements View {
     private class ListsGridListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
-            ListsThumbnail clickedList = (ListsThumbnail)((JPanel)e.getSource()).getComponentAt(e.getPoint());
+            LibrariesThumbnail clickedList = (LibrariesThumbnail)((JPanel)e.getSource()).getComponentAt(e.getPoint());
             controller.showDetails(clickedList.getId());
         }
     }

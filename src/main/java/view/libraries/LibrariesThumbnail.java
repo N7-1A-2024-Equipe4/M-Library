@@ -7,7 +7,7 @@ import java.awt.*;
 import model.Library;
 import utils.image.ImageUtil;
 
-public class ListsThumbnail extends JPanel{
+public class LibrariesThumbnail extends JPanel{
     private final int WIDTH = 200;
     private final int HEIGHT = 300;
 
@@ -18,7 +18,7 @@ public class ListsThumbnail extends JPanel{
     private JLabel titleLabel;
     private JLabel posterLabel;
 
-    public ListsThumbnail(Library library) {
+    public LibrariesThumbnail(Library library) {
         this.libraryName = library.getName();
         this.id = library.getId();
         setLayout(new FlowLayout());

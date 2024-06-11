@@ -2,14 +2,14 @@ package controller;
 
 import dao.LibraryDAO;
 import view.ViewEnum;
-import view.libraries.ListsView;
+import view.libraries.LibrariesView;
 
-public class ListsController {
-    private final ListsView view;
+public class LibrariesController {
+    private final LibrariesView view;
 
     private final LibraryDAO libraryDAO;
 
-    public ListsController(ListsView view) {
+    public LibrariesController(LibrariesView view) {
         this.view = view;
         this.libraryDAO = new LibraryDAO();
     }
