@@ -31,7 +31,7 @@ CREATE TABLE library
 (
     library_id INT AUTO_INCREMENT PRIMARY KEY,
     library_name VARCHAR(255) NOT NULL,
-    icon LONGBLOB,
+    icon VARCHAR(255),
     creation_date DATE,
     user_id INT NOT NULL,
     description TEXT(1000),
@@ -56,7 +56,7 @@ CREATE TABLE movie
     title       VARCHAR(255) NOT NULL,
     genre       ENUM('Action', 'Comedy', 'Drama', 'Horror', 'Romance', 'Sci-Fi', 'Documentary', 'Fantasy', 'Thriller', 'War'),
     duration    INT,
-    image       LONGBLOB, -- Since this database will be used for a small application, we choose to store the image directly in the database
+    image       VARCHAR(255),
     synopsis    TEXT(1000),
     rating INT,
     CHECK (rating BETWEEN 0 AND 10)
