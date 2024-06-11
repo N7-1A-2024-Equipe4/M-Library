@@ -21,6 +21,7 @@ public class LibraryService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
     public List<Library> getByUserId(int id) throws SQLException {
         return libraryDAO.getByUserId(id);
     }
