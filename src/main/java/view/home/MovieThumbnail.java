@@ -4,13 +4,14 @@ package view.home;
 import javax.swing.*;
 import java.awt.*;
 
-import utils.image.ImageUtil;
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import model.Movie;
+import utils.image.ImageUtil;
 
 public class MovieThumbnail extends JPanel {
     private final int WIDTH = 200;

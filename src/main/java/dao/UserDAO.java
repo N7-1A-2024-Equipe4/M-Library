@@ -40,7 +40,21 @@ public class UserDAO extends DAO<User> {
 
     @Override
     public User getById(int id) throws SQLException {
-        return null;
+        User user = null;
+        String query = "SELECT * FROM user WHERE user_id = ? LIMIT 1";
+        try (PreparedStatement preparedStatement = databaseConnection.prepareStatement(query)) {
+            preparedStatement.setString(1, Integer.toString(id));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                var fetchedUsername = resultSet.getString("username");
+                var password = resultSet.getString("password");
+                var firstName = resultSet.getString("first_name");
+                var lastName = resultSet.getString("last_name");
+                var createdAt = resultSet.getDate("created_at");
+                user = new User(id, fetchedUsername, password, firstName, lastName, createdAt);
+            }
+        }
+        return user;
     }
 
     @Override

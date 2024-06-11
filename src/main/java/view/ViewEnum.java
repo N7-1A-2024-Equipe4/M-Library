@@ -6,7 +6,8 @@ public enum ViewEnum {
     LISTS(true),
     PROFILE(true),
     MOVIE(false),
-    CREATELIBRARY(true);
+    CREATELIBRARY(true),
+    LIST(true);
 
     private boolean isProtected;
 
