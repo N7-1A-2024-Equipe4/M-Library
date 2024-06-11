@@ -1,5 +1,7 @@
+import controller.MainController;
 import dao.DatabaseConnection;
 import view.MainView;
+import view.ViewEnum;
 
 import javax.swing.*;
 
@@ -16,6 +18,7 @@ public class Application {
 
         // Create MainView
         MainView mainView = new MainView();
+        MainController.getInstance().show(ViewEnum.HOME, null);
 
         // Add MainView to the frame
         frame.add(mainView.getPanel());

@@ -34,9 +34,6 @@ public class MainView implements View {
         Arrays.stream(ViewEnum.values()).forEach(
                 viewEnum -> content.add(controller.getView(viewEnum).getPanel(), viewEnum.name())
         );
-
-        // set initial view
-        setContent(ViewEnum.LOGIN);
     }
 
     @Override

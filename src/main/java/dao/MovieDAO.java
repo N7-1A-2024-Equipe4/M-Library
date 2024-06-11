@@ -2,16 +2,16 @@ package dao;
 
 import model.Movie;
 import model.MovieGenre;
-import utils.ImageUtil;
+import utils.image.ImageUtil;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MovieDAO extends DAO<Movie> {
 

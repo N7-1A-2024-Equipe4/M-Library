@@ -1,9 +1,19 @@
 package view;
 
 public enum ViewEnum {
-    LOGIN,
-    HOME,
-    LISTS,
-    PROFILE,
-    MOVIE;
+    LOGIN(true),
+    HOME(false),
+    LISTS(true),
+    PROFILE(true),
+    MOVIE(false);
+
+    private boolean isProtected;
+
+    ViewEnum(boolean isProtected) {
+        this.isProtected = isProtected;
+    }
+
+    public boolean isProtected() {
+        return this.isProtected;
+    }
 }
