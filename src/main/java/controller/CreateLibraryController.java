@@ -8,6 +8,8 @@ import view.ViewEnum;
 
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.util.Date;
 
 public class CreateLibraryController {
@@ -17,6 +19,8 @@ public class CreateLibraryController {
 
     public void importPosterAction() {
         JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Image files", "jpg", "png");
+        fileChooser.setFileFilter(filter);
         fileChooser.showOpenDialog(null);
         ImageIcon image = new ImageIcon(fileChooser.getSelectedFile().getAbsolutePath());
         view.setPoster(image);        
@@ -25,9 +29,9 @@ public class CreateLibraryController {
 
     public void createListAction(String libraryName, ImageIcon poster, String description) {
         LibraryService libraryService = new LibraryService();
-        Library library = new Library(libraryName, poster, new Date(), Session.getUser(), description); 
+        Library library = new Library(libraryName, poster, new Date(), Session.getUser(), description);
+        System.err.println("Library: " + library);
         libraryService.addLibrary(library);
-
         MainController.getInstance().show(ViewEnum.LISTS, 1);
     }
 

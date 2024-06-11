@@ -1,7 +1,9 @@
 package view;
 
 import controller.CreateLibraryController;
-import lombok.Setter;
+import utils.image.ImageUtil;
+
+import java.awt.Image;
 
 import javax.swing.*;
 
@@ -10,7 +12,6 @@ public class CreateLibraryView implements View{
 
     private final CreateLibraryController controller;
 
-    @Setter
     private ImageIcon poster;
 
     private JPanel mainJPanel;
@@ -26,6 +27,7 @@ public class CreateLibraryView implements View{
     private JPanel descriptionJPanel;
     private JLabel descriptionJLabel;
     private JPanel wrapperJPanel;
+    private JLabel posterPreviewJLabel;
 
     public CreateLibraryView() {
         controller = new CreateLibraryController(this);
@@ -54,5 +56,15 @@ public class CreateLibraryView implements View{
         libraryNameTextField.setText("");
         poster = new ImageIcon();
         descriptionJTextArea.setText("");
+        posterPreviewJLabel.setIcon(null);
+    }
+
+    public void setPoster(ImageIcon poster) {
+        this.poster = poster;
+        Image image = poster.getImage();
+        Image newimg = image.getScaledInstance(posterPreviewJLabel.getWidth(), posterPreviewJLabel.getHeight(),  java.awt.Image.SCALE_SMOOTH);
+        poster = new ImageIcon(newimg);
+        posterPreviewJLabel.setIcon(poster);
+
     }
 }

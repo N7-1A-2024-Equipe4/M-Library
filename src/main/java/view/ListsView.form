@@ -7,10 +7,10 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="46430" class="javax.swing.JLabel">
+      <component id="535bc" class="javax.swing.JButton" binding="createLibraryJButton">
         <constraints border-constraint="North"/>
         <properties>
-          <text value="Mes listes de films :D"/>
+          <text value="Create library"/>
         </properties>
       </component>
     </children>

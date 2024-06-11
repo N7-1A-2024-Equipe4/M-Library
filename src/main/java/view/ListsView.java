@@ -3,14 +3,17 @@ package view;
 import controller.ListsController;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class ListsView implements View {
     private final ListsController controller;
     private JPanel panel;
+    private JButton createLibraryJButton;
 
     public ListsView() {
-        this.controller = new ListsController();
+        this.controller = new ListsController(this);
+
+        createLibraryJButton.addActionListener(actionEvent -> controller.
+                goToLibraryCreationAction());
     }
 
     @Override
