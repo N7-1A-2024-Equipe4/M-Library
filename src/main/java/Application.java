@@ -1,3 +1,4 @@
+import com.formdev.flatlaf.FlatLightLaf;
 import controller.MainController;
 import dao.DatabaseConnection;
 import view.MainView;
@@ -8,12 +9,7 @@ import javax.swing.*;
 public class Application {
     public static void main(String[] args) {
 
-        try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (ClassNotFoundException | UnsupportedLookAndFeelException |
-                 InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+        FlatLightLaf.setup();
 
         // Create the main frame
         JFrame frame = new JFrame("M-Library");

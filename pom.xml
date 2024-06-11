@@ -45,8 +45,8 @@
             <version>RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>com.jgoodies</groupId>
-            <artifactId>jgoodies-forms</artifactId>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
             <version>RELEASE</version>
         </dependency>
     </dependencies>
