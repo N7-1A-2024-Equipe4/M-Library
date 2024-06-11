@@ -4,7 +4,10 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 
 public class ImageUtil {
@@ -24,16 +27,24 @@ public class ImageUtil {
         return resizedImg;
     }
 
-    public static ImageIcon getImageFromUrl(String imageUrl) throws IOException {
-        ImageIcon cachedImage = imageCache.getImage(imageUrl);
+    public static ImageIcon getImageFromBinaryStream(InputStream is, Integer movieId) throws IOException {
+        ImageIcon cachedImage = imageCache.getImage(movieId);
         if (cachedImage != null) {
             return cachedImage;
         }
 
-        URL url = new URL(imageUrl);
-        BufferedImage bufferedImage = ImageIO.read(url);
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        byte[] buffer = new byte[8192];
+        int bytesRead;
+        while ((bytesRead = is.read(buffer)) != -1) {
+            os.write(buffer, 0, bytesRead);
+        }
+
+        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(os.toByteArray()));
         ImageIcon imageIcon = new ImageIcon(bufferedImage);
-        imageCache.addImage(imageUrl, imageIcon);
+
+        imageCache.addImage(movieId, imageIcon);
+
         return imageIcon;
     }
 }

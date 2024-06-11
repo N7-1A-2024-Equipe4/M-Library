@@ -6,12 +6,12 @@ import utils.image.ImageUtil;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class MovieDAO extends DAO<Movie> {
 
@@ -123,11 +123,11 @@ public class MovieDAO extends DAO<Movie> {
         MovieGenre genre = MovieGenre.fromDisplayName(resultSet.getString("genre"));
         int duration = resultSet.getInt("duration");
 
-        String posterUrl = resultSet.getString("image");
+        InputStream is = resultSet.getBinaryStream("image");
         ImageIcon poster = null;
-        if (posterUrl != null && !posterUrl.isEmpty()) {
+        if (is != null) {
             try {
-                poster = ImageUtil.getImageFromUrl(posterUrl);
+                poster = ImageUtil.getImageFromBinaryStream(is, id);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
