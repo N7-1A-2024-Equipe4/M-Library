@@ -11,7 +11,6 @@ import java.io.InputStream;
 import java.net.URL;
 
 public class ImageUtil {
-    private static final ImageCache imageCache = new ImageCache();
 
     public static Image getScaledImage(Image srcImage, int w, int h) {
         BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
@@ -27,12 +26,7 @@ public class ImageUtil {
         return resizedImg;
     }
 
-    public static ImageIcon getImageFromBinaryStream(InputStream is, Integer movieId) throws IOException {
-        ImageIcon cachedImage = imageCache.getImage(movieId);
-        if (cachedImage != null) {
-            return cachedImage;
-        }
-
+    public static ImageIcon getImageFromBinaryStream(InputStream is) throws IOException {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         byte[] buffer = new byte[8192];
         int bytesRead;
@@ -41,24 +35,6 @@ public class ImageUtil {
         }
 
         BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(os.toByteArray()));
-        ImageIcon imageIcon = new ImageIcon(bufferedImage);
-
-        imageCache.addImage(movieId, imageIcon);
-
-        return imageIcon;
-    }
-
-    public static ImageIcon getImageFromBinaryStreamLibrary(InputStream is) throws IOException {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        byte[] buffer = new byte[8192];
-        int bytesRead;
-        while ((bytesRead = is.read(buffer)) != -1) {
-            os.write(buffer, 0, bytesRead);
-        }
-
-        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(os.toByteArray()));
-        ImageIcon imageIcon = new ImageIcon(bufferedImage);
-
-        return imageIcon;
+        return new ImageIcon(bufferedImage);
     }
 }

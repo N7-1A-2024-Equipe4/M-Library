@@ -4,7 +4,19 @@ import javax.swing.ImageIcon;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ImageCache {
-    private final ConcurrentHashMap<Integer, ImageIcon> cache = new ConcurrentHashMap<>();
+    private static ImageCache instance;
+    private final ConcurrentHashMap<Integer, ImageIcon> cache;
+
+    private ImageCache() {
+        cache = new ConcurrentHashMap<>();
+    }
+
+    public static ImageCache getInstance() {
+        if (instance == null) {
+            instance = new ImageCache();
+        }
+        return instance;
+    }
 
     public ImageIcon getImage(Integer id) {
         return cache.get(id);
