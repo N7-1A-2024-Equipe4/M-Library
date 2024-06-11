@@ -18,7 +18,6 @@ public class MovieDAO extends DAO<Movie> {
     public MovieDAO() {
         super();
     }
-
     @Override
     public void add(Movie movie) throws SQLException {
         String query = "INSERT INTO movie (title, genre, duration, image, synopsis, rating) VALUES (?, ?, ?, ?, ?, ?)";
@@ -64,6 +63,7 @@ public class MovieDAO extends DAO<Movie> {
             }
         }
 
+
         return movies;
     }
 
@@ -83,7 +83,6 @@ public class MovieDAO extends DAO<Movie> {
             stmt.executeUpdate();
         }
     }
-
     @Override
     public void delete(int id) throws SQLException {
         String query = "DELETE FROM movie WHERE movie_id = ?";
