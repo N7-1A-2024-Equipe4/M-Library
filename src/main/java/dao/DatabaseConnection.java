@@ -13,7 +13,14 @@ public class DatabaseConnection {
 
     private static DatabaseConnection instance;
 
+    private static Connection connection;
+
     private DatabaseConnection() {
+        try {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static DatabaseConnection getInstance() {
@@ -23,15 +30,11 @@ public class DatabaseConnection {
         return instance;
     }
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
-    }
-
     public PreparedStatement prepareStatement(String query) throws SQLException {
-        return this.getConnection().prepareStatement(query);
+        return connection.prepareStatement(query);
     }
 
     public void close() throws SQLException {
-        this.getConnection().close();
+        connection.close();
     }
 }

@@ -41,7 +41,7 @@ public class MainController {
     }
 
     public void show(ViewEnum viewEnum, Integer modelID) {
-        if (Session.isSignedOut()) {
+        if (Session.isSignedOut() && viewEnum.isProtected()) {
             this.mainView.setContent(ViewEnum.LOGIN);
             return;
         }

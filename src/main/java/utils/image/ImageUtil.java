@@ -1,16 +1,15 @@
-package utils;
+package utils.image;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
+import java.net.URL;
 
 public class ImageUtil {
+    private static final ImageCache imageCache = new ImageCache();
+
     public static Image getScaledImage(Image srcImage, int w, int h) {
         BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -25,16 +24,16 @@ public class ImageUtil {
         return resizedImg;
     }
 
-    public static ImageIcon getImageFromBinaryStream(InputStream is) throws IOException {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        byte[] buffer = new byte[8192];
-        int bytesRead;
-        while ((bytesRead = is.read(buffer)) != -1) {
-            os.write(buffer, 0, bytesRead);
+    public static ImageIcon getImageFromUrl(String imageUrl) throws IOException {
+        ImageIcon cachedImage = imageCache.getImage(imageUrl);
+        if (cachedImage != null) {
+            return cachedImage;
         }
 
-        BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(os.toByteArray()));
-
-        return new ImageIcon(bufferedImage);
+        URL url = new URL(imageUrl);
+        BufferedImage bufferedImage = ImageIO.read(url);
+        ImageIcon imageIcon = new ImageIcon(bufferedImage);
+        imageCache.addImage(imageUrl, imageIcon);
+        return imageIcon;
     }
 }
