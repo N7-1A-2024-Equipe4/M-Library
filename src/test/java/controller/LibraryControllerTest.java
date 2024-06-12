@@ -23,7 +23,7 @@ public class LibraryControllerTest {
         libraryService.addLibrary(library);
 
         // Act
-        //controller.deleteLibraryAction();
+        controller.deleteLibraryAction();
 
         // Assert
         
