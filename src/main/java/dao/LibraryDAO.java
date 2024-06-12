@@ -65,11 +65,8 @@ public class LibraryDAO extends DAO<Library> {
             if (resultSet.next()) {
                 library = getLibraryFromResultSet(resultSet);
             } else {
-                throw new SQLException("Library with id " + id + " not found.");
+                return null;
             }
-
-
-
         }
         return library;
     }

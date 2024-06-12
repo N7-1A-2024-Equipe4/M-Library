@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.Image;
+import java.sql.SQLException;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
@@ -16,19 +17,24 @@ public class LibraryControllerTest {
 
     @Test
     public void testDeleteLibraryAction() {
-        // Arrange
-        LibraryService libraryService = new LibraryService();
-        Library library = new Library("testLibrary",
-                new ImageIcon("resources/library.png"),
-                new Date(),
-                new User(1),
-                "testDescription");
-        library = libraryService.addLibrary(library);
+        try {
+            // Arrange
+            LibraryService libraryService = new LibraryService();
+            Library library = new Library("testLibrary",
+                    new ImageIcon("resources/library.png"),
+                    new Date(),
+                    new User(1),
+                    "testDescription");
+            library = libraryService.addLibrary(library);
+            assert(libraryService.getById(library.getId()) != null);
 
-        // Act
-        controller.deleteLibraryAction(library.getId());
+            // Act
+            controller.deleteLibraryAction(library.getId());
 
-        // Assert
-
+            // Assert
+            assert(libraryService.getById(library.getId()) == null);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

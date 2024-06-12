@@ -16,7 +16,7 @@ public class LibraryDAOTest {
     @Test
     public void getByUserIdTest() {
         try {
-            dao.getById(9999);
+            assert(dao.getById(99999) == null);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
