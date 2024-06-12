@@ -22,6 +22,8 @@ public class Review {
         this.author = user;
         this.movie = movie;
     }
+    
+    public Review() {}
 
     public int getId() {
         return id;

@@ -13,9 +13,8 @@ public class ReviewDAO extends DAO<Review> {
     }
 
     @Override
-    public void add(Review entity) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+    public Review add(Review entity) throws SQLException {
+        return new Review();
     }
 
     @Override

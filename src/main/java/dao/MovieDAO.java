@@ -21,7 +21,7 @@ public class MovieDAO extends DAO<Movie> {
         super();
     }
     @Override
-    public void add(Movie movie) throws SQLException {
+    public Movie add(Movie movie) throws SQLException {
         String query = "INSERT INTO movie (title, genre, duration, image, synopsis, rating) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
@@ -34,6 +34,8 @@ public class MovieDAO extends DAO<Movie> {
 
             stmt.executeUpdate();
         }
+
+        return new Movie();
     }
 
     @Override

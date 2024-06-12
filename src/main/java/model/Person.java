@@ -68,6 +68,8 @@ public class Person {
         this.id = id;
     }
 
+    public Person() {}
+
     // Setters and Getters
 
     public int getId() {

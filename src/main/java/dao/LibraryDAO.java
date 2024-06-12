@@ -22,7 +22,7 @@ public class LibraryDAO extends DAO<Library> {
     }
 
     @Override
-    public void add(Library library) throws SQLException {
+    public Library add(Library library) throws SQLException {
         String query = "INSERT INTO library (library_name, icon, creation_date, user_id, description) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
@@ -34,6 +34,8 @@ public class LibraryDAO extends DAO<Library> {
 
             stmt.executeUpdate();
         }
+
+        return new Library();
 
     }
 
