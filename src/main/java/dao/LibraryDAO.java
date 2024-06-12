@@ -77,8 +77,12 @@ public class LibraryDAO extends DAO<Library> {
 
     @Override
     public void delete(int id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        String query = "DELETE FROM library WHERE library_id = ?";
+
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
     }
 
     private Library getLibraryFromResultSet(ResultSet resultSet) throws SQLException {
