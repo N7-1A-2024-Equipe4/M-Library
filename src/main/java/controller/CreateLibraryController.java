@@ -1,6 +1,6 @@
 package controller;
 
-import dao.LibraryService;
+import service.LibraryService;
 import model.Library;
 import session.Session;
 import view.CreateLibraryView;
