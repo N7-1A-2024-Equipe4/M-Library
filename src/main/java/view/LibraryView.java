@@ -22,6 +22,7 @@ public class LibraryView implements View {
     private JLabel descriptionTitleLabel;
     private JLabel descriptionLabel;
     private JLabel movieIconLabel;
+    private JButton deleteLibraryButton;
 
     private final int WIDTH = 150;
     private final int HEIGHT = 200;

@@ -22,7 +22,7 @@ public class LibraryDAO extends DAO<Library> {
     }
 
     @Override
-    public void add(Library library) throws SQLException {
+    public Library add(Library library) throws SQLException {
         String query = "INSERT INTO library (library_name, icon, creation_date, user_id, description) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
@@ -34,6 +34,8 @@ public class LibraryDAO extends DAO<Library> {
 
             stmt.executeUpdate();
         }
+
+        return new Library();
 
     }
 
@@ -77,8 +79,12 @@ public class LibraryDAO extends DAO<Library> {
 
     @Override
     public void delete(int id) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        String query = "DELETE FROM library WHERE library_id = ?";
+
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
     }
 
     private Library getLibraryFromResultSet(ResultSet resultSet) throws SQLException {

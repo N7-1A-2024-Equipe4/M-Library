@@ -38,6 +38,7 @@ public class Movie {
         this(-1, title, genre, duration, null, synopsis, rating);
     }
 
+    public Movie() {}
 
     public int getId() {
         return id;

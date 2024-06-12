@@ -38,5 +38,11 @@ public class LibraryService {
         }
     }
 
-
+    public void deleteLibrary(int id) {
+        try {
+            libraryDAO.delete(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

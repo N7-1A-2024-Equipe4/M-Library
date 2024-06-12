@@ -50,6 +50,8 @@ public class Library {
         this.date = date;
     }
 
+    public Library() {}
+
     public void addElement(ElementOfLibrary element) {
         elements.add(element);
     }
