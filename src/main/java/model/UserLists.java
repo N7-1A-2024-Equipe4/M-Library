@@ -9,5 +9,5 @@ public class UserLists {
 
     private User user;
 
-    private List<MovieList> lists;
+    private List<MovieLibrary> lists;
 }

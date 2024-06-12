@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class MovieList {
+public class MovieLibrary {
     private List<Movie> movies;
 
     private String listName;
 
-    public MovieList() {
+    public MovieLibrary() {
         this.movies = new ArrayList<>();
     }
 

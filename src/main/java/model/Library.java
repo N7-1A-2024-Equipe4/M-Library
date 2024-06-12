@@ -3,6 +3,7 @@ package model;
 import lombok.Data;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class Library {
         this.creationDate = creationDate;
         this.owner = owner;
         this.description = description;
+        this.elements = new ArrayList<>();
     }
 
     public Library(String name, List<ElementOfLibrary> elements, User owner) {
@@ -48,6 +50,7 @@ public class Library {
         this.description = description;
         this.icon = icon;
         this.date = date;
+        this.elements = new ArrayList<>();
     }
 
     public void addElement(ElementOfLibrary element) {
