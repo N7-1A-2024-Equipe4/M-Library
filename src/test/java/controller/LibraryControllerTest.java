@@ -6,7 +6,6 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 
 import org.junit.Test;
-
 import model.Library;
 import model.User;
 import service.LibraryService;
@@ -19,13 +18,17 @@ public class LibraryControllerTest {
     public void testDeleteLibraryAction() {
         // Arrange
         LibraryService libraryService = new LibraryService();
-        Library library = new Library("testLibrary", new ImageIcon("resources/library.png"), new Date(), new User(1), "testDescription");
-        libraryService.addLibrary(library);
+        Library library = new Library("testLibrary",
+                new ImageIcon("resources/library.png"),
+                new Date(),
+                new User(1),
+                "testDescription");
+        library = libraryService.addLibrary(library);
 
         // Act
-        controller.deleteLibraryAction();
+        controller.deleteLibraryAction(library.getId());
 
         // Assert
-        
+
     }
 }

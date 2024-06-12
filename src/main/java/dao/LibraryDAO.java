@@ -32,11 +32,21 @@ public class LibraryDAO extends DAO<Library> {
             stmt.setInt(4, library.getOwner().getId());
             stmt.setString(5, library.getDescription());
 
-            stmt.executeUpdate();
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating library failed, no rows affected.");
+            }
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    library.setId(generatedKeys.getInt(1));
+                } else {
+                    throw new SQLException("Creating library failed, no ID obtained.");
+                }
+            }
+            return library;
         }
-
-        return new Library();
-
     }
 
     @Override
@@ -52,8 +62,14 @@ public class LibraryDAO extends DAO<Library> {
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
             stmt.setInt(1, id);
             ResultSet resultSet = stmt.executeQuery();
-            resultSet.next();
-            library = getLibraryFromResultSet(resultSet);
+            if (resultSet.next()) {
+                library = getLibraryFromResultSet(resultSet);
+            } else {
+                throw new SQLException("Library with id " + id + " not found.");
+            }
+
+
+
         }
         return library;
     }
