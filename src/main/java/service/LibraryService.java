@@ -30,11 +30,12 @@ public class LibraryService {
         return library;
     }
 
-    public void addLibrary(Library library) {
+    public Library addLibrary(Library library) {
         try {
-            libraryDAO.add(library);
+            return libraryDAO.add(library);
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
     }
 
@@ -45,4 +46,6 @@ public class LibraryService {
             e.printStackTrace();
         }
     }
+
+
 }
