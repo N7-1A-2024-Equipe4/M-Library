@@ -125,26 +125,32 @@ public class MovieView implements View {
                 movieCastingPanel.add(Box.createVerticalStrut(3));
             }
         }
+
+        movieCastingPanel.revalidate();
+        movieCastingPanel.repaint();
     }
 
     private void populateReviewPanel(List<Review> reviews) {
         reviewPanel.removeAll();
         reviewPanel.setLayout(new BoxLayout(reviewPanel, BoxLayout.Y_AXIS));
 
-        System.out.println(movieSynopsis.getFont().toString());
-
         if (reviews == null || reviews.isEmpty()) {
             JLabel noReviewsLabel = new JLabel("No reviews available");
+            Font synopsisFont = movieSynopsis.getFont();
+            noReviewsLabel.setFont(synopsisFont);
             reviewPanel.add(noReviewsLabel);
         } else {
-            System.out.println(reviews.size());
             for (Review review : reviews) {
-
                 ReviewView reviewView = new ReviewView(review);
                 reviewPanel.add(reviewView);
+                reviewPanel.add(Box.createVerticalStrut(3));
             }
         }
+
+        reviewPanel.revalidate();
+        reviewPanel.repaint();
     }
+
 
 
     private void openReviewForm() {
@@ -159,14 +165,17 @@ public class MovieView implements View {
             reviewPanel.setLayout(new BoxLayout(reviewPanel, BoxLayout.Y_AXIS));
 
             JTextField reviewField = new JTextField();
-            JSpinner ratingSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 5, 0.1));
-            double
+            JSpinner ratingSpinner = new JSpinner(new SpinnerNumberModel(0.0, 0.0, 10.0, 0.1));
 
             JButton submitButton = new JButton("Submit");
 
             submitButton.addActionListener(e -> {
-                controller.submitReview(reviewField.getText(), (float)ratingSpinner.getValue(), currentUser, currentMovie);
+                Number ratingValue = (Number)ratingSpinner.getValue();
+                float rating = ratingValue.floatValue();
+                controller.submitReview(reviewField.getText(), rating, currentUser, currentMovie);
                 refresh(currentMovie.getId());
+
+                reviewFrame.setVisible(false);
             });
 
             reviewPanel.add(new JLabel("Review:"));
@@ -181,5 +190,6 @@ public class MovieView implements View {
             JOptionPane.showMessageDialog(panel, "You need to be logged in to submit a review.");
         }
     }
+
 
 }
