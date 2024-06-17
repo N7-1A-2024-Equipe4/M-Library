@@ -64,11 +64,13 @@ public class LibrariesView implements View {
                 // logged in user's libraries
                 libraries = libraryService.getByUserId(SessionService.getActiveUserId());
                 pageTitle.setText("My libraries");
+                createLibraryButton.setVisible(true);
             } else {
                 // visiting another user's libraries
                 libraries = libraryService.getByUserId(userId);
                 User user = userService.getUser(userId);
                 pageTitle.setText("Libraries of " + user.getFirstName() + " " + user.getLastName());
+                createLibraryButton.setVisible(false);
             }
             this.listsGrid.setLists(libraries);
         } catch (SQLException exception) {

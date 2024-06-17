@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class CreateLibraryView implements View{
+public class CreateLibraryView implements View {
 
     private final CreateLibraryController controller;
 
@@ -60,7 +60,7 @@ public class CreateLibraryView implements View{
     public void setPoster(ImageIcon poster) {
         this.poster = poster;
         Image image = poster.getImage();
-        Image newimg = image.getScaledInstance(posterPreviewJLabel.getWidth(), posterPreviewJLabel.getHeight(),  java.awt.Image.SCALE_SMOOTH);
+        Image newimg = image.getScaledInstance(posterPreviewJLabel.getWidth(), posterPreviewJLabel.getHeight(), java.awt.Image.SCALE_SMOOTH);
         poster = new ImageIcon(newimg);
         posterPreviewJLabel.setIcon(poster);
 
