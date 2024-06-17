@@ -60,7 +60,7 @@ public class LibrariesView implements View {
     public void refresh(Integer userId) {
         try {
             List<Library> libraries;
-            if (userId == null || userId == SessionService.getActiveUserId()) {
+            if (userId == null || userId.equals(SessionService.getActiveUserId())) {
                 // logged in user's libraries
                 libraries = libraryService.getByUserId(SessionService.getActiveUserId());
                 pageTitle.setText("My libraries");
