@@ -33,6 +33,12 @@
               <text value="Libraries"/>
             </properties>
           </component>
+          <component id="34f2" class="javax.swing.JButton" binding="searchButton">
+            <constraints/>
+            <properties>
+              <text value="Search"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="b7438" layout-manager="BorderLayout" hgap="0" vgap="0">
@@ -45,7 +51,8 @@
           <component id="efd01" class="javax.swing.JLabel" binding="usernameLabel">
             <constraints border-constraint="North"/>
             <properties>
-              <text value="Not logged in"/>
+              <horizontalAlignment value="0"/>
+              <text value="a"/>
             </properties>
           </component>
           <component id="f3f2a" class="javax.swing.JButton" binding="logoutButton">

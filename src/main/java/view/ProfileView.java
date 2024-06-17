@@ -2,14 +2,15 @@ package view;
 
 import controller.ProfileController;
 import model.User;
+import service.SessionService;
 import service.UserService;
-import session.Session;
 
 import javax.swing.*;
 
 public class ProfileView implements View {
     private final ProfileController controller;
     private final UserService userService;
+    private User user;
     private JPanel panel;
     private JLabel usernameLabel;
     private JLabel firstNameLabel;
@@ -24,6 +25,7 @@ public class ProfileView implements View {
     private JLabel creationDateLabel;
     private JLabel fullNameLabel;
     private JLabel profilePictureLabel;
+    private JButton showLibrariesButton;
 
     public ProfileView() {
         this.controller = new ProfileController(this);
@@ -35,6 +37,7 @@ public class ProfileView implements View {
                 usernameField.getText(),
                 String.valueOf(passwordField.getPassword())
         ));
+        this.showLibrariesButton.addActionListener(e -> controller.showLibrariesAction(user.getId()));
     }
 
     @Override
@@ -43,24 +46,27 @@ public class ProfileView implements View {
     }
 
     @Override
-    public void refresh(Integer modelId) {
-        User user;
-        if (modelId == null) {
-            user = Session.getUser();
+    public void refresh(Integer userId) {
+        if (userId == null || userId == SessionService.getUser().getId()) {
+            // logged in user's profile
+            user = SessionService.getUser();
+            editButton.setVisible(true);
+            firstNameField.setText(user.getFirstName());
+            lastNameField.setText(user.getLastName());
+            usernameField.setText(user.getUsername());
+            passwordField.setText("");
         } else {
-            user = userService.getUser(modelId);
+            // visiting another user's profile
+            user = userService.getUser(userId);
+            editButton.setVisible(false);
         }
         fullNameLabel.setText(user.getFirstName() + " " + user.getLastName().toUpperCase());
         usernameLabel.setText(user.getUsername());
-        // profilePictureLabel.setIcon(new ImageIcon(user.getProfilePicture())); TODO
+        profilePictureLabel.setIcon(user.getPicture());
         firstNameLabel.setText(user.getFirstName());
         lastNameLabel.setText(user.getLastName());
         creationDateLabel.setText(user.getCreatedAt().toString());
-        this.editPanel.setVisible(false);
-        firstNameField.setText(user.getFirstName());
-        lastNameField.setText(user.getLastName());
-        usernameField.setText(user.getUsername());
-        passwordField.setText("");
+        editPanel.setVisible(false);
     }
 
     public void userChangeSuccess() {

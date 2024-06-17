@@ -1,19 +1,20 @@
-package session;
+package service;
 
 import dao.UserDAO;
 import lombok.Getter;
 import model.User;
 
-public class Session {
+public class SessionService {
     private static final UserDAO userDAO = new UserDAO();
+
     @Getter
-    private static User user;
+    private static Integer activeUserId;
 
     public static String getUsername() {
         if (isSignedOut()) {
             return "Not logged in";
         }
-        return user.getUsername();
+        return getUser().getUsername();
     }
 
     /**
@@ -27,13 +28,13 @@ public class Session {
      * @return true if the login was successful, false otherwise
      */
     public static boolean login(String username, String password) {
-        if (!isSignedOut()) {
+        if (isLoggedIn()) {
             return false;
         }
         try {
-            User fetchedUser = userDAO.getUserByUsername(username);
+            User fetchedUser = userDAO.findUserByUsername(username);
             if (fetchedUser != null && isPasswordMatching(password, fetchedUser.getPassword())) {
-                Session.user = fetchedUser;
+                SessionService.activeUserId = fetchedUser.getId();
                 return true;
             }
         } catch (Exception e) {
@@ -48,21 +49,23 @@ public class Session {
     }
 
     public static void logout() {
-        user = null;
+        activeUserId = null;
     }
 
     public static boolean isSignedOut() {
-        return user == null;
-    }
-
-    public static String getPassword() {
-        if (isSignedOut()) {
-            return "Not logged in";
-        }
-        return user.getPassword();
+        return activeUserId == null;
     }
 
     public static boolean isLoggedIn() {
-        return !isSignedOut();
+        return activeUserId != null;
+    }
+
+    public static User getUser() {
+        try {
+            return userDAO.getById(activeUserId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new User();
     }
 }

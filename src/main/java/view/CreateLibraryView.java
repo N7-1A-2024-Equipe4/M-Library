@@ -1,11 +1,9 @@
 package view;
 
 import controller.CreateLibraryController;
-import utils.image.ImageUtil;
-
-import java.awt.Image;
 
 import javax.swing.*;
+import java.awt.*;
 
 
 public class CreateLibraryView implements View{
@@ -52,7 +50,7 @@ public class CreateLibraryView implements View{
     }
 
     @Override
-    public void refresh(Integer modelID) {
+    public void refresh(Integer modelId) {
         libraryNameTextField.setText("");
         poster = new ImageIcon();
         descriptionJTextArea.setText("");

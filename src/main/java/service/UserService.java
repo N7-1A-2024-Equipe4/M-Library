@@ -2,9 +2,9 @@ package service;
 
 import dao.UserDAO;
 import model.User;
-import session.Session;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserService {
 
@@ -40,7 +40,14 @@ public class UserService {
     }
 
     public static boolean isAuthedUser(int id) {
-        return Session.getUser().getId() == id;
+        return SessionService.getUser().getId() == id;
     }
 
+    public List<User> searchUsers(String query) {
+        try {
+            return userDao.findByUsername(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
