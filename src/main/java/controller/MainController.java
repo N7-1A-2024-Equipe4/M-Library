@@ -1,10 +1,10 @@
 package controller;
 
-import session.Session;
+import service.SessionService;
 import view.*;
-import view.libraries.LibrariesView;
 import view.home.HomeView;
 import view.libraries.LibrariesView;
+import view.search.SearchView;
 
 import java.util.Map;
 
@@ -23,8 +23,9 @@ public class MainController {
                 ViewEnum.MOVIE, new MovieView(),
                 ViewEnum.PROFILE, new ProfileView(),
                 ViewEnum.CREATELIBRARY, new CreateLibraryView(),
-                ViewEnum.LISTS, new LibrariesView(),
-                ViewEnum.LIST, new LibraryView()
+                ViewEnum.LIBRARIES, new LibrariesView(),
+                ViewEnum.LIBRARY, new LibraryView(),
+                ViewEnum.SEARCH, new SearchView()
         );
     }
 
@@ -42,11 +43,11 @@ public class MainController {
         return instance = new MainController(view);
     }
 
-    public void show(ViewEnum viewEnum, Integer modelID) {
-        if (Session.isSignedOut() && viewEnum.isProtected()) {
+    public void show(ViewEnum viewEnum, Integer modelId) {
+        if (SessionService.isSignedOut() && viewEnum.isAuthRequired()) {
             this.mainView.setContent(ViewEnum.LOGIN);
         } else {
-            this.views.get(viewEnum).refresh(modelID);
+            this.views.get(viewEnum).refresh(modelId);
             this.mainView.setContent(viewEnum);
         }
     }

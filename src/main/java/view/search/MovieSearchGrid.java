@@ -1,4 +1,4 @@
-package view.home;
+package view.search;
 
 import model.Movie;
 import view.thumbnail.MovieThumbnail;
@@ -7,8 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class MoviesGrid extends JPanel {
-    public MoviesGrid() {
+public class MovieSearchGrid extends JPanel {
+    public MovieSearchGrid() {
         setLayout(new GridLayout(0, 5, 5, 5));
     }
 
@@ -16,7 +16,7 @@ public class MoviesGrid extends JPanel {
         removeAll();
 
         for (Movie movie : movies) {
-            MovieThumbnail thumbnail = new MovieThumbnail(movie);
+            MovieThumbnail thumbnail = new MovieThumbnail(movie, 100, 150);
             this.add(thumbnail);
         }
     }

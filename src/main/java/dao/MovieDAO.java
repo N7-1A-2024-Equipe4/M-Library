@@ -20,6 +20,7 @@ public class MovieDAO extends DAO<Movie> {
     public MovieDAO() {
         super();
     }
+
     @Override
     public Movie add(Movie movie) throws SQLException {
         String query = "INSERT INTO movie (title, genre, duration, image, synopsis, rating) VALUES (?, ?, ?, ?, ?, ?)";
@@ -72,11 +73,11 @@ public class MovieDAO extends DAO<Movie> {
 
     public List<Movie> getByLibraryId(int libraryId) throws SQLException {
         String query = """
-                       SELECT *
-                       FROM movie.*
-                       LEFT JOIN movie_in_library ON movie.movie_id = movie_in_library.movie_id
-                       WHERE library_id = ?;
-                       """;
+                SELECT *
+                FROM movie.*
+                LEFT JOIN movie_in_library ON movie.movie_id = movie_in_library.movie_id
+                WHERE library_id = ?;
+                """;
         Movie movie = null;
         List<Movie> movies = new ArrayList<>();
 
@@ -111,6 +112,7 @@ public class MovieDAO extends DAO<Movie> {
             stmt.executeUpdate();
         }
     }
+
     @Override
     public void delete(int id) throws SQLException {
         String query = "DELETE FROM movie WHERE movie_id = ?";
@@ -159,5 +161,19 @@ public class MovieDAO extends DAO<Movie> {
             }
         }
         return null;
+    }
+
+    public List<Movie> findByTitle(String title) throws SQLException {
+        String query = "SELECT * FROM movie WHERE title LIKE ?";
+        List<Movie> movies = new ArrayList<>();
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setString(1, "%" + title + "%");
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                movies.add(getMovieFromResultSet(resultSet));
+            }
+        }
+        return movies;
     }
 }

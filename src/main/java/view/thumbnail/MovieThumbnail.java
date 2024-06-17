@@ -1,30 +1,28 @@
-package view.home;
+package view.thumbnail;
 
 
-import javax.swing.*;
-import java.awt.*;
-
-
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
+import lombok.Getter;
 import model.Movie;
 import utils.image.ImageUtil;
 
-public class MovieThumbnail extends JPanel {
-    private final int WIDTH = 200;
-    private final int HEIGHT = 300;
+import javax.swing.*;
+import java.awt.*;
 
+public class MovieThumbnail extends JPanel {
+
+    @Getter
     private int movieId;
     private JLabel titleLabel;
     private JLabel posterLabel;
 
     public MovieThumbnail(Movie movie) {
+        this(movie, 200, 300);
+    }
+
+    public MovieThumbnail(Movie movie, int width, int height) {
         this.movieId = movie.getId();
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setPreferredSize(new Dimension(width, height));
 
         titleLabel = new JLabel(movie.getTitle(), SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
@@ -33,15 +31,10 @@ public class MovieThumbnail extends JPanel {
         posterLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         if (movie.getPoster() != null) {
-            posterLabel.setIcon(new ImageIcon(ImageUtil.getScaledImage(movie.getPoster().getImage(), WIDTH, HEIGHT)));
+            posterLabel.setIcon(new ImageIcon(ImageUtil.getScaledImage(movie.getPoster().getImage(), width, height)));
         }
 
         add(titleLabel, BorderLayout.NORTH);
         add(posterLabel, BorderLayout.CENTER);
-    }
-
-
-    public int getMovieId() {
-        return movieId;
     }
 }

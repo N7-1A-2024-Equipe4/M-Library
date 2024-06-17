@@ -3,6 +3,7 @@ package view;
 import controller.LoginController;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.util.Set;
 
 public class LoginView implements View {
@@ -11,6 +12,7 @@ public class LoginView implements View {
     private JTextField usernameTextField;
     private JTextField passwordTextField;
     private JButton loginButton;
+    private Border defaultBorder;
 
     public LoginView() {
         controller = new LoginController(this);
@@ -18,6 +20,7 @@ public class LoginView implements View {
                 usernameTextField.getText(),
                 passwordTextField.getText()
         ));
+        defaultBorder = passwordTextField.getBorder();
     }
 
     @Override
@@ -26,9 +29,9 @@ public class LoginView implements View {
     }
 
     @Override
-    public void refresh(Integer moveID) {
-        usernameTextField.setBorder(BorderFactory.createLineBorder(java.awt.Color.BLACK));
-        passwordTextField.setBorder(BorderFactory.createLineBorder(java.awt.Color.BLACK));
+    public void refresh(Integer modelId) {
+        usernameTextField.setBorder(defaultBorder);
+        passwordTextField.setBorder(defaultBorder);
     }
 
     public void loginFailed(Set<LoginError> errors) {

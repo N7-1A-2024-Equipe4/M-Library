@@ -24,7 +24,7 @@ public class LibraryView implements View {
     private JLabel movieIconLabel;
     private JButton deleteLibraryButton;
 
-    private final int WIDTH = 150;
+    private final int WIDTH = 200;
     private final int HEIGHT = 200;
 
     private LibraryService libraryService;
@@ -39,9 +39,9 @@ public class LibraryView implements View {
     }
 
     @Override
-    public void refresh(Integer modelID) {
+    public void refresh(Integer modelId) {
         try {
-            Library library = this.libraryService.getById(modelID);
+            Library library = this.libraryService.getById(modelId);
             if (library.getIcon() != null) {
                 movieIconLabel.setIcon(new ImageIcon
                         (ImageUtil.getScaledImage(library.getIcon().getImage(),
