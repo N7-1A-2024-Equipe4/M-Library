@@ -15,7 +15,7 @@ public class PersonDAO extends DAO<Person> {
     }
 
     @Override
-    public Person add(Person person) throws SQLException {
+    public void add(Person person) throws SQLException {
         String query = "INSERT INTO person (person_id, first_name, last_name, date_of_birth, date_of_death, is_actor, is_director, is_screenwriter) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
@@ -30,8 +30,6 @@ public class PersonDAO extends DAO<Person> {
 
             stmt.executeUpdate();
         }
-
-        return new Person();
     }
 
     @Override

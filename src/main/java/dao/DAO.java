@@ -29,7 +29,7 @@ public abstract class DAO<T> {
      * @param entity the entity to be added
      * @throws SQLException if an error occurs while adding the entity
      */
-    public abstract T add(T entity) throws SQLException;
+    public abstract void add(T entity) throws SQLException;
 
     // Read
 

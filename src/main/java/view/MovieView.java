@@ -1,15 +1,19 @@
 package view;
 
 import controller.MovieController;
+import dao.ReviewDAO;
 import model.Movie;
 import model.Person;
 import org.apache.commons.lang3.StringUtils;
 import service.MovieService;
+import session.Session;
 import utils.image.ImageUtil;
 import utils.TimeUtils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -30,13 +34,17 @@ public class MovieView implements View {
     private JLabel movieSynopsis;
     private JLabel movieDirectors;
     private JPanel movieCastingPanel;
+    private JButton doAReview;
 
     private final MovieService movieService;
+    private final ReviewDAO reviewDAO;
+
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public MovieView() {
-        controller = new MovieController();
+        this.controller = new MovieController();
         this.movieService = new MovieService();
+        this.reviewDAO = new ReviewDAO();
     }
 
     @Override
@@ -58,7 +66,10 @@ public class MovieView implements View {
             movieSynopsis.setText(fetchedMovie.getSynopsis());
             movieRating.setText(Float.toString(fetchedMovie.getRating()));
             movieDirectors.setText(formatDirectors(fetchedMovie.getDirectors()));
+
             populateCastingPanel(fetchedMovie.getActors());
+
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

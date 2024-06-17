@@ -234,7 +234,7 @@
                       <text value="&lt;html&gt;&lt;div style='margin-right:10px'&gt;Reviews&lt;/div&gt;&lt;/html&gt;"/>
                     </properties>
                   </component>
-                  <component id="833d4" class="javax.swing.JButton" default-binding="true">
+                  <component id="833d4" class="javax.swing.JButton" binding="doAReview">
                     <constraints/>
                     <properties>
                       <text value="Do a review"/>
