@@ -19,7 +19,7 @@ public class LibrariesController {
     }
 
     public void goToLibraryCreationAction() {
-        MainController.getInstance().show(ViewEnum.CREATELIBRARY, 1);
+        MainController.getInstance().show(ViewEnum.CREATELIBRARY, null);
     }
 
 }

@@ -14,10 +14,8 @@ public class LibraryController {
     }
 
     public void deleteLibraryAction(int libraryId) {
-        MainController.getInstance().show(ViewEnum.LIBRARIES, 1);
+        MainController.getInstance().show(ViewEnum.LIBRARIES, null);
         libraryService.deleteLibrary(libraryId);
     }
-        
-    
 
 }
