@@ -1,29 +1,31 @@
-package view;
+package view.movie;
 
 import controller.MovieController;
 import dao.ReviewDAO;
 import model.Movie;
 import model.Person;
+import model.Review;
+import model.User;
 import org.apache.commons.lang3.StringUtils;
 import service.MovieService;
 import session.Session;
 import utils.image.ImageUtil;
 import utils.TimeUtils;
+import view.View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class MovieView implements View {
-    private final MovieController controller;
-
     private final int WIDTH = 200;
     private final int HEIGHT = 250;
+
+    private final MovieController controller;
+    private Movie currentMovie;
 
     private JPanel panel;
     private JLabel movieImage;
@@ -35,6 +37,7 @@ public class MovieView implements View {
     private JLabel movieDirectors;
     private JPanel movieCastingPanel;
     private JButton doAReview;
+    private JPanel reviewPanel;
 
     private final MovieService movieService;
     private final ReviewDAO reviewDAO;
@@ -45,6 +48,10 @@ public class MovieView implements View {
         this.controller = new MovieController();
         this.movieService = new MovieService();
         this.reviewDAO = new ReviewDAO();
+
+        doAReview.addActionListener(e -> {
+            openReviewForm();
+        });
     }
 
     @Override
@@ -56,6 +63,8 @@ public class MovieView implements View {
     public void refresh(Integer movieID) {
         try {
             Movie fetchedMovie = movieService.getMovieById(movieID);
+            currentMovie = fetchedMovie;
+
             if (fetchedMovie.getPoster() != null) {
                 movieImage.setIcon(new ImageIcon(ImageUtil.getScaledImage(fetchedMovie.getPoster().getImage(), WIDTH, HEIGHT)));
             }
@@ -69,6 +78,8 @@ public class MovieView implements View {
 
             populateCastingPanel(fetchedMovie.getActors());
 
+            List<Review> reviews = reviewDAO.getByMovieId(movieID);
+            populateReviewPanel(reviews);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -114,8 +125,61 @@ public class MovieView implements View {
                 movieCastingPanel.add(Box.createVerticalStrut(3));
             }
         }
-        movieCastingPanel.revalidate();
-        movieCastingPanel.repaint();
+    }
+
+    private void populateReviewPanel(List<Review> reviews) {
+        reviewPanel.removeAll();
+        reviewPanel.setLayout(new BoxLayout(reviewPanel, BoxLayout.Y_AXIS));
+
+        System.out.println(movieSynopsis.getFont().toString());
+
+        if (reviews == null || reviews.isEmpty()) {
+            JLabel noReviewsLabel = new JLabel("No reviews available");
+            reviewPanel.add(noReviewsLabel);
+        } else {
+            System.out.println(reviews.size());
+            for (Review review : reviews) {
+
+                ReviewView reviewView = new ReviewView(review);
+                reviewPanel.add(reviewView);
+            }
+        }
+    }
+
+
+    private void openReviewForm() {
+        if (Session.isLoggedIn()) {
+            User currentUser = Session.getUser();
+
+            JFrame reviewFrame = new JFrame("Submit a Review");
+            reviewFrame.setSize(300, 200);
+            reviewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            JPanel reviewPanel = new JPanel();
+            reviewPanel.setLayout(new BoxLayout(reviewPanel, BoxLayout.Y_AXIS));
+
+            JTextField reviewField = new JTextField();
+            JSpinner ratingSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 5, 0.1));
+            double
+
+            JButton submitButton = new JButton("Submit");
+
+            submitButton.addActionListener(e -> {
+                controller.submitReview(reviewField.getText(), (float)ratingSpinner.getValue(), currentUser, currentMovie);
+                refresh(currentMovie.getId());
+            });
+
+            reviewPanel.add(new JLabel("Review:"));
+            reviewPanel.add(reviewField);
+            reviewPanel.add(new JLabel("Rating:"));
+            reviewPanel.add(ratingSpinner);
+            reviewPanel.add(submitButton);
+
+            reviewFrame.add(reviewPanel);
+            reviewFrame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(panel, "You need to be logged in to submit a review.");
+        }
     }
 
 }

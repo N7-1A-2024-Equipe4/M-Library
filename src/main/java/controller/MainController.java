@@ -4,7 +4,7 @@ import session.Session;
 import view.*;
 import view.libraries.LibrariesView;
 import view.home.HomeView;
-import view.libraries.LibrariesView;
+import view.movie.MovieView;
 
 import java.util.Map;
 
