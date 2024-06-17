@@ -47,7 +47,7 @@ public class ProfileView implements View {
 
     @Override
     public void refresh(Integer userId) {
-        if (userId == null || userId == SessionService.getUser().getId()) {
+        if (userId == null || userId.equals(SessionService.getActiveUserId())) {
             // logged in user's profile
             user = SessionService.getUser();
             editButton.setVisible(true);
