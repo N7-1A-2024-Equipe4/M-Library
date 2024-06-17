@@ -1,15 +1,15 @@
 package view.home;
 
 import controller.HomeController;
-import dao.MovieDAO;
 import model.Movie;
+import service.MovieService;
 import view.View;
+import view.thumbnail.MovieThumbnail;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -20,11 +20,11 @@ public class HomeView implements View {
     private MoviesGrid moviesGrid;
     private JProgressBar progressBar;
 
-    private final MovieDAO movieDAO;
+    private final MovieService movieService;
 
     public HomeView() {
         this.controller = new HomeController(this);
-        this.movieDAO = new MovieDAO();
+        this.movieService = new MovieService();
         setupUI();
     }
 
@@ -49,13 +49,13 @@ public class HomeView implements View {
     }
 
     @Override
-    public void refresh(Integer movieID) {
+    public void refresh(Integer movieId) {
         progressBar.setVisible(true);
 
         new SwingWorker<List<Movie>, Void>() {
             @Override
-            protected List<Movie> doInBackground() throws SQLException {
-                return movieDAO.getAll();
+            protected List<Movie> doInBackground() {
+                return movieService.getAll();
             }
 
             @Override
@@ -81,8 +81,7 @@ public class HomeView implements View {
         @Override
         public void mouseClicked(MouseEvent e) {
             Component component = moviesGrid.getComponentAt(e.getPoint());
-            if (component instanceof MovieThumbnail) {
-                MovieThumbnail clickedMovie = (MovieThumbnail) component;
+            if (component instanceof MovieThumbnail clickedMovie) { // java 17 pattern matching
                 controller.showDetails(clickedMovie.getMovieId());
             }
         }

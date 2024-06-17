@@ -16,7 +16,7 @@ public class HomeController {
         this.movieDAO = new MovieDAO();
     }
 
-    public void showDetails(Integer movieID) {
-        MainController.getInstance().show(ViewEnum.MOVIE, movieID);
+    public void showDetails(Integer movieId) {
+        MainController.getInstance().show(ViewEnum.MOVIE, movieId);
     }
 }

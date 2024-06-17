@@ -1,7 +1,7 @@
 package controller;
 
+import service.SessionService;
 import service.UserService;
-import session.Session;
 import view.LoginView;
 import view.LoginView.LoginError;
 import view.ViewEnum;
@@ -30,7 +30,7 @@ public class LoginController {
             view.loginFailed(errors);
             return;
         }
-        if (Session.login(username, password)) {
+        if (SessionService.login(username, password)) {
             MainController mainController = MainController.getInstance();
             mainController.updateNavbar();
             mainController.show(ViewEnum.PROFILE, null);

@@ -1,16 +1,13 @@
-package view.libraries;
+package view.thumbnail;
 
 import lombok.Getter;
-
-import javax.swing.*;
-import java.awt.*;
 import model.Library;
 import utils.image.ImageUtil;
 
-public class LibrariesThumbnail extends JPanel{
-    private final int WIDTH = 200;
-    private final int HEIGHT = 300;
+import javax.swing.*;
+import java.awt.*;
 
+public class LibrariesThumbnail extends JPanel{
     @Getter
     private String libraryName;
     @Getter
@@ -19,10 +16,14 @@ public class LibrariesThumbnail extends JPanel{
     private JLabel posterLabel;
 
     public LibrariesThumbnail(Library library) {
+        this(library, 200, 200);
+    }
+
+    public LibrariesThumbnail(Library library, int width, int height) {
         this.libraryName = library.getName();
         this.id = library.getId();
         setLayout(new FlowLayout());
-        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setPreferredSize(new Dimension(width, height));
 
         titleLabel = new JLabel(libraryName, SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
@@ -30,10 +31,9 @@ public class LibrariesThumbnail extends JPanel{
         posterLabel = new JLabel();
         posterLabel.setHorizontalAlignment(SwingConstants.CENTER);
         if (library.getIcon() != null) {
-            posterLabel.setIcon(new ImageIcon(ImageUtil.getScaledImage(library.getIcon().getImage(), WIDTH, HEIGHT)));
+            posterLabel.setIcon(new ImageIcon(ImageUtil.getScaledImage(library.getIcon().getImage(), width, height)));
         }
         add(titleLabel, BorderLayout.NORTH);
         add(posterLabel, BorderLayout.CENTER);
     }
-
 }

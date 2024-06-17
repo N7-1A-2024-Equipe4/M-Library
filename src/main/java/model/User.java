@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.swing.*;
 import java.util.Date;
 
 @Data
@@ -17,7 +18,9 @@ public class User {
     private String firstName;
     private String lastName;
     private Date createdAt;
+    private ImageIcon picture;
 
+    // Copy constructor
     public User(User user) {
         this.id = user.getId();
         this.username = user.getUsername();
@@ -25,10 +28,10 @@ public class User {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.createdAt = new Date();
+        this.picture = user.getPicture();
     }
 
     public User(int id) {
         this.id = id;
     }
-
 }

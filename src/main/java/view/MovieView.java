@@ -5,12 +5,11 @@ import model.Movie;
 import model.Person;
 import org.apache.commons.lang3.StringUtils;
 import service.MovieService;
-import utils.image.ImageUtil;
 import utils.TimeUtils;
+import utils.image.ImageUtil;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +18,7 @@ public class MovieView implements View {
     private final MovieController controller;
 
     private final int WIDTH = 200;
-    private final int HEIGHT = 250;
+    private final int HEIGHT = 300;
 
     private JPanel panel;
     private JLabel movieImage;
@@ -45,23 +44,23 @@ public class MovieView implements View {
     }
 
     @Override
-    public void refresh(Integer movieID) {
-        try {
-            Movie fetchedMovie = movieService.getMovieById(movieID);
-            if (fetchedMovie.getPoster() != null) {
-                movieImage.setIcon(new ImageIcon(ImageUtil.getScaledImage(fetchedMovie.getPoster().getImage(), WIDTH, HEIGHT)));
-            }
-
-            movieTitle.setText(fetchedMovie.getTitle());
-            movieGenre.setText(StringUtils.capitalize(fetchedMovie.getGenre().toString().toLowerCase()));
-            movieDuration.setText(TimeUtils.formatDuration(fetchedMovie.getDuration()));
-            movieSynopsis.setText(fetchedMovie.getSynopsis());
-            movieRating.setText(Float.toString(fetchedMovie.getRating()));
-            movieDirectors.setText(formatDirectors(fetchedMovie.getDirectors()));
-            populateCastingPanel(fetchedMovie.getActors());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+    public void refresh(Integer movieId) {
+        Movie fetchedMovie = movieService.getMovieById(movieId);
+        if (fetchedMovie == null) {
+            return;
         }
+        if (fetchedMovie.getPoster() != null) {
+            movieImage.setIcon(new ImageIcon(ImageUtil.getScaledImage(fetchedMovie.getPoster().getImage(), WIDTH, HEIGHT)));
+        }
+
+        movieTitle.setText(fetchedMovie.getTitle());
+        movieGenre.setText(StringUtils.capitalize(fetchedMovie.getGenre().toString().toLowerCase()));
+        movieDuration.setText(TimeUtils.formatDuration(fetchedMovie.getDuration()));
+        movieSynopsis.setText(fetchedMovie.getSynopsis());
+        movieRating.setText(Float.toString(fetchedMovie.getRating()));
+        movieDirectors.setText(formatDirectors(fetchedMovie.getDirectors()));
+        populateCastingPanel(fetchedMovie.getActors());
+
     }
 
     private String formatDirectors(List<Person> directors) {

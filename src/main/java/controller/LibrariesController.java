@@ -15,7 +15,7 @@ public class LibrariesController {
     }
 
     public void showDetails(int libraryId) {
-        MainController.getInstance().show(ViewEnum.LIST, libraryId);
+        MainController.getInstance().show(ViewEnum.LIBRARY, libraryId);
     }
 
     public void goToLibraryCreationAction() {

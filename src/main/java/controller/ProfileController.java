@@ -1,9 +1,10 @@
 package controller;
 
 import model.User;
+import service.SessionService;
 import service.UserService;
-import session.Session;
 import view.ProfileView;
+import view.ViewEnum;
 
 public class ProfileController {
     private final ProfileView view;
@@ -17,7 +18,7 @@ public class ProfileController {
 
     public void saveChangesAction(String firstName, String lastName, String username, String password) {
         // copy session user
-        User updatedUser = new User(Session.getUser());
+        User updatedUser = new User(SessionService.getUser());
         // update fields if not blank
         if (!firstName.isBlank()) {
             updatedUser.setFirstName(firstName);
@@ -37,12 +38,16 @@ public class ProfileController {
             return;
         }
         // logout and login to refresh the user in the session
-        Session.logout();
-        if (Session.login(updatedUser.getUsername(), updatedUser.getPassword())) {
+        SessionService.logout();
+        if (SessionService.login(updatedUser.getUsername(), updatedUser.getPassword())) {
             view.refresh(null);
             view.userChangeSuccess();
         } else {
             view.userChangeFail();
         }
+    }
+
+    public void showLibrariesAction(int userId) {
+        MainController.getInstance().show(ViewEnum.LIBRARIES, userId);
     }
 }

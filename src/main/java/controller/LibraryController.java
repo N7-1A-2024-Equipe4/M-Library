@@ -1,10 +1,8 @@
 package controller;
 
-import dao.LibraryDAO;
+import service.LibraryService;
 import view.LibraryView;
 import view.ViewEnum;
-import service.LibraryService;
-import view.libraries.LibrariesView;
 
 public class LibraryController {
     private final LibraryView view;
@@ -16,7 +14,7 @@ public class LibraryController {
     }
 
     public void deleteLibraryAction(int libraryId) {
-        MainController.getInstance().show(ViewEnum.LISTS, 1);
+        MainController.getInstance().show(ViewEnum.LIBRARIES, 1);
         libraryService.deleteLibrary(libraryId);
     }
         

@@ -1,6 +1,7 @@
 package view.libraries;
 
 import model.Library;
+import view.thumbnail.LibrariesThumbnail;
 
 import javax.swing.*;
 import java.awt.*;
