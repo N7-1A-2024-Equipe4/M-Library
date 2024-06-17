@@ -1,10 +1,13 @@
 package view;
 
 import controller.MovieController;
+import model.Library;
 import model.Movie;
 import model.Person;
 import org.apache.commons.lang3.StringUtils;
+import service.LibraryService;
 import service.MovieService;
+import session.Session;
 import utils.image.ImageUtil;
 import utils.TimeUtils;
 
@@ -12,7 +15,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MovieView implements View {
@@ -21,6 +26,7 @@ public class MovieView implements View {
     private final int WIDTH = 200;
     private final int HEIGHT = 250;
 
+    private Movie movie;
     private JPanel panel;
     private JLabel movieImage;
     private JLabel movieTitle;
@@ -30,13 +36,27 @@ public class MovieView implements View {
     private JLabel movieSynopsis;
     private JLabel movieDirectors;
     private JPanel movieCastingPanel;
+    private JComboBox addMovieToLibraryComboBox;
+    private JButton addMovieToLibraryButton;
+    private JTextField AddMovieToLibraryNoteText;
+    private Map<String, Library> libraryMap;
+    private JLabel addMovieToLibraryLabel;
 
     private final MovieService movieService;
+    private final LibraryService libraryService;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     public MovieView() {
-        controller = new MovieController();
+        this.controller = new MovieController();
         this.movieService = new MovieService();
+        this.libraryService = new LibraryService();
+        this.libraryMap = new HashMap<>();
+        this.addMovieToLibraryButton.addActionListener(e -> controller.addMovieToLibraryAction(
+                libraryMap.get(addMovieToLibraryComboBox.getSelectedItem()),
+                movie.getId(),
+                AddMovieToLibraryNoteText.getText()
+        ));
+
     }
 
     @Override
@@ -47,18 +67,40 @@ public class MovieView implements View {
     @Override
     public void refresh(Integer movieID) {
         try {
-            Movie fetchedMovie = movieService.getMovieById(movieID);
-            if (fetchedMovie.getPoster() != null) {
-                movieImage.setIcon(new ImageIcon(ImageUtil.getScaledImage(fetchedMovie.getPoster().getImage(), WIDTH, HEIGHT)));
+            movie = movieService.getMovieById(movieID);
+            List<Library> libraries = libraryService.getByUserIdComplete(Session.getUser().getId());
+
+            if (movie.getPoster() != null) {
+                movieImage.setIcon(new ImageIcon(ImageUtil.getScaledImage(movie.getPoster().getImage(), WIDTH, HEIGHT)));
             }
 
-            movieTitle.setText(fetchedMovie.getTitle());
-            movieGenre.setText(StringUtils.capitalize(fetchedMovie.getGenre().toString().toLowerCase()));
-            movieDuration.setText(TimeUtils.formatDuration(fetchedMovie.getDuration()));
-            movieSynopsis.setText(fetchedMovie.getSynopsis());
-            movieRating.setText(Float.toString(fetchedMovie.getRating()));
-            movieDirectors.setText(formatDirectors(fetchedMovie.getDirectors()));
-            populateCastingPanel(fetchedMovie.getActors());
+            // Set movie details
+            movieTitle.setText(movie.getTitle());
+            movieGenre.setText(StringUtils.capitalize(movie.getGenre().toString().toLowerCase()));
+            movieDuration.setText(TimeUtils.formatDuration(movie.getDuration()));
+            movieSynopsis.setText(movie.getSynopsis());
+            movieRating.setText(Float.toString(movie.getRating()));
+            movieDirectors.setText(formatDirectors(movie.getDirectors()));
+            populateCastingPanel(movie.getActors());
+
+            // Add movie to library
+            for (Library library : libraries) {
+                // print all attributes of library
+                System.out.println("name : " + library.getName());
+                System.out.println("description : " + library.getDescription());
+                List<Movie> libraryMovies = library.getMovies();
+                for (Movie movie : libraryMovies) {
+                    System.out.println("movie title : " + movie.getTitle());
+                    System.out.println("movie genre : " + movie.getGenre());
+                    System.out.println("movie duration : " + movie.getDuration());
+                    System.out.println("movie synopsis : " + movie.getSynopsis());
+                    System.out.println("movie rating : " + movie.getRating());
+                }
+                if (library.getMovies().stream().noneMatch(m -> m.getId() == movie.getId())) {
+                    libraryMap.put(library.getName(), library);
+                    addMovieToLibraryComboBox.addItem(library.getName());
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -243,6 +243,20 @@
                       <html.disable class="java.lang.Boolean" value="false"/>
                     </clientProperties>
                   </component>
+                  <component id="62a1c" class="javax.swing.JButton" binding="addMovieToLibraryButton">
+                    <constraints/>
+                    <properties>
+                      <text value="Add movie to library"/>
+                    </properties>
+                  </component>
+                  <component id="f504e" class="javax.swing.JComboBox" binding="addMovieToLibraryComboBox">
+                    <constraints/>
+                    <properties/>
+                  </component>
+                  <component id="b9958" class="javax.swing.JTextField" binding="AddMovieToLibraryNoteText">
+                    <constraints/>
+                    <properties/>
+                  </component>
                 </children>
               </grid>
             </children>

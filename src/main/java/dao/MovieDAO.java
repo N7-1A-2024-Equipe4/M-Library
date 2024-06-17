@@ -73,7 +73,7 @@ public class MovieDAO extends DAO<Movie> {
     public List<Movie> getByLibraryId(int libraryId) throws SQLException {
         String query = """
                        SELECT *
-                       FROM movie.*
+                       FROM movie
                        LEFT JOIN movie_in_library ON movie.movie_id = movie_in_library.movie_id
                        WHERE library_id = ?;
                        """;
