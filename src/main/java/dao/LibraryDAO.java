@@ -58,6 +58,7 @@ public class LibraryDAO extends DAO<Library> {
             while (resultSet.next()) {
                 libraries.add(getLibraryFromResultSet(resultSet));
             }
+        }
         return libraries;
     }
 

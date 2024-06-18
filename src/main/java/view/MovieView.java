@@ -39,15 +39,15 @@ public class MovieView implements View {
     private JComboBox addMovieToLibraryComboBox;
     private JButton addMovieToLibraryButton;
     private JTextField AddMovieToLibraryNoteText;
-    private Map<String, Library> libraryMap;
     private JLabel addMovieToLibraryLabel;
+    private Map<String, Library> libraryMap;
 
     private final MovieService movieService;
     private final LibraryService libraryService;
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private final SimpleDateFormat dateFormat;
 
     public MovieView() {
-        this.controller = new MovieController();
+        this.controller = new MovieController(this);
         this.movieService = new MovieService();
         this.libraryService = new LibraryService();
         this.libraryMap = new HashMap<>();
@@ -56,7 +56,7 @@ public class MovieView implements View {
                 movie.getId(),
                 AddMovieToLibraryNoteText.getText()
         ));
-
+        this.dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     }
 
     @Override
@@ -68,7 +68,6 @@ public class MovieView implements View {
     public void refresh(Integer movieID) {
         try {
             movie = movieService.getMovieById(movieID);
-            List<Library> libraries = libraryService.getByUserIdComplete(Session.getUser().getId());
 
             if (movie.getPoster() != null) {
                 movieImage.setIcon(new ImageIcon(ImageUtil.getScaledImage(movie.getPoster().getImage(), WIDTH, HEIGHT)));
@@ -83,26 +82,34 @@ public class MovieView implements View {
             movieDirectors.setText(formatDirectors(movie.getDirectors()));
             populateCastingPanel(movie.getActors());
 
+            setupAddToLibrary();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setupAddToLibrary() throws SQLException {
+        if (Session.isLoggedIn()) {
+            addMovieToLibraryLabel.setText("Add the movie to one of your libraries:");
+            addMovieToLibraryComboBox.setVisible(true);
+            addMovieToLibraryButton.setVisible(true);
+            AddMovieToLibraryNoteText.setVisible(true);
+            List<Library> libraries = libraryService.getByUserIdComplete(Session.getUser().getId());
+
             // Add movie to library
+            addMovieToLibraryComboBox.removeAllItems();
             for (Library library : libraries) {
-                // print all attributes of library
-                System.out.println("name : " + library.getName());
-                System.out.println("description : " + library.getDescription());
-                List<Movie> libraryMovies = library.getMovies();
-                for (Movie movie : libraryMovies) {
-                    System.out.println("movie title : " + movie.getTitle());
-                    System.out.println("movie genre : " + movie.getGenre());
-                    System.out.println("movie duration : " + movie.getDuration());
-                    System.out.println("movie synopsis : " + movie.getSynopsis());
-                    System.out.println("movie rating : " + movie.getRating());
-                }
                 if (library.getMovies().stream().noneMatch(m -> m.getId() == movie.getId())) {
                     libraryMap.put(library.getName(), library);
                     addMovieToLibraryComboBox.addItem(library.getName());
                 }
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            addMovieToLibraryComboBox.setSelectedIndex(-1);
+        } else {
+            addMovieToLibraryLabel.setText("Please log in to add movie to library");
+            addMovieToLibraryComboBox.setVisible(false);
+            addMovieToLibraryButton.setVisible(false);
+            AddMovieToLibraryNoteText.setVisible(false);
         }
     }
 
@@ -149,4 +156,7 @@ public class MovieView implements View {
         movieCastingPanel.repaint();
     }
 
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }
