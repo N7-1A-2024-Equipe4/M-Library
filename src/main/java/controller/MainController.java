@@ -4,6 +4,7 @@ import service.SessionService;
 import view.*;
 import view.home.HomeView;
 import view.libraries.LibrariesView;
+import view.movie.MovieView;
 import view.search.SearchView;
 
 import java.util.Map;

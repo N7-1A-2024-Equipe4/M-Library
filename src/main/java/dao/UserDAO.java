@@ -1,5 +1,6 @@
 package dao;
 
+import model.Library;
 import model.User;
 
 import javax.swing.*;
@@ -25,8 +26,9 @@ public class UserDAO extends DAO<User> {
     }
 
     @Override
-    public User add(User entity) throws SQLException {
-        return new User();
+    public Library add(User entity) throws SQLException {
+        ;
+        return null;
     }
 
     @Override

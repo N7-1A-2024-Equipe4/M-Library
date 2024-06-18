@@ -1,5 +1,6 @@
 package dao;
 
+import model.Library;
 import model.Movie;
 import model.MovieGenre;
 import utils.image.ImageCache;
@@ -22,7 +23,7 @@ public class MovieDAO extends DAO<Movie> {
     }
 
     @Override
-    public Movie add(Movie movie) throws SQLException {
+    public Library add(Movie movie) throws SQLException {
         String query = "INSERT INTO movie (title, genre, duration, image, synopsis, rating) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
@@ -35,8 +36,7 @@ public class MovieDAO extends DAO<Movie> {
 
             stmt.executeUpdate();
         }
-
-        return new Movie();
+        return null;
     }
 
     @Override
