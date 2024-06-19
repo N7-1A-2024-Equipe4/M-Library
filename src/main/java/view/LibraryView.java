@@ -3,6 +3,7 @@ package view;
 import model.ElementOfLibrary;
 import model.Library;
 import service.LibraryService;
+import service.SessionService;
 import utils.image.ImageUtil;
 
 import javax.sql.rowset.BaseRowSet;
@@ -77,6 +78,13 @@ public class LibraryView implements View {
             JLabel descriptionTitleLabel = new JLabel("Description");
             JLabel descriptionLabel = new JLabel();
             JButton buttonDelete = new JButton(("Delete library"));
+            if (library.getOwner().getId() == SessionService.getActiveUserId()) {
+                // logged in user's profile
+                buttonDelete.setVisible(true);
+            } else {
+                // visiting another user's profile
+                buttonDelete.setVisible(false);
+            }
             buttonDelete.addActionListener(e -> controller.deleteLibraryAction(modelId));
             JLabel moviesLabel = new JLabel("Movies");
             moviesLabel.setFont(new Font("Arial", Font.BOLD, 20));
