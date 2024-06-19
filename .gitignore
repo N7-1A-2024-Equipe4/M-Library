@@ -21,12 +21,10 @@ target/
 *.code-workspace
 
 # Ignore useless IntelliJ IDEA files
-*.iml
 .idea/libraries/
 .idea/shelf/
 .idea/workspace.xml
 .idea/usage.statistics.xml
-.idea/modules.xml
 .idea/git_toolbox_prj.xml
 .idea/uiDesigner.xml
 .idea/dataSources.local.xml
