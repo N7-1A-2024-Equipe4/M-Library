@@ -107,7 +107,7 @@ public class MovieView implements View {
 
     private void setupAddToLibrary() throws SQLException {
         if (SessionService.isLoggedIn()) {
-            addMovieToLibraryLabel.setText("");
+            addMovieToLibraryLabel.setText("Add a note to go along with the movie in your library:");
             addMovieToLibraryComboBox.setVisible(true);
             addMovieToLibraryButton.setVisible(true);
             addMovieToLibraryNoteText.setVisible(true);
