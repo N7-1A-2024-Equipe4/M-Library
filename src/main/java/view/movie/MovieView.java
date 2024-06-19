@@ -107,7 +107,7 @@ public class MovieView implements View {
 
     private void setupAddToLibrary() throws SQLException {
         if (SessionService.isLoggedIn()) {
-            addMovieToLibraryLabel.setText("Add the movie to one of your libraries:");
+            addMovieToLibraryLabel.setText("Add a note to go along with the movie in your library:");
             addMovieToLibraryComboBox.setVisible(true);
             addMovieToLibraryButton.setVisible(true);
             addMovieToLibraryNoteText.setVisible(true);
@@ -124,7 +124,7 @@ public class MovieView implements View {
             }
             addMovieToLibraryComboBox.setSelectedIndex(-1);
         } else {
-            addMovieToLibraryLabel.setText("Please log in to add movie to library");
+            addMovieToLibraryLabel.setText("Please log in order to add movie to library");
             addMovieToLibraryComboBox.setVisible(false);
             addMovieToLibraryButton.setVisible(false);
             addMovieToLibraryNoteText.setVisible(false);
