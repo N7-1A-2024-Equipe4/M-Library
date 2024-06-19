@@ -52,6 +52,7 @@ public class LibraryView implements View {
     @Override
     public void refresh(Integer modelId) {
         try {
+            mainPanel.removeAll();
             Library library = this.libraryService.getById(modelId);
             if (library.getIcon() != null) {
                 movieIconLabel.setIcon(new ImageIcon(ImageUtil.getScaledImage(library.getIcon().getImage(), WIDTH, HEIGHT)));
