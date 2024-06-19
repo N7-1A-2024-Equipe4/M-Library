@@ -26,8 +26,8 @@ public class UserDAO extends DAO<User> {
     }
 
     @Override
-    public Library add(User entity) throws SQLException {
-        ;
+    public User add(User entity) throws SQLException {
+
         return null;
     }
 

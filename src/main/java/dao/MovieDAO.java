@@ -23,7 +23,7 @@ public class MovieDAO extends DAO<Movie> {
     }
 
     @Override
-    public Library add(Movie movie) throws SQLException {
+    public Movie add(Movie movie) throws SQLException {
         String query = "INSERT INTO movie (title, genre, duration, image, synopsis, rating) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
@@ -36,7 +36,8 @@ public class MovieDAO extends DAO<Movie> {
 
             stmt.executeUpdate();
         }
-        return null;
+
+        return new Movie();
     }
 
     @Override
@@ -73,11 +74,11 @@ public class MovieDAO extends DAO<Movie> {
 
     public List<Movie> getByLibraryId(int libraryId) throws SQLException {
         String query = """
-                SELECT *
-                FROM movie.*
-                LEFT JOIN movie_in_library ON movie.movie_id = movie_in_library.movie_id
-                WHERE library_id = ?;
-                """;
+                       SELECT *
+                       FROM movie
+                       LEFT JOIN movie_in_library ON movie.movie_id = movie_in_library.movie_id
+                       WHERE library_id = ?;
+                       """;
         Movie movie = null;
         List<Movie> movies = new ArrayList<>();
 

@@ -51,8 +51,15 @@ public class LibraryDAO extends DAO<Library> {
 
     @Override
     public List<Library> getAll() throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        String query = "SELECT * FROM library";
+        List<Library> libraries = new ArrayList<>();
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            ResultSet resultSet = stmt.executeQuery();
+            while (resultSet.next()) {
+                libraries.add(getLibraryFromResultSet(resultSet));
+            }
+        }
+        return libraries;
     }
 
     @Override
@@ -121,6 +128,19 @@ public class LibraryDAO extends DAO<Library> {
         return new Library(libraryId, name, new User(userId), description, icon, date);
     }
 
+    public void addMovieToLibrary(int libraryId, int movieId, String note) throws SQLException {
+        String query = "INSERT INTO movie_in_library (movie_id, library_id, note) VALUES (?, ?, ?)";
 
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setInt(1, movieId);
+            stmt.setInt(2, libraryId);
+            stmt.setString(3, note);
 
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Creating movie in library failed, no rows affected.");
+            }
+        }
+    }
 }
