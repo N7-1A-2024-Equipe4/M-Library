@@ -41,6 +41,7 @@ De plus, l'application utilise une base de données MySQL pour stocker les donn�
 - Le package `dao` contient les classes d'accès aux données.
   - Les classes DAO (Data Access Object) sont responsables de la communication avec la base de données.
   - Elles utilisent JDBC pour exécuter des requêtes SQL. Tous les DAO utilisent la classe Singleton `DatabaseConnection` pour obtenir une connexion à la base de données.
+  - Il existe un système de mise en cache pour les posters de film, afin d'éviter de les télécharger à chaque fetch.
 
 - Le package `service` contient les classes de service.
   - Les classes de service contiennent la logique métier de l'application.
@@ -64,6 +65,6 @@ De plus, l'application utilise une base de données MySQL pour stocker les donn�
 
 - Gestion des listes de lecture
   - Création de listes de lecture
+  - Suppression de listes de lecture
   - Ajout de films à une liste de lecture
-  - Suppression de films d'une liste de lecture
   - Affichage des films d'une liste de lecture

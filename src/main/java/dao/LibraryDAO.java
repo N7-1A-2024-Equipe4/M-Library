@@ -98,7 +98,13 @@ public class LibraryDAO extends DAO<Library> {
 
     @Override
     public void delete(int id) throws SQLException {
-        String query = "DELETE FROM library WHERE library_id = ?";
+        String query = "DELETE FROM movie_in_library WHERE library_id = ?";
+
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        }
+        query = "DELETE FROM library WHERE library_id = ?";
 
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
             stmt.setInt(1, id);

@@ -1,0 +1,49 @@
+@startuml
+
+package service {
+    class UserService
+    class MovieService
+    class LibraryService
+}
+
+package dao {
+    abstract class DAO
+    class UserDAO extends DAO
+}
+
+package view {
+    interface View
+    class ProfileView implements View
+    class MovieView implements View
+    class HomeView implements View
+}
+
+package controller {
+    class ProfileController
+    class MovieController
+    class LibraryController
+}
+
+'package model {
+'    class User
+'    class Movie
+'    class Review
+'    class Library
+'}
+
+dao -right- service
+
+service - view
+service - controller
+
+view -down- controller
+
+
+
+skinparam packageStyle rect
+skinparam packageTitleAlignment left
+
+skinparam linetype ortho
+
+
+@enduml
