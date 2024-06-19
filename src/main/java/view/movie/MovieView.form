@@ -5,28 +5,27 @@
       <xy x="20" y="20" width="4480" height="671"/>
     </constraints>
     <properties>
-      <preferredSize width="1000" height="10000000"/>
+      <preferredSize width="-1" height="-1"/>
+      <visible value="true"/>
     </properties>
     <border type="none"/>
     <children>
-      <grid id="c6473" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="5152d" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints border-constraint="North"/>
-        <properties>
-          <preferredSize width="500" height="10000000"/>
-        </properties>
+        <properties/>
         <border type="empty">
-          <size top="50" left="100" bottom="50" right="100"/>
+          <size top="50" left="100" bottom="0" right="0"/>
         </border>
         <children>
-          <grid id="f030c" layout-manager="BorderLayout" hgap="0" vgap="0">
+          <grid id="a572" layout-manager="BorderLayout" hgap="0" vgap="0">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
             <children>
-              <grid id="4b360" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="2">
+              <grid id="1c912" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="2">
                 <margin top="0" left="10" bottom="0" right="0"/>
                 <constraints border-constraint="Center"/>
                 <properties>
@@ -34,7 +33,7 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="9167e" class="javax.swing.JLabel" binding="movieTitle">
+                  <component id="4456a" class="javax.swing.JLabel" binding="movieTitle">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -43,7 +42,7 @@
                       <text value="Label"/>
                     </properties>
                   </component>
-                  <component id="4d273" class="javax.swing.JLabel" binding="movieDuration">
+                  <component id="20777" class="javax.swing.JLabel" binding="movieDuration">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -52,21 +51,21 @@
                       <text value="Label"/>
                     </properties>
                   </component>
-                  <grid id="f4fa" layout-manager="FlowLayout" hgap="0" vgap="0" flow-align="0">
+                  <grid id="10c1c" layout-manager="FlowLayout" hgap="0" vgap="0" flow-align="0">
                     <constraints>
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="a5ea4" class="javax.swing.JLabel">
+                      <component id="35520" class="javax.swing.JLabel">
                         <constraints/>
                         <properties>
                           <font size="16" style="1"/>
                           <text value="Genre : "/>
                         </properties>
                       </component>
-                      <component id="22d63" class="javax.swing.JLabel" binding="movieGenre">
+                      <component id="5b326" class="javax.swing.JLabel" binding="movieGenre">
                         <constraints/>
                         <properties>
                           <alignmentY value="0.0"/>
@@ -79,7 +78,7 @@
                       </component>
                     </children>
                   </grid>
-                  <grid id="6f6c" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                  <grid id="3199c" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                     <margin top="10" left="10" bottom="10" right="10"/>
                     <constraints>
                       <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -91,7 +90,7 @@
                       <size top="5" left="5" bottom="5" right="5"/>
                     </border>
                     <children>
-                      <component id="517f7" class="javax.swing.JLabel" binding="movieRating">
+                      <component id="4052d" class="javax.swing.JLabel" binding="movieRating">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -104,21 +103,21 @@
                       </component>
                     </children>
                   </grid>
-                  <grid id="f34ee" layout-manager="FlowLayout" hgap="0" vgap="0" flow-align="0">
+                  <grid id="d8b6e" layout-manager="FlowLayout" hgap="0" vgap="0" flow-align="0">
                     <constraints>
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="71ba7" class="javax.swing.JLabel">
+                      <component id="923e6" class="javax.swing.JLabel">
                         <constraints/>
                         <properties>
                           <font size="16" style="1"/>
                           <text value="Directors : "/>
                         </properties>
                       </component>
-                      <component id="b7781" class="javax.swing.JLabel" binding="movieDirectors">
+                      <component id="cbae8" class="javax.swing.JLabel" binding="movieDirectors">
                         <constraints/>
                         <properties>
                           <alignmentY value="0.0"/>
@@ -133,7 +132,7 @@
                   </grid>
                 </children>
               </grid>
-              <grid id="1556" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="d44b6" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints border-constraint="West"/>
                 <properties/>
@@ -141,7 +140,7 @@
                   <color color="-1743293"/>
                 </border>
                 <children>
-                  <component id="e22ad" class="javax.swing.JLabel" binding="movieImage">
+                  <component id="2e82c" class="javax.swing.JLabel" binding="movieImage">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -153,7 +152,7 @@
               </grid>
             </children>
           </grid>
-          <grid id="39d73" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="a5a06" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -163,7 +162,7 @@
               <size top="10" left="0" bottom="0" right="0"/>
             </border>
             <children>
-              <component id="b5391" class="javax.swing.JLabel">
+              <component id="c3380" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -172,7 +171,7 @@
                   <text value="Synopsis"/>
                 </properties>
               </component>
-              <component id="53c9b" class="javax.swing.JLabel" binding="movieSynopsis">
+              <component id="b8812" class="javax.swing.JLabel" binding="movieSynopsis">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -184,7 +183,7 @@
               </component>
             </children>
           </grid>
-          <grid id="14d64" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="85782" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="10" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -192,7 +191,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="aa844" class="javax.swing.JLabel">
+              <component id="f51a" class="javax.swing.JLabel">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -201,7 +200,7 @@
                   <text value="Casting"/>
                 </properties>
               </component>
-              <grid id="d379f" binding="movieCastingPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="df74" binding="movieCastingPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -212,17 +211,17 @@
               </grid>
             </children>
           </grid>
-          <grid id="bd0cb" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="bd0cb" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="10" left="0" bottom="0" right="0"/>
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties/>
             <border type="none"/>
             <children>
               <grid id="1b12f" layout-manager="FlowLayout" hgap="0" vgap="0" flow-align="0">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="1" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -243,17 +242,17 @@
                       <html.disable class="java.lang.Boolean" value="false"/>
                     </clientProperties>
                   </component>
-                  <component id="62a1c" class="javax.swing.JButton" binding="addMovieToLibraryButton" custom-create="true">
-                    <constraints/>
-                    <properties>
-                      <text value="Add movie to library"/>
-                    </properties>
-                  </component>
                   <component id="f504e" class="javax.swing.JComboBox" binding="addMovieToLibraryComboBox">
                     <constraints/>
                     <properties/>
                   </component>
-                  <component id="b9958" class="javax.swing.JTextField" binding="AddMovieToLibraryNoteText">
+                  <component id="7e526" class="javax.swing.JButton" binding="addMovieToLibraryButton">
+                    <constraints/>
+                    <properties>
+                      <text value="Button"/>
+                    </properties>
+                  </component>
+                  <component id="b9958" class="javax.swing.JTextField" binding="addMovieToLibraryNoteText">
                     <constraints/>
                     <properties/>
                   </component>
@@ -267,7 +266,7 @@
               </grid>
               <grid id="93c9c" binding="reviewPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
