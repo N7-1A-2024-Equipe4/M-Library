@@ -43,9 +43,9 @@ public class MovieView implements View {
     private JButton doAReview;
     private JPanel reviewPanel;
     private JComboBox addMovieToLibraryComboBox;
-    private JButton addMovieToLibraryButton;
-    private JTextField AddMovieToLibraryNoteText;
+    private JTextField addMovieToLibraryNoteText;
     private JLabel addMovieToLibraryLabel;
+    private JButton addMovieToLibraryButton;
     private Map<String, Library> libraryMap;
 
     private final MovieService movieService;
@@ -58,6 +58,7 @@ public class MovieView implements View {
         this.controller = new MovieController(this);
         this.movieService = new MovieService();
         this.reviewDAO = new ReviewDAO();
+        this.dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         doAReview.addActionListener(e -> {
             openReviewForm();
@@ -67,9 +68,8 @@ public class MovieView implements View {
         this.addMovieToLibraryButton.addActionListener(e -> controller.addMovieToLibraryAction(
                 libraryMap.get(addMovieToLibraryComboBox.getSelectedItem()),
                 movie.getId(),
-                AddMovieToLibraryNoteText.getText()
+                addMovieToLibraryNoteText.getText()
         ));
-        this.dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     }
 
     @Override
@@ -110,8 +110,8 @@ public class MovieView implements View {
             addMovieToLibraryLabel.setText("Add the movie to one of your libraries:");
             addMovieToLibraryComboBox.setVisible(true);
             addMovieToLibraryButton.setVisible(true);
-            AddMovieToLibraryNoteText.setVisible(true);
-            AddMovieToLibraryNoteText.setText("");
+            addMovieToLibraryNoteText.setVisible(true);
+            addMovieToLibraryNoteText.setText("");
             List<Library> libraries = libraryService.getByUserIdComplete(SessionService.getUser().getId());
 
             // Add movie to library
@@ -127,7 +127,7 @@ public class MovieView implements View {
             addMovieToLibraryLabel.setText("Please log in to add movie to library");
             addMovieToLibraryComboBox.setVisible(false);
             addMovieToLibraryButton.setVisible(false);
-            AddMovieToLibraryNoteText.setVisible(false);
+            addMovieToLibraryNoteText.setVisible(false);
         }
     }
 
@@ -197,7 +197,6 @@ public class MovieView implements View {
     }
 
 
-
     private void openReviewForm() {
         if (SessionService.isLoggedIn()) {
             User currentUser = SessionService.getUser();
@@ -215,7 +214,7 @@ public class MovieView implements View {
             JButton submitButton = new JButton("Submit");
 
             submitButton.addActionListener(e -> {
-                Number ratingValue = (Number)ratingSpinner.getValue();
+                Number ratingValue = (Number) ratingSpinner.getValue();
                 float rating = ratingValue.floatValue();
                 controller.submitReview(reviewField.getText(), rating, currentUser, movie);
                 refresh(movie.getId());
@@ -236,8 +235,4 @@ public class MovieView implements View {
         }
     }
 
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
 }
