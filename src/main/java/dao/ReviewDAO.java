@@ -21,7 +21,7 @@ public class ReviewDAO extends DAO<Review> {
     }
 
     @Override
-    public Library add(Review review) throws SQLException {
+    public Review add(Review review) throws SQLException {
         String query = "INSERT INTO review (review, user_id, movie_id, rating) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {

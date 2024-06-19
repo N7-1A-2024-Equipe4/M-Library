@@ -17,7 +17,6 @@ public abstract class DAO<T> {
     /**
      * Constructs a DAO object with the specified database connection.
      *
-     * @param databaseConnection the database connection to be used by the DAO
      */
     public DAO() {
         this.databaseConnection = DatabaseConnection.getInstance();
@@ -32,7 +31,7 @@ public abstract class DAO<T> {
      * @return
      * @throws SQLException if an error occurs while adding the entity
      */
-    public abstract Library add(T entity) throws SQLException;
+    public abstract T add(T entity) throws SQLException;
 
     // Read
 

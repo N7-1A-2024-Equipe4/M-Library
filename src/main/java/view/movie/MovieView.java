@@ -2,14 +2,16 @@ package view.movie;
 
 import controller.MovieController;
 import dao.ReviewDAO;
+import model.Library;
 import model.Movie;
 import model.Person;
 import model.Review;
 import model.User;
 import org.apache.commons.lang3.StringUtils;
+import service.LibraryService;
 import service.MovieService;
-import utils.image.ImageUtil;
 import service.SessionService;
+import utils.image.ImageUtil;
 import utils.TimeUtils;
 import view.View;
 
@@ -17,7 +19,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MovieView implements View {
@@ -25,7 +29,7 @@ public class MovieView implements View {
     private final int HEIGHT = 300;
 
     private final MovieController controller;
-    private Movie currentMovie;
+    private Movie movie;
 
     private JPanel panel;
     private JLabel movieImage;
@@ -38,20 +42,34 @@ public class MovieView implements View {
     private JPanel movieCastingPanel;
     private JButton doAReview;
     private JPanel reviewPanel;
+    private JComboBox addMovieToLibraryComboBox;
+    private JButton addMovieToLibraryButton;
+    private JTextField AddMovieToLibraryNoteText;
+    private JLabel addMovieToLibraryLabel;
+    private Map<String, Library> libraryMap;
 
     private final MovieService movieService;
     private final ReviewDAO reviewDAO;
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private final LibraryService libraryService;
+    private final SimpleDateFormat dateFormat;
 
     public MovieView() {
-        this.controller = new MovieController();
+        this.controller = new MovieController(this);
         this.movieService = new MovieService();
         this.reviewDAO = new ReviewDAO();
 
         doAReview.addActionListener(e -> {
             openReviewForm();
         });
+        this.libraryService = new LibraryService();
+        this.libraryMap = new HashMap<>();
+        this.addMovieToLibraryButton.addActionListener(e -> controller.addMovieToLibraryAction(
+                libraryMap.get(addMovieToLibraryComboBox.getSelectedItem()),
+                movie.getId(),
+                AddMovieToLibraryNoteText.getText()
+        ));
+        this.dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     }
 
     @Override
@@ -63,7 +81,7 @@ public class MovieView implements View {
     public void refresh(Integer movieID) {
         try {
             Movie fetchedMovie = movieService.getMovieById(movieID);
-            currentMovie = fetchedMovie;
+            movie = fetchedMovie;
 
             if (fetchedMovie.getPoster() != null) {
                 movieImage.setIcon(new ImageIcon(ImageUtil.getScaledImage(fetchedMovie.getPoster().getImage(), WIDTH, HEIGHT)));
@@ -80,9 +98,36 @@ public class MovieView implements View {
 
             List<Review> reviews = reviewDAO.getByMovieId(movieID);
             populateReviewPanel(reviews);
+            setupAddToLibrary();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void setupAddToLibrary() throws SQLException {
+        if (SessionService.isLoggedIn()) {
+            addMovieToLibraryLabel.setText("Add the movie to one of your libraries:");
+            addMovieToLibraryComboBox.setVisible(true);
+            addMovieToLibraryButton.setVisible(true);
+            AddMovieToLibraryNoteText.setVisible(true);
+            AddMovieToLibraryNoteText.setText("");
+            List<Library> libraries = libraryService.getByUserIdComplete(SessionService.getUser().getId());
+
+            // Add movie to library
+            addMovieToLibraryComboBox.removeAllItems();
+            for (Library library : libraries) {
+                if (library.getMovies().stream().noneMatch(m -> m.getId() == movie.getId())) {
+                    libraryMap.put(library.getName(), library);
+                    addMovieToLibraryComboBox.addItem(library.getName());
+                }
+            }
+            addMovieToLibraryComboBox.setSelectedIndex(-1);
+        } else {
+            addMovieToLibraryLabel.setText("Please log in to add movie to library");
+            addMovieToLibraryComboBox.setVisible(false);
+            addMovieToLibraryButton.setVisible(false);
+            AddMovieToLibraryNoteText.setVisible(false);
         }
     }
 
@@ -172,8 +217,8 @@ public class MovieView implements View {
             submitButton.addActionListener(e -> {
                 Number ratingValue = (Number)ratingSpinner.getValue();
                 float rating = ratingValue.floatValue();
-                controller.submitReview(reviewField.getText(), rating, currentUser, currentMovie);
-                refresh(currentMovie.getId());
+                controller.submitReview(reviewField.getText(), rating, currentUser, movie);
+                refresh(movie.getId());
 
                 reviewFrame.setVisible(false);
             });
@@ -192,4 +237,7 @@ public class MovieView implements View {
     }
 
 
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }
