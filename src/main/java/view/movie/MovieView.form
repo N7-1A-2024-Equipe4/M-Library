@@ -233,10 +233,10 @@
                       <text value="&lt;html&gt;&lt;div style='margin-right:10px'&gt;Reviews&lt;/div&gt;&lt;/html&gt;"/>
                     </properties>
                   </component>
-                  <component id="833d4" class="javax.swing.JButton" binding="doAReview">
+                  <component id="833d4" class="javax.swing.JButton" binding="addAReview">
                     <constraints/>
                     <properties>
-                      <text value="Do a review"/>
+                      <text value="Add a review"/>
                     </properties>
                     <clientProperties>
                       <html.disable class="java.lang.Boolean" value="false"/>

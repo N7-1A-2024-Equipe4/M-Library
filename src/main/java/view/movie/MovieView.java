@@ -40,7 +40,7 @@ public class MovieView implements View {
     private JLabel movieSynopsis;
     private JLabel movieDirectors;
     private JPanel movieCastingPanel;
-    private JButton doAReview;
+    private JButton addAReview;
     private JPanel reviewPanel;
     private JComboBox addMovieToLibraryComboBox;
     private JTextField addMovieToLibraryNoteText;
@@ -60,7 +60,7 @@ public class MovieView implements View {
         this.reviewDAO = new ReviewDAO();
         this.dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        doAReview.addActionListener(e -> {
+        addAReview.addActionListener(e -> {
             openReviewForm();
         });
         this.libraryService = new LibraryService();
