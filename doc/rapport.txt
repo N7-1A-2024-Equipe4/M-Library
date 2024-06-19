@@ -29,18 +29,41 @@ L'application cliente suit une architecture MVC (Model-View-Controller) :
     Ces fichiers sont de format XML et décrivent la disposition des composants graphiques.
     Lors d'un build sur IntelliJ IDEA, ces fichiers sont pris en compte pour générer les classes Java correspondantes.
     Cela peut être modifié dans les paramètres de l'IDE : https://www.jetbrains.com/help/idea/gui-designer-output-options.html
+  - Avant l'affichage d'une vue, celle-ci est rafraîchie grâce à sa méthode `refresh()`, les données à afficher sont récupérées via les classes de service.
 
 - Le package `controller` contient les classes de contrôleur.
   - Les contrôleurs font la gestion des événements et des actions de l'utilisateur au sein de la vue.
+  - Ces classes sont instanciées par leur vue respective et utilisent les classes de service pour effectuer des opérations sur les données.
+  - Le passage d'une vue à une autre s'effectue par la méthode `show()` de la classe Singleton `MainController`.
 
 De plus, l'application utilise une base de données MySQL pour stocker les données. Il existe donc également des couches applicatives "backend" :
 
 - Le package `dao` contient les classes d'accès aux données.
   - Les classes DAO (Data Access Object) sont responsables de la communication avec la base de données.
-  - Elles utilisent JDBC pour exécuter des requêtes SQL.
+  - Elles utilisent JDBC pour exécuter des requêtes SQL. Tous les DAO utilisent la classe Singleton `DatabaseConnection` pour obtenir une connexion à la base de données.
 
 - Le package `service` contient les classes de service.
   - Les classes de service contiennent la logique métier de l'application.
   - Elles utilisent les classes DAO pour accéder aux données.
   - Elles sont utilisées par les contrôleurs pour effectuer des opérations sur les données.
   - Elles sont utilisées par les vues pour récupérer les données à afficher.
+
+## 4. Fonctionnalités
+
+- Gestion des utilisateurs
+  - Connexion
+  - Déconnexion
+  - Modification des informations du compte
+  - Recherche d'utilisateurs
+
+- Gestion des films
+  - Page d'accueil
+  - Recherche de films
+  - Détails d'un film
+  - Ajout de critiques sur un film
+
+- Gestion des listes de lecture
+  - Création de listes de lecture
+  - Ajout de films à une liste de lecture
+  - Suppression de films d'une liste de lecture
+  - Affichage des films d'une liste de lecture
