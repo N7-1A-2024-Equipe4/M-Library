@@ -1,7 +1,5 @@
 package dao;
 
-import model.Library;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,8 +13,7 @@ public abstract class DAO<T> {
     protected DatabaseConnection databaseConnection;
 
     /**
-     * Constructs a DAO object with the specified database connection.
-     *
+     * Constructs a DAO object.
      */
     public DAO() {
         this.databaseConnection = DatabaseConnection.getInstance();
