@@ -11,6 +11,7 @@ public class MovieController {
     }
 
     public void addMovieToLibraryAction(Library library, int movieId, String note) {
+        System.out.println("Adding movie to library");
         LibraryService libraryService = new LibraryService();
         libraryService.addMovieToLibrary(library.getId(), movieId, note);
         view.refresh(movieId);

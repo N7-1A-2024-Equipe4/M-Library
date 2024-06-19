@@ -94,6 +94,7 @@ public class MovieView implements View {
             addMovieToLibraryComboBox.setVisible(true);
             addMovieToLibraryButton.setVisible(true);
             AddMovieToLibraryNoteText.setVisible(true);
+            AddMovieToLibraryNoteText.setText("");
             List<Library> libraries = libraryService.getByUserIdComplete(Session.getUser().getId());
 
             // Add movie to library

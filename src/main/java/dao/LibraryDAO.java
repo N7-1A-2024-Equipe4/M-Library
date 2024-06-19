@@ -135,7 +135,6 @@ public class LibraryDAO extends DAO<Library> {
             stmt.setInt(1, movieId);
             stmt.setInt(2, libraryId);
             stmt.setString(3, note);
-            stmt.executeUpdate();
 
             int affectedRows = stmt.executeUpdate();
 
