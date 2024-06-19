@@ -38,6 +38,10 @@ public class LibraryService {
 
     public void setElementsOfLibraries(Library library) throws SQLException {
         Map<Integer, String> elements = libraryDAO.getElementsOfLibrary(library.getId());
-        //Association
+        List<ElementOfLibrary> elementsOfLibraryList = new ArrayList<>();
+        for(Map.Entry<Integer, String> entry : elements.entrySet()){
+            elementsOfLibraryList.add(new ElementOfLibrary(movieDAO.getById(entry.getKey()), entry.getValue()));
+        }
+        library.setElements(elementsOfLibraryList);
     }
 }
