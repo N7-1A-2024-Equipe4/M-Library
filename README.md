@@ -28,17 +28,36 @@ The application was developed as part of a six-week school project. The project 
 UI was created with **Swing** library for **Java 17**.
 
 
-# 3. Getting started 
+# 3. Getting started
 
-*TODO  
-Explain how to launch (account creation, jar launch...)*
+## 3.1. Prerequisites
 
-# 4. Architecture presentation
+- Java 17
+- Maven
+- IntelliJ IDEA (GUI Designer .form files are used)
 
-*TODO  
-Package organisation ? DB Diagram ?*
+## 3.2. Database setup
 
-# 5. Contact
+1. See [database_setup.md](doc/database/database_setup.md)
+2. Setup [dao/DatabaseConnection.java](src/main/java/dao/DatabaseConnection.java) with your database credentials
+
+## 3.3. Building and running
+
+1. Clone the repository
+2. Open the project in IntelliJ IDEA
+3. `mvn clean install -DskipTests`
+4. Build > Rebuild Project
+5. Run `Application` class
+
+## 3.4. Generating an executable JAR with dependencies
+
+1. Clone the repository
+2. Open the project in IntelliJ IDEA
+3. Settings > Editor > GUI Designer > Generate GUI into: Java source code
+4. `mvn clean compile assembly:single`
+5. `java -jar target/M-Library-1.0-SNAPSHOT-jar-with-dependencies.jar`
+
+# 4. Contact
 
 **anton.xu@etu.inp-n7.fr  
 farouk.abidi@etu.inp-n7.fr  
