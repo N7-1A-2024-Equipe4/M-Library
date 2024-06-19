@@ -16,7 +16,7 @@ public class PersonDAO extends DAO<Person> {
     }
 
     @Override
-    public Library add(Person person) throws SQLException {
+    public Person add(Person person) throws SQLException {
         String query = "INSERT INTO person (person_id, first_name, last_name, date_of_birth, date_of_death, is_actor, is_director, is_screenwriter) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {

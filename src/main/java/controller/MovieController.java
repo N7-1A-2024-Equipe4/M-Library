@@ -2,7 +2,7 @@ package controller;
 
 import model.Library;
 import service.LibraryService;
-import view.MovieView;
+import view.movie.MovieView;
 
 import dao.ReviewDAO;
 import model.Movie;
@@ -14,11 +14,11 @@ import java.sql.SQLException;
 public class MovieController {
     private final MovieView view;
     private final ReviewDAO reviewDAO;
+
     public MovieController(MovieView view) {
         this.view = view;
         this.reviewDAO = new ReviewDAO();
     }
-    private final ReviewDAO reviewDAO;
 
     public void addMovieToLibraryAction(Library library, int movieId, String note) {
         System.out.println("Adding movie to library");

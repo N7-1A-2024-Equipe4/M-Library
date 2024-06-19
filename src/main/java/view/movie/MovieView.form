@@ -243,7 +243,7 @@
                       <html.disable class="java.lang.Boolean" value="false"/>
                     </clientProperties>
                   </component>
-                  <component id="62a1c" class="javax.swing.JButton" binding="addMovieToLibraryButton">
+                  <component id="62a1c" class="javax.swing.JButton" binding="addMovieToLibraryButton" custom-create="true">
                     <constraints/>
                     <properties>
                       <text value="Add movie to library"/>
