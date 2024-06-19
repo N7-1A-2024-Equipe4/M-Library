@@ -1,5 +1,6 @@
 package dao;
 
+import model.ElementOfLibrary;
 import model.Library;
 import model.User;
 import utils.image.ImageUtil;
@@ -9,9 +10,7 @@ import java.io.InputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.swing.ImageIcon;
 
@@ -142,5 +141,19 @@ public class LibraryDAO extends DAO<Library> {
                 throw new SQLException("Creating movie in library failed, no rows affected.");
             }
         }
+    }
+    public Map<Integer, String> getElementsOfLibrary(int libraryId) throws SQLException {
+        Map<Integer, String> elements = new HashMap<>();
+        String query = "SELECT * FROM movie_in_library WHERE library_id = ?";
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setInt(1, libraryId);
+            ResultSet resultSet = stmt.executeQuery();
+            while(resultSet.next()){
+                int movieId = resultSet.getInt("movie_id");
+                String note = resultSet.getString("note");
+                elements.put(movieId, note);
+            }
+        }
+        return elements;
     }
 }
