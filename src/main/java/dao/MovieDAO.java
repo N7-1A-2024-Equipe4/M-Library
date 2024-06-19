@@ -1,5 +1,6 @@
 package dao;
 
+import model.Library;
 import model.Movie;
 import model.MovieGenre;
 import utils.image.ImageCache;
@@ -20,6 +21,7 @@ public class MovieDAO extends DAO<Movie> {
     public MovieDAO() {
         super();
     }
+
     @Override
     public Movie add(Movie movie) throws SQLException {
         String query = "INSERT INTO movie (title, genre, duration, image, synopsis, rating) VALUES (?, ?, ?, ?, ?, ?)";
@@ -111,6 +113,7 @@ public class MovieDAO extends DAO<Movie> {
             stmt.executeUpdate();
         }
     }
+
     @Override
     public void delete(int id) throws SQLException {
         String query = "DELETE FROM movie WHERE movie_id = ?";
@@ -159,5 +162,19 @@ public class MovieDAO extends DAO<Movie> {
             }
         }
         return null;
+    }
+
+    public List<Movie> findByTitle(String title) throws SQLException {
+        String query = "SELECT * FROM movie WHERE title LIKE ?";
+        List<Movie> movies = new ArrayList<>();
+        try (PreparedStatement stmt = databaseConnection.prepareStatement(query)) {
+            stmt.setString(1, "%" + title + "%");
+            ResultSet resultSet = stmt.executeQuery();
+
+            while (resultSet.next()) {
+                movies.add(getMovieFromResultSet(resultSet));
+            }
+        }
+        return movies;
     }
 }

@@ -1,6 +1,6 @@
 package controller;
 
-import session.Session;
+import service.SessionService;
 import view.NavbarView;
 import view.ViewEnum;
 
@@ -16,16 +16,20 @@ public class NavbarController {
         MainController.getInstance().show(ViewEnum.HOME, null);
     }
 
-    public void librariesAction() {
-        MainController.getInstance().show(ViewEnum.LISTS, null);
-    }
-
     public void profileAction() {
         MainController.getInstance().show(ViewEnum.PROFILE, null);
     }
 
+    public void librariesAction() {
+        MainController.getInstance().show(ViewEnum.LIBRARIES, null);
+    }
+
+    public void searchAction() {
+        MainController.getInstance().show(ViewEnum.SEARCH, null);
+    }
+
     public void logoutAction() {
-        Session.logout();
+        SessionService.logout();
 
         view.refresh(null);
         MainController.getInstance().show(ViewEnum.LOGIN, null);

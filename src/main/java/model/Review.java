@@ -4,11 +4,11 @@ public class Review {
 
     private int id;
     private String review;
-    private int rating;
+    private float rating;
     private User author;
     private Movie movie;
 
-    public Review(int id, String text, int rating, User user, Movie movie) {
+    public Review(int id, String text, float rating, User user, Movie movie) {
         this.id = id;
         this.review = text;
         this.rating = rating;
@@ -16,14 +16,9 @@ public class Review {
         this.movie = movie;
     }
 
-    public Review(String text, int rating, User user, Movie movie) {
-        this.review = text;
-        this.rating = rating;
-        this.author = user;
-        this.movie = movie;
+    public Review(String text, float rating, User user, Movie movie) {
+        this(-1, text, rating, user, movie);
     }
-    
-    public Review() {}
 
     public int getId() {
         return id;
@@ -33,31 +28,16 @@ public class Review {
         return review;
     }
 
-    public void setReview(String text) {
-        this.review = text;
-    }
-
-    public int getRating() {
+    public float getRating() {
         return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
     }
 
     public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(User user) {
-        this.author = user;
-    }
-
     public Movie getMovie() {
         return movie;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
 }

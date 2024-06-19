@@ -1,6 +1,7 @@
 package view.home;
 
 import model.Movie;
+import view.thumbnail.MovieThumbnail;
 
 import javax.swing.*;
 import java.awt.*;

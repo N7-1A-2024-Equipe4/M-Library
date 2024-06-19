@@ -1,16 +1,13 @@
 package controller;
 
-import java.awt.Image;
-import java.sql.SQLException;
-import java.util.Date;
-
-import javax.swing.ImageIcon;
-
-import org.junit.Test;
 import model.Library;
 import model.User;
+import org.junit.Test;
 import service.LibraryService;
-import session.Session;
+
+import javax.swing.*;
+import java.sql.SQLException;
+import java.util.Date;
 
 public class LibraryControllerTest {
     private LibraryController controller;
@@ -26,13 +23,13 @@ public class LibraryControllerTest {
                     new User(1),
                     "testDescription");
             library = libraryService.addLibrary(library);
-            assert(libraryService.getById(library.getId()) != null);
+            assert (libraryService.getById(library.getId()) != null);
 
             // Act
             controller.deleteLibraryAction(library.getId());
 
             // Assert
-            assert(libraryService.getById(library.getId()) == null);
+            assert (libraryService.getById(library.getId()) == null);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

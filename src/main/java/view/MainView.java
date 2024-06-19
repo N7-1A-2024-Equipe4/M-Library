@@ -24,18 +24,15 @@ public class MainView implements View {
 
     public MainView() {
         controller = MainController.initInstance(this);
-        /* FIXME should it rather be this ?
-            controller = MainController.getInstance();
-            controller.init(this);
-         */
         contentLayout = (CardLayout) content.getLayout();
 
         // add different views to content panel layout
         Arrays.stream(ViewEnum.values()).forEach(
                 viewEnum -> content.add(controller.getView(viewEnum).getPanel(), viewEnum.name())
         );
-        // set initial view
-        setContent(ViewEnum.LOGIN);
+
+        // refresh navbar
+        navbarView.refresh(null);
     }
 
     @Override
@@ -48,7 +45,7 @@ public class MainView implements View {
     }
 
     @Override
-    public void refresh(Integer moveID) {
+    public void refresh(Integer modelId) {
         navbarView.refresh(null);
     }
 

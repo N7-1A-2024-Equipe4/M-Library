@@ -1,5 +1,7 @@
 package dao;
 
+import model.Library;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -27,9 +29,10 @@ public abstract class DAO<T> {
      * Adds a new entity to the database.
      *
      * @param entity the entity to be added
+     * @return
      * @throws SQLException if an error occurs while adding the entity
      */
-    public abstract T add(T entity) throws SQLException;
+    public abstract Library add(T entity) throws SQLException;
 
     // Read
 

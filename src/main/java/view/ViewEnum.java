@@ -1,21 +1,22 @@
 package view;
 
 public enum ViewEnum {
-    LOGIN(true),
+    LOGIN(false),
     HOME(false),
-    LISTS(true),
+    LIBRARIES(true),
     PROFILE(true),
     MOVIE(false),
     CREATELIBRARY(true),
-    LIST(true);
+    LIBRARY(true),
+    SEARCH(false);
 
-    private boolean isProtected;
+    private boolean isAuthRequired;
 
-    ViewEnum(boolean isProtected) {
-        this.isProtected = isProtected;
+    ViewEnum(boolean isAuthRequired) {
+        this.isAuthRequired = isAuthRequired;
     }
 
-    public boolean isProtected() {
-        return this.isProtected;
+    public boolean isAuthRequired() {
+        return this.isAuthRequired;
     }
 }

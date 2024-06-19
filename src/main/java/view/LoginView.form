@@ -31,6 +31,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
+              <preferredSize width="150" height="20"/>
               <text value=""/>
             </properties>
           </component>
@@ -52,7 +53,9 @@
               </grid>
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
-            <properties/>
+            <properties>
+              <preferredSize width="150" height="20"/>
+            </properties>
           </component>
           <component id="2229a" class="javax.swing.JButton" binding="loginButton" default-binding="true">
             <constraints>

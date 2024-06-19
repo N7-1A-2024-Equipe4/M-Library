@@ -1,14 +1,12 @@
 package view;
 
 import controller.CreateLibraryController;
-import utils.image.ImageUtil;
-
-import java.awt.Image;
 
 import javax.swing.*;
+import java.awt.*;
 
 
-public class CreateLibraryView implements View{
+public class CreateLibraryView implements View {
 
     private final CreateLibraryController controller;
 
@@ -52,7 +50,7 @@ public class CreateLibraryView implements View{
     }
 
     @Override
-    public void refresh(Integer modelID) {
+    public void refresh(Integer modelId) {
         libraryNameTextField.setText("");
         poster = new ImageIcon();
         descriptionJTextArea.setText("");
@@ -62,7 +60,7 @@ public class CreateLibraryView implements View{
     public void setPoster(ImageIcon poster) {
         this.poster = poster;
         Image image = poster.getImage();
-        Image newimg = image.getScaledInstance(posterPreviewJLabel.getWidth(), posterPreviewJLabel.getHeight(),  java.awt.Image.SCALE_SMOOTH);
+        Image newimg = image.getScaledInstance(posterPreviewJLabel.getWidth(), posterPreviewJLabel.getHeight(), java.awt.Image.SCALE_SMOOTH);
         poster = new ImageIcon(newimg);
         posterPreviewJLabel.setIcon(poster);
 
